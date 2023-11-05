@@ -9,6 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -48,7 +49,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        return true;
+        if (item.getItemId() == R.id.nav_home) {
+            Toast.makeText(this, "Te lleva a home", Toast.LENGTH_SHORT).show();
+            drawerLayout.closeDrawers();
+            return true;
+        } else if (item.getItemId() == R.id.nav_profile) {
+            Toast.makeText(this, "Te lleva a profile", Toast.LENGTH_SHORT).show();
+            drawerLayout.closeDrawers();
+            return true;
+        }else if (item.getItemId() == R.id.nav_acerca) {
+            Toast.makeText(this, "Te lleva a about it", Toast.LENGTH_SHORT).show();
+            drawerLayout.closeDrawers();
+            return true;
+        }else if (item.getItemId() == R.id.nav_setting) {
+            Toast.makeText(this, "Te lleva a setting", Toast.LENGTH_SHORT).show();
+            drawerLayout.closeDrawers();
+            return true;
+        }else if (item.getItemId() == R.id.nav_exit) {
+            finish();
+            return true;
+        }else {return false;}
     }
 
     @Override
