@@ -57,7 +57,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawerLayout.closeDrawers();
             return true;
         } else if (item.getItemId() == R.id.nav_profile) {
-            Toast.makeText(this, "Te lleva a profile", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this, vistaUsurio.class);
+            startActivity(intent);
             drawerLayout.closeDrawers();
             return true;
         }else if (item.getItemId() == R.id.nav_acerca) {

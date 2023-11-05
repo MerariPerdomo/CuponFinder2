@@ -2,7 +2,9 @@ package sv.edu.universidad.cuponfinder2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 public class vistaUsurio extends AppCompatActivity {
 
@@ -10,5 +12,13 @@ public class vistaUsurio extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vista_usurio);
+    }
+
+    public void ViewSettings(View view) {
+        Intent ir = new Intent(vistaUsurio.this,Configuracion.class);
+        startActivity(ir);
+    }
+
+    public void ViewAboutUs(View view) {
     }
 }

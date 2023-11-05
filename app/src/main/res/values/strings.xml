@@ -51,4 +51,8 @@
     <string name="cerrar_sesion">Logout</string>
     <string name="activar_notificaciones">Enable notifications</string>
     <string name="usuario">User</string>
+    <string name="txtNombre_completo">Full name</string>
+    <string name="txtLocalName">Local Name</string>
+    <string name="txtCuestionAccount">Already have an account?</string>
+    <string name="txtcreate_account">Create Account</string>
 </resources>

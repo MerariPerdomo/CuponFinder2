@@ -35,12 +35,12 @@
             android:gravity="center_horizontal"
             app:boxStrokeColor="#39A4C6"
             app:boxStrokeErrorColor="@color/design_default_color_error"
-            app:startIconDrawable="@drawable/ic_person">
+            app:startIconDrawable="@drawable/ic_perfil">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nombre completo"
+                android:hint="@string/txtNombre_completo"
                 android:inputType="text"
                 android:textColorHint="#8D6E63" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -53,12 +53,12 @@
             android:gravity="center_horizontal"
             app:boxStrokeColor="#39A4C6"
             app:boxStrokeErrorColor="@color/design_default_color_error"
-            app:startIconDrawable="@drawable/ic_person">
+            app:startIconDrawable="@drawable/ic_perfil">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nombre de Establecimiento"
+                android:hint="@string/txtLocalName"
                 android:inputType="text"
                 android:textColorHint="#8D6E63" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -127,7 +127,7 @@
             android:layout_height="70dp"
             android:layout_marginTop="15dp"
             android:backgroundTint="#3EB4DA"
-            android:text="@string/txtButtonlogin"
+            android:text="@string/txtcreate_account"
             android:textSize="20sp" />
 
     </LinearLayout>
@@ -138,7 +138,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="¿Ya tienes cuenta? Inicia Sesión"
+        android:onClick="accountExist"
+        android:text="@string/txtCuestionAccount"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textStyle="bold"
