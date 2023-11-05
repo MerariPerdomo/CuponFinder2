@@ -1,3 +1,41 @@
 <resources>
     <string name="app_name">CuponFinder2</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <string name="txtSetting">Settings</string>
+    <string name="txtAbout">About us</string>
+    <string name="appName">Cupon Finder</string>
+    <string name="txtuserName">Username</string>
+    <string name="txtEmail">Email</string>
+    <string name="drawSettings">Dibujo de engranaje</string>
+    <string name="drawInfo">Dibujo de informacion</string>
+    <string name="txtdescriptionLogo">logo</string>
+    <string name="txtContentDescriptionLogo">Logo de aplicacion</string>
+    <string name="txtPasswordInput">Password</string>
+    <string name="txtInputLabelMail">Email</string>
+    <string name="txtButtonlogin">Login</string>
+    <string name="textContraseña">Forgot your password?</string>
+    <string name="Crearcuentatxt">Do not have an account? Sign Up</string>
+    <string name="txtPregunta">Which user do you want to be?</string>
+    <string name="txtbtn1">Salesperson</string>
+    <string name="txtbtn2">Client</string>
+    <string name="txtConfirmPassword">Confirm password</string>
+    <string name="configuracion">Settings</string>
+    <string name="editar_perfil">Edit profile</string>
+    <string name="idioma">Language</string>
+    <string name="cerrar_sesion">Logout</string>
+    <string name="activar_notificaciones">Enable notifications</string>
+    <string name="usuario">User</string>
 </resources>
