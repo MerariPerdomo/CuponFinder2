@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -24,6 +25,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         /*--------------Para menu lateral ---------------*/
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
@@ -62,7 +65,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawerLayout.closeDrawers();
             return true;
         }else if (item.getItemId() == R.id.nav_setting) {
-            Toast.makeText(this, "Te lleva a setting", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this, Configuracion.class);
+            startActivity(intent);
             drawerLayout.closeDrawers();
             return true;
         }else if (item.getItemId() == R.id.nav_exit) {
