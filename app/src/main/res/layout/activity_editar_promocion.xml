@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center|start|top"
+    android:orientation="vertical"
+    android:padding="15dp"
+    tools:context=".Editar_promocion">
+
+    <Button
+        android:id="@+id/button6"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="58dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/edit_promotion"
+        android:textColor="@color/light_blue_600"
+        android:textSize="20sp"
+        app:icon="@drawable/ic_regresar"
+        app:iconSize="30dp"
+        app:iconTint="@color/light_blue_600" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/EditarNombrePromo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/promotion_name"
+        app:startIconDrawable="@drawable/ic_canasta"
+        app:startIconTint="@color/amarillo">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="TextContrastCheck" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtEditarPrecio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/promotion_price"
+        app:startIconDrawable="@drawable/ic_dinero"
+        app:startIconTint="@color/amarillo">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="TextContrastCheck" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtEditarFechaInicio"
+        style="@style/Widget.Material3.MaterialCalendar.Day.Selected"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/start_date"
+        android:inputType="date"
+        app:startIconDrawable="@drawable/ic_calendar"
+        app:startIconTint="@color/amarillo">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="TextContrastCheck" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtEditarFechaFinal"
+        style="@style/Widget.Material3.MaterialCalendar.Day.Selected"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/end_date"
+        android:inputType="date"
+        app:startIconDrawable="@drawable/ic_calendar"
+        app:startIconTint="@color/amarillo">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="TextContrastCheck" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/button8"
+            android:layout_width="187dp"
+            android:layout_height="93dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/verde_lima"
+            android:gravity="center"
+            android:text="@string/save"
+            android:textSize="20sp"
+            app:icon="@drawable/ic_save"
+            app:iconSize="35dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline10"
+            app:layout_constraintVertical_bias="0.151"
+            tools:ignore="TextContrastCheck" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.17490494" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</LinearLayout>
