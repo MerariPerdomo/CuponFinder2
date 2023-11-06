@@ -15,18 +15,6 @@
     <string name="enable_notifications">Enable Notifications</string>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     <string name="txtSetting">Settings</string>
     <string name="txtAbout">About us</string>
     <string name="appName">Cupon Finder</string>
@@ -56,4 +44,6 @@
     <string name="txtCuestionAccount">Already have an account?</string>
     <string name="txtcreate_account">Create Account</string>
     <string name="title_activity_splash_screen">Cupon Finder</string>
+    <string name="txtCategoria">Categories</string>
+    <string name="txtHomePromotes">Promotions of the day</string>
 </resources>

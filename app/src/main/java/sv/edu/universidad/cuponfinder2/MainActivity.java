@@ -4,8 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintLayoutStates;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +19,15 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    /*-------------Seccion de Categorias -------------*/
+
+    private RecyclerView.Adapter adapter;
+    private RecyclerView recyclerViewListCategorias;
+    private RecyclerView recyclerViewListPromotes;
+
+
+
 
     /*--------------Para menu lateral ---------------*/
     DrawerLayout drawerLayout;
@@ -39,7 +52,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
         /*-----------------fin----------------*/
 
+        /*-------------Seccion de Categorias -------------*/
+        recyclerViewCategorias();
+        recyclerViewPromotes();
+
     }
+
+    private void recyclerViewPromotes() {
+        LinearLayoutManager promote = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        recyclerViewListCategorias=findViewById(R.id.rvCategories);
+        recyclerViewListCategorias.setLayoutManager(promote);
+    }
+
+    private void recyclerViewCategorias() {
+        LinearLayoutManager car = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        recyclerViewListCategorias=findViewById(R.id.rvPromote);
+        recyclerViewListCategorias.setLayoutManager(car);
+    }
+
     /*--------------Para menu lateral ---------------*/
     @Override
     public void onBackPressed(){

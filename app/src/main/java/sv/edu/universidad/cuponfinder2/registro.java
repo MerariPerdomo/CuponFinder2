@@ -17,6 +17,6 @@ public class registro extends AppCompatActivity {
     public void accountExist(View view) {
         Intent Login = new Intent(registro.this, login.class);
         startActivity(Login);
-        finish();
+
     }
 }
