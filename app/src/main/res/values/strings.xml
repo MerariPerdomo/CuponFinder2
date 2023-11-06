@@ -15,6 +15,18 @@
     <string name="enable_notifications">Enable Notifications</string>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     <string name="txtSetting">Settings</string>
     <string name="txtAbout">About us</string>
     <string name="appName">Cupon Finder</string>
@@ -44,6 +56,15 @@
     <string name="txtCuestionAccount">Already have an account?</string>
     <string name="txtcreate_account">Create Account</string>
     <string name="title_activity_splash_screen">Cupon Finder</string>
+    <string name="about_us">About Us</string>
+    <string name="img_aboutus">img_aboutUs</string>
+    <string name="version">Version</string>
+    <string name="cupon_finder_1_0_0">Cupon Finder 1.0.0</string>
+    <string name="developed_by">Developed by</string>
+    <string name="karen_andrea_l_pez_maga_a">Karen López</string>
+    <string name="ver_nica_lisseth_mar_n_santos">Verónica Marín </string>
+    <string name="merari_ang_lica_perdomo_figueroa">Merari Perdomo </string>
+    <string name="config">Settings</string>
     <string name="txtCategoria">Categories</string>
     <string name="txtHomePromotes">Promotions of the day</string>
 </resources>

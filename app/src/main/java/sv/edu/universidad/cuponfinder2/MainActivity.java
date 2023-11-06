@@ -92,7 +92,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawerLayout.closeDrawers();
             return true;
         }else if (item.getItemId() == R.id.nav_acerca) {
-            Toast.makeText(this, "Te lleva a about it", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this, AcercaDe.class);
+            startActivity(intent);
+            Toast.makeText(this, "About Us", Toast.LENGTH_SHORT).show();
             drawerLayout.closeDrawers();
             return true;
         }else if (item.getItemId() == R.id.nav_setting) {
