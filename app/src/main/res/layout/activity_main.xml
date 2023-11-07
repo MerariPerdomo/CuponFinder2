@@ -23,7 +23,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@color/white"
             tools:ignore="MissingConstraints">
 
@@ -38,39 +38,59 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:navigationIcon="@drawable/ic_menu" />
 
+
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/searchLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/constraintLayoutq"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-                <androidx.appcompat.widget.SearchView
-                    android:id="@+id/search"
-                    android:layout_width="384dp"
-                    android:layout_height="49dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="16dp"
-                    app:iconifiedByDefault="false"
+               <!-- <EditText
+                    android:id="@+id/editTextText"
+                    android:layout_width="280dp"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="66dp"
+                    android:autofillHints=""
+
+                    android:drawablePadding="10dp"
+                    android:ems="10"
+                    android:gravity="center_vertical"
+                    android:hint="  Search..."
+                    android:inputType="text|textAutoComplete"
+                    android:minHeight="48dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:queryBackground="@android:color/darker_gray"
-                    app:queryHint="Search..." />
+                    app:startIconDrawable="@drawable/ic_search" />-->
 
+                <SearchView
+                    android:layout_width="298dp"
+                    android:layout_height="49dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/fondo_search"
+                    android:hint="Search..."
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="135dp"
-                app:layout_constraintEnd_toEndOf="@id/searchLayout"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/constraintLayoutq">
 
                 <TextView
                     android:id="@+id/textView11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="284dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="236dp"
                     android:text="@string/txtCategoria"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -80,31 +100,32 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvCategories"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="19dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
                 <TextView
-                    android:id="@+id/textView13"
+                    android:id="@+id/textView15"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="28dp"
-                    android:layout_marginTop="204dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="132dp"
                     android:text="@string/txtHomePromotes"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/rvCategories" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rvCategories" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvPromote"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="19dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView13" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
