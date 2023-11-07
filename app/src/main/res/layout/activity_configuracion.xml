@@ -133,7 +133,6 @@
         android:layout_marginTop="24dp"
         android:layout_marginBottom="36dp"
         android:text="@string/enable_notifications"
-        android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/divider3"
         app:layout_constraintEnd_toEndOf="parent"
