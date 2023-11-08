@@ -15,7 +15,7 @@
         app:layout_constraintGuide_percent="0.08866442" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/btnRegresarAcercaDe"
         style="@style/Widget.Material3.Button.TextButton.Icon"
         android:layout_width="161dp"
         android:layout_height="50dp"
