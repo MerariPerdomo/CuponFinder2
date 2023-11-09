@@ -95,12 +95,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (item.getItemId() == R.id.nav_home) {
             Intent intent = new Intent(MainActivity.this, Editar_promocion.class);
             startActivity(intent);
-            Toast.makeText(this, "Te lleva a home", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show();
             drawerLayout.closeDrawers();
             return true;
         } else if (item.getItemId() == R.id.nav_profile) {
             Intent intent = new Intent(MainActivity.this, vistaUsurio.class);
             startActivity(intent);
+            drawerLayout.closeDrawers();
+            return true;
+        }else if (item.getItemId() == R.id.nav_promotios) {
+            Intent intent = new Intent(MainActivity.this, promotions.class);
+            startActivity(intent);
+            Toast.makeText(this, "Promotions", Toast.LENGTH_SHORT).show();
             drawerLayout.closeDrawers();
             return true;
         }else if (item.getItemId() == R.id.nav_acerca) {

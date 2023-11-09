@@ -7,6 +7,10 @@
         <item android:id="@+id/nav_profile"
             android:title="@string/profile"
             android:icon="@drawable/ic_perfil"/>
+        <item
+            android:id="@+id/nav_promotios"
+            android:icon="@drawable/ic_cartnav"
+            android:title="@string/txtNavPromotions" />
         <item android:id="@+id/nav_acerca"
             android:title="@string/about_it"
             android:icon="@drawable/ic_home"/>

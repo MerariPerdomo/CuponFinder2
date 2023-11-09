@@ -62,4 +62,7 @@
     <string name="publicidad_ex">publicidad</string>
     <string name="edit_image">Edit</string>
     <string name="delete_image">Delete</string>
+    <string name="txtNavPromotions">Promotions</string>
+    <string name="txtPromotions">Promotions</string>
+    <string name="btnAgregarPromotion">Add</string>
 </resources>
