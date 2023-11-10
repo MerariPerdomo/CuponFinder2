@@ -65,4 +65,6 @@
     <string name="txtNavPromotions">Promotions</string>
     <string name="txtPromotions">Promotions</string>
     <string name="btnAgregarPromotion">Add</string>
+    <string name="description_promotion">Description</string>
+    <string name="txtDescriptionImg">Imagen de promocion</string>
 </resources>

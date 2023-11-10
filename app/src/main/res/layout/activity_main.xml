@@ -10,7 +10,7 @@
     tools:openDrawer="start">
 
 
-    <com.google.android.material.navigation.NavigationView
+   <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:id="@+id/nav_view"
@@ -71,7 +71,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.3" />
+                    app:layout_constraintGuide_percent="0.46" />
 
                 <SearchView
                     android:id="@+id/scvPromotion"
@@ -104,14 +104,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.06" />
+                    app:layout_constraintGuide_percent="0.11" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline15"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.03" />
+                    app:layout_constraintGuide_percent="0.06" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline21"
