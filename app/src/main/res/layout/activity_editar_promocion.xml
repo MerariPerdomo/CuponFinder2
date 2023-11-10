@@ -40,9 +40,9 @@
 
             <Button
                 android:id="@+id/button5"
-                android:layout_width="117dp"
-                android:layout_height="53dp"
-                android:layout_marginStart="20dp"
+                android:layout_width="120dp"
+                android:layout_height="56dp"
+                android:layout_marginStart="22dp"
                 android:backgroundTint="@color/rojo"
                 android:text="@string/delete_image"
                 android:textColor="@color/celeste"
@@ -50,7 +50,7 @@
                 app:iconTint="@color/celeste"
                 app:layout_constraintBottom_toTopOf="@+id/guideline12"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.795"
+                app:layout_constraintHorizontal_bias="0.828"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/guideline10"
                 app:layout_constraintVertical_bias="0.977" />
@@ -60,7 +60,7 @@
                 android:layout_width="117dp"
                 android:layout_height="53dp"
                 android:layout_marginTop="252dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="22dp"
                 android:backgroundTint="@color/amarillo"
                 android:text="@string/edit_image"
                 android:textColor="@color/verdeOscuro"
