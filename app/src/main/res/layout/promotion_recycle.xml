@@ -8,7 +8,7 @@
     android:layout_margin="8dp">
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/imgPromoRecycle"
         android:layout_width="86dp"
         android:layout_height="58dp"
         android:contentDescription="@string/txtDescriptionImg"
@@ -31,7 +31,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView5"
+        app:layout_constraintStart_toEndOf="@+id/imgPromoRecycle"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -47,7 +47,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.217"
-        app:layout_constraintStart_toEndOf="@+id/imageView5"
+        app:layout_constraintStart_toEndOf="@+id/imgPromoRecycle"
         app:layout_constraintTop_toBottomOf="@+id/txtTituloPromo"
         app:layout_constraintVertical_bias="1.0" />
 
@@ -62,7 +62,7 @@
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imageView5"
+        app:layout_constraintStart_toEndOf="@+id/imgPromoRecycle"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
