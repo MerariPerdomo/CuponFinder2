@@ -114,5 +114,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider" />
 
+    <Button
+        android:id="@+id/btnSession"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cerrar session"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="600dp"
+        tools:ignore="MissingConstraints" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

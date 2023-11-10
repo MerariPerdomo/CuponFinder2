@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "693247028343",
+    "project_id": "cupon-finder-5b634",
+    "storage_bucket": "cupon-finder-5b634.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:693247028343:android:2da83c1b5fed496ff7aa72",
+        "android_client_info": {
+          "package_name": "sv.edu.universidad.cuponfinder2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMkuJjvRDq99JtCps3JM6mZy2QO1oNV2o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

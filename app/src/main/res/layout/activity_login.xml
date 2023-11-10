@@ -41,7 +41,8 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/txtInputLabelMail"
                 android:inputType="textEmailAddress"
-                android:textColorHint="#8D6E63" />
+                android:textColorHint="#8D6E63"
+                android:id="@+id/txtEmail"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -59,12 +60,13 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/txtPasswordInput"
                 android:inputType="textPassword"
-                android:textColorHint="#8D6E63" />
+                android:textColorHint="#8D6E63"
+                android:id="@+id/txtPssw"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
 
-            android:id="@+id/button"
+            android:id="@+id/btnLogin"
             android:layout_width="232dp"
             android:textColor="@color/white"
             android:layout_height="70dp"
@@ -76,13 +78,12 @@
 
         <Button
             style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="@string/textContraseña"
             android:textAlignment="center"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 <!--            android:textColor="@color/black"-->
 
 
@@ -90,7 +91,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/textView2"
+        android:id="@+id/btnNoCount"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

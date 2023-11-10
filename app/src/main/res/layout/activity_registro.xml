@@ -2,6 +2,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/btnRegister"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="20dp"
@@ -14,8 +15,8 @@
         android:layout_height="670dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:paddingTop="35dp"
-        android:paddingHorizontal="40dp">
+        android:paddingHorizontal="40dp"
+        android:paddingTop="35dp">
 
         <ImageView
             android:id="@+id/imageView3"
@@ -38,6 +39,7 @@
             app:startIconDrawable="@drawable/ic_perfil">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/txtNombre_completo"
@@ -56,6 +58,7 @@
             app:startIconDrawable="@drawable/ic_perfil">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtLocal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/txtLocalName"
@@ -74,6 +77,7 @@
             app:startIconDrawable="@android:drawable/sym_action_email">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/txtInputLabelMail"
@@ -85,14 +89,15 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:gravity="center_horizontal"
             app:boxStrokeColor="#39A4C6"
-            android:layout_marginBottom="5dp"
             app:boxStrokeErrorColor="@color/design_default_color_error"
             app:endIconMode="password_toggle"
             app:startIconDrawable="@android:drawable/ic_lock_idle_lock">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtPs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/txtPasswordInput"
@@ -111,6 +116,7 @@
             app:startIconDrawable="@android:drawable/ic_lock_idle_lock">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtPs2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/txtConfirmPassword"
@@ -119,21 +125,20 @@
         </com.google.android.material.textfield.TextInputLayout>
 
 
-
         <Button
-            android:id="@+id/button"
             android:layout_width="232dp"
-            android:textColor="@color/white"
             android:layout_height="70dp"
             android:layout_marginTop="15dp"
             android:backgroundTint="#3EB4DA"
             android:text="@string/txtcreate_account"
-            android:textSize="20sp" />
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:onClick="CreateCount"/>
 
     </LinearLayout>
 
     <Button
-        android:id="@+id/textView2"
+
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
