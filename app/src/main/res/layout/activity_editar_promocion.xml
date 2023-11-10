@@ -1,123 +1,204 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center|start|top"
-    android:orientation="vertical"
     android:padding="15dp"
     tools:context=".Editar_promocion">
 
-    <Button
-        android:id="@+id/button6"
-        style="@style/Widget.Material3.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="58dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:text="@string/edit_promotion"
-        android:textColor="@color/light_blue_600"
-        android:textSize="20sp"
-        app:icon="@drawable/ic_regresar"
-        app:iconSize="30dp"
-        app:iconTint="@color/light_blue_600" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/EditarNombrePromo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/promotion_name"
-        app:startIconDrawable="@drawable/ic_canasta"
-        app:startIconTint="@color/amarillo">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:ignore="TextContrastCheck" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/txtEditarPrecio"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/promotion_price"
-        app:startIconDrawable="@drawable/ic_dinero"
-        app:startIconTint="@color/amarillo">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:ignore="TextContrastCheck" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/txtEditarFechaInicio"
-        style="@style/Widget.Material3.MaterialCalendar.Day.Selected"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/start_date"
-        android:inputType="date"
-        app:startIconDrawable="@drawable/ic_calendar"
-        app:startIconTint="@color/amarillo">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:ignore="TextContrastCheck" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/txtEditarFechaFinal"
-        style="@style/Widget.Material3.MaterialCalendar.Day.Selected"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/end_date"
-        android:inputType="date"
-        app:startIconDrawable="@drawable/ic_calendar"
-        app:startIconTint="@color/amarillo">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:ignore="TextContrastCheck" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/button8"
-            android:layout_width="187dp"
-            android:layout_height="93dp"
-            android:layout_marginTop="28dp"
-            android:layout_marginBottom="16dp"
-            android:backgroundTint="@color/verde_lima"
-            android:gravity="center"
-            android:text="@string/save"
-            android:textSize="20sp"
-            app:icon="@drawable/ic_save"
-            app:iconSize="35dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline10"
-            app:layout_constraintVertical_bias="0.151"
-            tools:ignore="TextContrastCheck" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.17490494" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.1" />
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="294dp"
+                android:layout_height="207dp"
+                android:layout_marginTop="120dp"
+                android:contentDescription="@string/publicidad_ex"
+                app:layout_constraintBottom_toTopOf="@+id/guideline12"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.494"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                app:srcCompat="@drawable/publicidadejemplo" />
+
+            <Button
+                android:id="@+id/button5"
+                android:layout_width="120dp"
+                android:layout_height="56dp"
+                android:layout_marginStart="22dp"
+                android:backgroundTint="@color/rojo"
+                android:text="@string/delete_image"
+                android:textColor="@color/celeste"
+                app:icon="@drawable/ic_delete"
+                app:iconTint="@color/celeste"
+                app:layout_constraintBottom_toTopOf="@+id/guideline12"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.828"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guideline10"
+                app:layout_constraintVertical_bias="0.977" />
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="117dp"
+                android:layout_height="53dp"
+                android:layout_marginTop="252dp"
+                android:layout_marginEnd="22dp"
+                android:backgroundTint="@color/amarillo"
+                android:text="@string/edit_image"
+                android:textColor="@color/verdeOscuro"
+                app:icon="@drawable/ic_edit"
+                app:iconTint="@color/verdeOscuro"
+                app:layout_constraintBottom_toTopOf="@+id/guideline12"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.162"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guideline10" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="835dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.46" />
+
+            <EditText
+                android:id="@+id/editTextText4"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="148dp"
+                android:drawableStart="@drawable/ic_calendar"
+                android:drawableTint="@color/verde_lima"
+                android:ems="10"
+                android:hint="@string/end_date"
+                android:importantForAutofill="no"
+                android:inputType="date"
+                app:layout_constraintBottom_toTopOf="@+id/guideline11"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guideline12"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <EditText
+                android:id="@+id/editTextText"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="252dp"
+                android:drawableStart="@drawable/ic_canasta"
+                android:drawableTint="@color/verde_lima"
+                android:ems="10"
+                android:hint="@string/promotion_name"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                app:layout_constraintBottom_toTopOf="@+id/guideline11"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guideline12"
+                app:layout_constraintVertical_bias="0.188"
+                tools:ignore="TextContrastCheck" />
+
+            <EditText
+                android:id="@+id/editTextText3"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="80dp"
+                android:drawableStart="@drawable/ic_calendar"
+                android:drawableTint="@color/verde_lima"
+                android:ems="10"
+                android:hint="@string/start_date"
+                android:importantForAutofill="no"
+                android:inputType="date"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guideline12" />
+
+            <Button
+                android:id="@+id/button6"
+                android:layout_width="239dp"
+                android:layout_height="61dp"
+                android:layout_marginBottom="82dp"
+                android:backgroundTint="@color/azul_brillante"
+                android:text="@string/save"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="TextContrastCheck" />
+
+            <EditText
+                android:id="@+id/editTextTextMultiLine2"
+                style="@style/Widget.Material3.AutoCompleteTextView.OutlinedBox"
+                android:layout_width="300dp"
+                android:layout_height="109dp"
+                android:layout_marginStart="41dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginBottom="19dp"
+                android:background="#FFFCE4"
+                android:ems="10"
+                android:gravity="start|top"
+                android:hint="@string/description_promotion"
+                android:inputType="textMultiLine"
+                app:layout_constraintBottom_toTopOf="@+id/button6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextText4"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <Button
+                android:id="@+id/btnRegresarEditarPromocion"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="209dp"
+                android:layout_height="55dp"
+                android:layout_marginBottom="32dp"
+                android:text="@string/edit_promotion"
+                android:textColor="@color/light_blue_600"
+                android:textSize="20sp"
+                app:icon="@drawable/ic_regresar"
+                app:iconSize="30dp"
+                app:iconTint="@color/light_blue_600"
+                app:layout_constraintBottom_toTopOf="@+id/guideline10"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.093"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="button5,button4" />
 
 
-</LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

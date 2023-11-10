@@ -8,7 +8,7 @@
     tools:context=".Configuracion">
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/btnRegresarConfig"
         style="@style/Widget.Material3.Button.TextButton.Icon"
         android:layout_width="137dp"
         android:layout_height="65dp"
