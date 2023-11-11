@@ -86,23 +86,31 @@
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.46" />
 
-            <EditText
-                android:id="@+id/editTextText4"
+            <TextView
+                android:id="@+id/etEditarFechaFinal"
+                style="@style/Widget.AppCompat.PopupMenu"
                 android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="148dp"
-                android:drawableStart="@drawable/ic_calendar"
-                android:drawableTint="@color/verde_lima"
+                android:background="#2303FF0E"
+                android:clickable="true"
                 android:ems="10"
+                android:focusable="true"
+                android:gravity="center_vertical"
                 android:hint="@string/end_date"
                 android:importantForAutofill="no"
                 android:inputType="date"
+                android:padding="10dp"
+                android:textSize="20sp"
+                app:drawableStartCompat="@drawable/ic_calendar"
+                app:drawableTint="@color/verde_lima"
                 app:layout_constraintBottom_toTopOf="@+id/guideline11"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintHorizontal_bias="0.53"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/guideline12"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.0"
+                tools:ignore="TextViewEdits,TextContrastCheck" />
 
             <EditText
                 android:id="@+id/editTextText"
@@ -122,21 +130,27 @@
                 app:layout_constraintVertical_bias="0.188"
                 tools:ignore="TextContrastCheck" />
 
-            <EditText
-                android:id="@+id/editTextText3"
+            <TextView
+                android:id="@+id/etEditarFechaInicio"
+                style="@android:style/Widget.TextView.PopupMenu"
                 android:layout_width="300dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="80dp"
-                android:drawableStart="@drawable/ic_calendar"
-                android:drawableTint="@color/verde_lima"
+                android:layout_marginTop="88dp"
+                android:background="#86D0F2FF"
                 android:ems="10"
+                android:gravity="center|start"
                 android:hint="@string/start_date"
                 android:importantForAutofill="no"
                 android:inputType="date"
+                android:padding="10dp"
+                android:textSize="20sp"
+                app:drawableStartCompat="@drawable/ic_calendar"
+                app:drawableTint="@color/verde_lima"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintHorizontal_bias="0.53"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/guideline12" />
+                app:layout_constraintTop_toTopOf="@+id/guideline12"
+                tools:ignore="TextViewEdits,TextContrastCheck" />
 
             <Button
                 android:id="@+id/button6"
@@ -160,16 +174,19 @@
                 android:layout_marginTop="7dp"
                 android:layout_marginEnd="40dp"
                 android:layout_marginBottom="19dp"
+                android:autofillHints=""
                 android:background="#FFFCE4"
                 android:ems="10"
+                android:foregroundGravity="center"
                 android:gravity="start|top"
                 android:hint="@string/description_promotion"
                 android:inputType="textMultiLine"
                 app:layout_constraintBottom_toTopOf="@+id/button6"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextText4"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toBottomOf="@+id/etEditarFechaFinal"
+                app:layout_constraintVertical_bias="0.0"
+                tools:ignore="TextContrastCheck" />
 
             <Button
                 android:id="@+id/btnRegresarEditarPromocion"
