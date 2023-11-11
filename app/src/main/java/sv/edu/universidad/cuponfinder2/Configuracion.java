@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
@@ -30,8 +31,10 @@ public class Configuracion extends AppCompatActivity {
         builder.setSingleChoiceItems(listItems, -1, (dialog, which) -> {
             if (which == 0) {
                 ((MyApplication) getApplication()).updateLocale("en");
+                Toast.makeText(getApplicationContext(), "English Language", Toast.LENGTH_SHORT).show();
             } else if (which == 1) {
                 ((MyApplication) getApplication()).updateLocale("en");
+                Toast.makeText(getApplicationContext(), "Español establecido", Toast.LENGTH_SHORT).show();
             }
             dialog.dismiss();
             recreate(); // Reinicia la actividad para aplicar los cambios de idioma
