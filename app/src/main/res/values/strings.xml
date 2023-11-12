@@ -4,7 +4,7 @@
     <string name="nav_drawer_close">Close navigation drawer</string>
     <string name="home">Home</string>
     <string name="profile">Profile</string>
-    <string name="about_it">About it</string>
+    <string name="about_it">About Us</string>
     <string name="setting">Setting</string>
     <string name="exit">Exit</string>
     <string name="settings">Settings</string>
@@ -59,12 +59,12 @@
     <string name="start_date"> Start Date</string>
     <string name="end_date"> End Date</string>
     <string name="save"> Save Changes</string>
-    <string name="publicidad_ex">publicidad</string>
+    <string name="publicidad_ex">publicity</string>
     <string name="edit_image">Edit</string>
     <string name="delete_image">Delete</string>
     <string name="txtNavPromotions">Promotions</string>
     <string name="txtPromotions">Promotions</string>
     <string name="btnAgregarPromotion">Add</string>
     <string name="description_promotion">Description</string>
-    <string name="txtDescriptionImg">Imagen de promocion</string>
+    <string name="txtDescriptionImg">Promotion Image</string>
 </resources>
