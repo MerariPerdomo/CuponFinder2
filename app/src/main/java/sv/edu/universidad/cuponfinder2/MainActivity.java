@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.nav_home) {
-            Intent intent = new Intent(MainActivity.this, Editar_promocion.class);
+            Intent intent = new Intent(MainActivity.this, Negocios.class);
             startActivity(intent);
             Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show();
             drawerLayout.closeDrawers();
