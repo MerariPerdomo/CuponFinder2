@@ -67,22 +67,22 @@ public class registro extends AppCompatActivity {
         setContentView(R.layout.activity_registro);
         mAuth = FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference();
-        storageReference= FirebaseStorage.getInstance().getReference();
-        mfirestore = FirebaseFirestore.getInstance();
-        progressDialog = new ProgressDialog(this);
-        agregar = findViewById(R.id.agregarFoto);
-        perfil=findViewById(R.id.imgUsuario);
         txtEmail = findViewById(R.id.txtEmail);
         txtNombre = findViewById(R.id.txtName);
         txtNegocio = findViewById(R.id.txtLocal);
         txtContra = findViewById(R.id.txtPs);
         txtContra2 = findViewById(R.id.txtPs2);
+        storageReference= FirebaseStorage.getInstance().getReference();
+        mfirestore = FirebaseFirestore.getInstance();
+        progressDialog = new ProgressDialog(this);
+        agregar = findViewById(R.id.agregarFoto);
+        perfil=findViewById(R.id.imgUsuario);
 
     }
 
     private void registerUser() {
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            
+
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
@@ -99,30 +99,6 @@ public class registro extends AppCompatActivity {
                             if (task2.isSuccessful()){
                                 startActivity(new Intent(registro.this, vistaUsurio.class));
                                 finish();
-                             /*   SharedPreferences sharedPreferences = getSharedPreferences("CuponFinder2", MODE_PRIVATE);
-                                String imageUriString = sharedPreferences.getString("imageUri", null);
-                                if (imageUriString != null) {
-                                    Uri imageUri = Uri.parse(imageUriString);
-                                    StorageReference reference = storageReference.child("perfil/*" + id);
-                                    reference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                        @Override
-                                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                            Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                                            while (!uriTask.isSuccessful());
-                                            if (uriTask.isSuccessful()){
-                                                uriTask.addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                                    @Override
-                                                    public void onSuccess(Uri uri) {
-                                                        String download_uri = uri.toString();
-                                                        HashMap<String, Object> map = new HashMap<>();
-                                                        map.put("photo", download_uri);
-                                                        mfirestore.collection("perfil").document(mAuth.getUid()).update(map);
-                                                    }
-                                                });
-                                            }
-                                        }
-                                    });
-                                }*/
                             }else{
                                 Toast.makeText(registro.this, "Algo salio mal", Toast.LENGTH_SHORT).show();
                             }
@@ -165,7 +141,6 @@ public class registro extends AppCompatActivity {
             }
         }
     }
-    /*
     public void AgregarFoto(View view) {
         Intent i =new Intent(Intent.ACTION_PICK);
         i.setType("image/*");
@@ -182,36 +157,9 @@ public class registro extends AppCompatActivity {
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
-
     private void subirFoto(Uri image_url) {
         progressDialog.setMessage("Actualizando foto");
         progressDialog.show();
-        String rute_storage_photo = storage_path + "" + "photo" + "" + mAuth.getUid();
-        StorageReference reference = storageReference.child(rute_storage_photo);
-        reference.putFile(image_url).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                while (!uriTask.isSuccessful());
-                if (uriTask.isSuccessful()){
-                    uriTask.addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            String download_uri = uri.toString();
-                            HashMap<String, Object> map = new HashMap<>();
-                            map.put("photo", download_uri);
-                            mfirestore.collection("perfil").document(mAuth.getUid()).update(map);
-                        }
-                    });
-                }
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(registro.this, "Error al cargar foto", Toast.LENGTH_SHORT).show();
-
-            }
-        });
         String tempImageName = "tempImage";
         StorageReference reference = storageReference.child(tempImageName);
         reference.putFile(image_url).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -243,5 +191,5 @@ public class registro extends AppCompatActivity {
             Picasso.with(getApplicationContext()).load(imageUrl).into(perfil);
         }
 
-    }*/
+    }
 }
