@@ -15,31 +15,36 @@
         android:layout_height="670dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:paddingHorizontal="40dp"
-        >
+        android:paddingHorizontal="40dp">
 
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="5dp"
-            android:contentDescription="@string/txtContentDescriptionLogo"
-            app:srcCompat="@drawable/logoapp"
-            tools:ignore="ImageContrastCheck" />
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:id="@+id/imgUsuario"
-            android:layout_margin="10dp"
-            android:contentDescription="Img perfil" />
+            <ImageView
+                android:id="@+id/imgUsuario"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="20dp"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/img_perfil" />
 
-        <Button
-            android:id="@+id/agregarFoto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button"
-            android:onClick="AgregarFoto"/>
+            <Button
+                android:id="@+id/agregarFoto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#3EB4DA"
+                android:onClick="AgregarFoto"
+                android:text="@string/add_photo"
+                android:layout_margin="5dp" />
+
+        <!--    <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="20dp"
+                android:contentDescription="@string/txtContentDescriptionLogo"
+                app:srcCompat="@drawable/logoapp"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="4dp"
+                tools:layout_editor_absoluteY="7dp" />-->
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

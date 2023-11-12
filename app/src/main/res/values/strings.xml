@@ -67,4 +67,6 @@
     <string name="btnAgregarPromotion">Add</string>
     <string name="description_promotion">Description</string>
     <string name="txtDescriptionImg">Promotion Image</string>
+    <string name="add_photo">Add photo</string>
+    <string name="img_perfil">Img perfil</string>
 </resources>

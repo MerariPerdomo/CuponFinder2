@@ -9,8 +9,12 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +38,13 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import android.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -52,7 +63,6 @@ public class registro extends AppCompatActivity {
     private static final int COD_SEL_IMAGE =300;
     private Uri image_url;
     String photo = "photo";
-    String idd;
     ProgressDialog progressDialog;
     //Valores a registrar
     private String nombre ="";
@@ -104,6 +114,70 @@ public class registro extends AppCompatActivity {
                             }
                         }
                     });
+                    SharedPreferences sharedPreferences = getSharedPreferences("CuponFinder2", MODE_PRIVATE);
+                    String imageBitmapString = sharedPreferences.getString("tempImageBitmap", null);
+                    if (imageBitmapString != null) {
+                        Bitmap imageBitmap = stringToBitmap(imageBitmapString);
+                        byte[] data = bitmapToByte(imageBitmap);
+                        StorageReference reference = storageReference.child("perfil/*" + id);
+                        reference.putBytes(data).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                Toast.makeText(registro.this, "Bienvenido", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(registro.this, "Error al subir la imagen", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+
+
+                  /*  SharedPreferences sharedPreferences = getSharedPreferences("CuponFinder2", MODE_PRIVATE);
+                    String imageUriString = sharedPreferences.getString("imageUri", null);
+                    Toast.makeText(registro.this, "Antes de subir", Toast.LENGTH_SHORT).show();
+
+                    if (imageUriString != null) {
+                        Uri imageUri = Uri.parse(imageUriString);
+                        StorageReference reference = storageReference.child("perfil/*" + userId);
+                        reference.putFile(Uri.parse(image_url + userId)).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                                while (!uriTask.isSuccessful());
+                                if (uriTask.isSuccessful()){
+                                    uriTask.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uri) {
+                                            String download_uri = uri.toString();
+                                            HashMap<String, Object> map = new HashMap<>();
+                                            map.put("photo", download_uri);
+                                            mfirestore.collection("perfil").document(mAuth.getUid()).update(map);
+                                        }
+                                    });
+                                }
+                            }
+                        });*/
+                    /*    reference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                                while (!uriTask.isSuccessful());
+                                if (uriTask.isSuccessful()){
+                                    uriTask.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uri) {
+                                            String download_uri = "photo "+ uri.toString()+id;
+                                            HashMap<String, Object> map = new HashMap<>();
+                                            map.put("photo", download_uri);
+                                            mfirestore.collection("perfil").document(Objects.requireNonNull(mAuth.getUid())).update(map);
+                                        }
+                                    });
+                                }
+                            }
+                        });*/
+                 //   }
 
                 } else {
                     Toast.makeText(registro.this, "Authentication failed", Toast.LENGTH_SHORT).show();
@@ -153,13 +227,49 @@ public class registro extends AppCompatActivity {
             if(requestCode == COD_SEL_IMAGE){
                 image_url = data.getData();
                 subirFoto(image_url);
+                Uri selectedImage = data.getData();
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
+    public String bitmapToString(Bitmap bitmap){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] b = baos.toByteArray();
+        return Base64.encodeToString(b,Base64.DEFAULT);
+    }
+    public Bitmap stringToBitmap(String encodedString) {
+        try {
+            byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch (Exception e) {
+            e.getMessage();
+            return null;
+        }
+    }
+    public byte[] bitmapToByte(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        return baos.toByteArray();
+    }
     private void subirFoto(Uri image_url) {
-        progressDialog.setMessage("Actualizando foto");
-        progressDialog.show();
+        try{
+            InputStream imageStream = getContentResolver().openInputStream(image_url);
+            Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+            SharedPreferences sharedPreferences = getSharedPreferences("CuponFinder2", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("tempImageBitmap", bitmapToString(selectedImage));
+            editor.apply();
+            Toast.makeText(this, "Pasa a cargar imagen", Toast.LENGTH_SHORT).show();
+            cargarImagen();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            Toast.makeText(registro.this, "Error al guardar la foto", Toast.LENGTH_SHORT).show();
+        }
+
+        /*
+
         String tempImageName = "tempImage";
         StorageReference reference = storageReference.child(tempImageName);
         reference.putFile(image_url).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -182,14 +292,32 @@ public class registro extends AppCompatActivity {
                     });
                 }
             }
-        });
+        });*/
     }
     public void cargarImagen() {
-        SharedPreferences sharedPreferences = getSharedPreferences("MyApp", MODE_PRIVATE);
-        String imageUrl = sharedPreferences.getString("tempImageUrl", null);
-        if (imageUrl != null) {
-            Picasso.with(getApplicationContext()).load(imageUrl).into(perfil);
+        progressDialog.setMessage("Actualizando foto");
+        progressDialog.show();
+        SharedPreferences sharedPreferences = getSharedPreferences("CuponFinder2", MODE_PRIVATE);
+        String imageBitmapString = sharedPreferences.getString("tempImageBitmap", null);
+        if (imageBitmapString != null) {
+            Bitmap imageBitmap = stringToBitmap(imageBitmapString);
+            File tempFile = createTempFile(imageBitmap);
+            Picasso.with(getApplicationContext()).load(tempFile).into(perfil);
+            progressDialog.dismiss();
         }
+    }
 
+    public File createTempFile(Bitmap bitmap) {
+        File tempFile = null;
+        try {
+            tempFile = File.createTempFile("tempImage", ".png", getCacheDir());
+            tempFile.deleteOnExit();
+            FileOutputStream fos = new FileOutputStream(tempFile);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            fos.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return tempFile;
     }
 }
