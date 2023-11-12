@@ -5,7 +5,7 @@
     android:id="@+id/btnRegister"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="20dp"
+    android:layout_margin="10dp"
     tools:context=".registro">
 
 
@@ -16,17 +16,30 @@
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:paddingHorizontal="40dp"
-        android:paddingTop="35dp">
+        >
 
         <ImageView
             android:id="@+id/imageView3"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="10dp"
+            android:layout_margin="5dp"
             android:contentDescription="@string/txtContentDescriptionLogo"
             app:srcCompat="@drawable/logoapp"
             tools:ignore="ImageContrastCheck" />
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/imgUsuario"
+            android:layout_margin="10dp"
+            android:contentDescription="Img perfil" />
+
+        <Button
+            android:id="@+id/agregarFoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button"
+            android:onClick="AgregarFoto"/>
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
