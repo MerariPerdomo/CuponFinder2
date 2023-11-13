@@ -32,9 +32,10 @@
         app:civ_border_width="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline16"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.155"
+        app:layout_constraintHorizontal_bias="0.092"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline17" />
+        app:layout_constraintTop_toBottomOf="@id/guideline17"
+        app:layout_constraintVertical_bias="0.0" />
 
     <View
         android:id="@+id/divider5"
@@ -70,7 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
 
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/divider5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.671"
@@ -174,17 +175,6 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.16" />
 
-        <Button
-            android:id="@+id/btnSession"
-            android:layout_width="300dp"
-            android:layout_height="48dp"
-            android:backgroundTint="#3EB4DA"
-            android:padding="10dp"
-            android:text="Cerrar session"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="77dp"
-            tools:layout_editor_absoluteY="287dp" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.Guideline
@@ -200,6 +190,53 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.2514029" />
+
+    <Button
+        android:id="@+id/btnSession"
+        style="@style/Widget.Material3.Button.TextButton.Icon"
+        android:layout_width="298dp"
+        android:layout_height="58dp"
+        android:gravity="start"
+        android:padding="10dp"
+        android:text="Cerrar session"
+        android:textColor="@color/rojo"
+        android:textSize="20sp"
+        app:icon="@drawable/ic_salir"
+        app:iconSize="30dp"
+        app:iconTint="@color/rojo"
+        app:layout_constraintBottom_toTopOf="@+id/guideline30"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline31"
+        app:layout_constraintVertical_bias="0.606"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.84" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline31"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.55" />
+
+    <View
+        android:id="@+id/divider4"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="52dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/btnSession"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline31"
+        app:layout_constraintVertical_bias="0.632" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
