@@ -28,7 +28,7 @@
         app:layout_constraintGuide_percent="0.18" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/btnRegresarNegocios"
         style="@style/Widget.Material3.Button.TextButton.Icon"
         android:layout_width="341dp"
         android:layout_height="52dp"
@@ -39,7 +39,7 @@
         app:iconSize="30dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline28"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.257"
+        app:layout_constraintHorizontal_bias="0.357"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.702" />

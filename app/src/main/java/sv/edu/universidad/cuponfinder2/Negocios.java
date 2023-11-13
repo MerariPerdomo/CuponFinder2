@@ -5,6 +5,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +16,16 @@ public class Negocios extends AppCompatActivity {
     private NegociosAdapter adapter;
     private List<Negocio> negocios;
 
+    Button btnRegresarNegocios;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_negocios);
+
+        btnRegresarNegocios=findViewById(R.id.btnRegresarNegocios);
+
+        btnRegresarNegocios.setOnClickListener(v -> onBackPressed());
 
         negocios = obtenerNegocios();
 
