@@ -71,4 +71,5 @@
     <string name="img_perfil">Img perfil</string>
     <string name="txtPerfil">Anonymous</string>
     <string name="txtEmailStatus">No E-mail</string>
+    <string name="img_splashscreen">splashscreen</string>
 </resources>
