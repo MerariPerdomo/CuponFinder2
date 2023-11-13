@@ -8,26 +8,19 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
-import java.util.Objects;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 import sv.edu.universidad.cuponfinder2.Model.Usuarios;
 
 public class vistaUsurio extends AppCompatActivity {
@@ -45,7 +38,7 @@ public class vistaUsurio extends AppCompatActivity {
         email=findViewById(R.id.email);
         mAuth = FirebaseAuth.getInstance();
         btnCerrar = (Button) findViewById(R.id.btnSession);
-        perfilFoto = findViewById(R.id.profile_image);
+        perfilFoto = findViewById(R.id.img_perfil_negocio);
 
         storageReference= FirebaseStorage.getInstance().getReference();
 

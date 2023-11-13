@@ -1,52 +1,69 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="300dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/amarilloSuperClaro"
+    app:cardBackgroundColor="@color/white"
     app:cardElevation="4dp"
     app:cardUseCompatPadding="true">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:padding="16dp">
 
         <ImageView
             android:id="@+id/imgEjemplo"
-            android:layout_width="257dp"
-            android:layout_height="202dp"
-            android:layout_gravity="top"
-            android:layout_marginBottom="16dp"
+            android:layout_width="365dp"
+            android:layout_height="112dp"
             android:scaleType="centerCrop"
             android:src="@drawable/publicidadejemplo" />
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_perfil_negocio"
+            android:layout_width="61dp"
+            android:layout_height="67dp"
+            android:layout_below="@id/imgEjemplo"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/publicidadejemplo"
+            app:civ_border_color="#FF000000"
+            app:civ_border_width="2dp" />
+
         <TextView
             android:id="@+id/etNombre"
-            android:layout_width="256dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_below="@id/imgEjemplo"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="17dp"
+            android:layout_toEndOf="@id/img_perfil_negocio"
             android:text="Business name"
             android:textColor="@color/light_blue_900"
             android:textSize="24sp" />
 
         <TextView
             android:id="@+id/tvCategory"
-            android:layout_width="263dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/etNombre"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@id/img_perfil_negocio"
             android:text="Category" />
 
         <com.google.android.material.button.MaterialButton
             style="?attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginEnd="8dp"
+            android:layout_below="@id/tvCategory"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="19dp"
+            android:layout_marginEnd="10dp"
             android:gravity="center"
             android:text="See Inside"
-            android:textColor="@color/light_blue_900"
+            android:textColor="@color/verdeOscuro"
             android:textSize="18sp" />
 
-    </LinearLayout>
+    </RelativeLayout>
+
 
 </com.google.android.material.card.MaterialCardView>
+
