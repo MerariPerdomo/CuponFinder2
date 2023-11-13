@@ -78,6 +78,7 @@
         app:layout_constraintVertical_bias="0.254" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -89,7 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.1" />
+            app:layout_constraintGuide_begin="41dp" />
 
         <ImageView
             android:id="@+id/imageView"
@@ -189,12 +190,14 @@
 
     <Button
         android:id="@+id/btnSession"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:backgroundTint="#3EB4DA"
+        android:padding="10dp"
         android:text="Cerrar session"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="600dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="77dp"
+        tools:layout_editor_absoluteY="500dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
