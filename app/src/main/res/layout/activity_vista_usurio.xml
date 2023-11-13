@@ -198,7 +198,7 @@
         android:layout_height="58dp"
         android:gravity="start"
         android:padding="10dp"
-        android:text="Cerrar session"
+        android:text="Logout"
         android:textColor="@color/rojo"
         android:textSize="20sp"
         app:icon="@drawable/ic_salir"

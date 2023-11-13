@@ -69,4 +69,6 @@
     <string name="txtDescriptionImg">Promotion Image</string>
     <string name="add_photo">Add photo</string>
     <string name="img_perfil">Img perfil</string>
+    <string name="txtPerfil">Anonymous</string>
+    <string name="txtEmailStatus">No E-mail</string>
 </resources>

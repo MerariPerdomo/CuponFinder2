@@ -83,8 +83,9 @@ public class vistaUsurio extends AppCompatActivity {
                 }
             });
         }else{
-            nombreUsuario.setText("Incognito");
-            email.setText("No hay email");
+            nombreUsuario.setText(R.string.txtPerfil);
+            email.setText(R.string.txtEmailStatus);
+            btnCerrar.setText(R.string.txtButtonlogin);
         }
 
     }
