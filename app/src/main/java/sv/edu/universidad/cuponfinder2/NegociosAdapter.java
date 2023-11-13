@@ -30,6 +30,7 @@ public class NegociosAdapter extends RecyclerView.Adapter<NegociosViewHolder> {
         holder.nombre.setText(negocio.getNombre());
         holder.categoria.setText(negocio.getCategoria());
         holder.imagen.setImageResource(negocio.getImagen());
+        holder.perfil_negocio.setImageResource(negocio.getPerfil_negocio());
     }
 
     @Override
