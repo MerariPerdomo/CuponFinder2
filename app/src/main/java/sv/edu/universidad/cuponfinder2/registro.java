@@ -133,52 +133,6 @@ public class registro extends AppCompatActivity {
                         });
                     }
 
-
-                  /*  SharedPreferences sharedPreferences = getSharedPreferences("CuponFinder2", MODE_PRIVATE);
-                    String imageUriString = sharedPreferences.getString("imageUri", null);
-                    Toast.makeText(registro.this, "Antes de subir", Toast.LENGTH_SHORT).show();
-
-                    if (imageUriString != null) {
-                        Uri imageUri = Uri.parse(imageUriString);
-                        StorageReference reference = storageReference.child("perfil/*" + userId);
-                        reference.putFile(Uri.parse(image_url + userId)).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                                while (!uriTask.isSuccessful());
-                                if (uriTask.isSuccessful()){
-                                    uriTask.addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                        @Override
-                                        public void onSuccess(Uri uri) {
-                                            String download_uri = uri.toString();
-                                            HashMap<String, Object> map = new HashMap<>();
-                                            map.put("photo", download_uri);
-                                            mfirestore.collection("perfil").document(mAuth.getUid()).update(map);
-                                        }
-                                    });
-                                }
-                            }
-                        });*/
-                    /*    reference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                                while (!uriTask.isSuccessful());
-                                if (uriTask.isSuccessful()){
-                                    uriTask.addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                        @Override
-                                        public void onSuccess(Uri uri) {
-                                            String download_uri = "photo "+ uri.toString()+id;
-                                            HashMap<String, Object> map = new HashMap<>();
-                                            map.put("photo", download_uri);
-                                            mfirestore.collection("perfil").document(Objects.requireNonNull(mAuth.getUid())).update(map);
-                                        }
-                                    });
-                                }
-                            }
-                        });*/
-                 //   }
-
                 } else {
                     Toast.makeText(registro.this, "Authentication failed", Toast.LENGTH_SHORT).show();
                 }
@@ -261,38 +215,11 @@ public class registro extends AppCompatActivity {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("tempImageBitmap", bitmapToString(selectedImage));
             editor.apply();
-            Toast.makeText(this, "Pasa a cargar imagen", Toast.LENGTH_SHORT).show();
             cargarImagen();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            Toast.makeText(registro.this, "Error al guardar la foto", Toast.LENGTH_SHORT).show();
+            Toast.makeText(registro.this, "Error al subir la foto", Toast.LENGTH_SHORT).show();
         }
-
-        /*
-
-        String tempImageName = "tempImage";
-        StorageReference reference = storageReference.child(tempImageName);
-        reference.putFile(image_url).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                while (!uriTask.isSuccessful());
-                if (uriTask.isSuccessful()){
-                    uriTask.addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            String download_uri = uri.toString();
-                            // Guarda la URL de la imagen en SharedPreferences
-                            SharedPreferences sharedPreferences = getSharedPreferences("MyApp", MODE_PRIVATE);
-                            sharedPreferences.edit().putString("tempImageUrl", download_uri).apply();
-                            Toast.makeText(registro.this, "Foto actualizada", Toast.LENGTH_SHORT).show();
-                            progressDialog.dismiss();
-                            cargarImagen();
-                        }
-                    });
-                }
-            }
-        });*/
     }
     public void cargarImagen() {
         progressDialog.setMessage("Actualizando foto");

@@ -22,6 +22,6 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-condensed-medium"
         android:id="@+id/nombre_usu"
-        android:text="Incognito"
+
         android:textSize="24sp" />
 </LinearLayout>

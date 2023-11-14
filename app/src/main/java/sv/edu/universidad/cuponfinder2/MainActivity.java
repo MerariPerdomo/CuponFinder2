@@ -143,18 +143,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.nav_home) {
-            Intent intent = new Intent(MainActivity.this, Negocios.class);
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
             Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show();
             drawerLayout.closeDrawers();
             return true;
         } else if (item.getItemId() == R.id.nav_profile) {
-            Intent intent = new Intent(MainActivity.this, vistaUsurio.class);
+            Intent intent = new Intent(getApplicationContext(), vistaUsurio.class);
             startActivity(intent);
             drawerLayout.closeDrawers();
             return true;
         }else if (item.getItemId() == R.id.nav_promotios) {
-            Intent intent = new Intent(MainActivity.this, promotions.class);
+            Intent intent = new Intent(getApplicationContext(), promotions.class);
             startActivity(intent);
             Toast.makeText(this, "Promotions", Toast.LENGTH_SHORT).show();
             drawerLayout.closeDrawers();
@@ -171,9 +171,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawerLayout.closeDrawers();
             return true;
         }else if (item.getItemId() == R.id.nav_exit) {
+            mAuth.signOut();
+            startActivity(new Intent(getApplicationContext(), login.class));
             finish();
             return true;
-        }else {return false;}
+        } else if (item.getItemId() == R.id.nav_negocios) {
+            Intent intent = new Intent(MainActivity.this, Negocios.class);
+            startActivity(intent);
+            drawerLayout.closeDrawers();
+            return true;
+        } else {return false;}
     }
 
     @Override

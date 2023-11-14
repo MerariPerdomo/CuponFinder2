@@ -11,6 +11,10 @@
             android:id="@+id/nav_promotios"
             android:icon="@drawable/ic_cartnav"
             android:title="@string/txtNavPromotions" />
+        <item
+            android:id="@+id/nav_negocios"
+            android:icon="@drawable/ic_cartnav"
+            android:title="@string/stores" />
         <item android:id="@+id/nav_acerca"
             android:title="@string/about_it"
             android:icon="@drawable/ic_home"/>
@@ -18,7 +22,7 @@
             android:title="@string/setting"
             android:icon="@drawable/ic_settings"/>
         <item android:id="@+id/nav_exit"
-            android:title="@string/exit"
+            android:title="Log out"
             android:icon="@drawable/ic_exit_to_app_"/>
     </group>
 </menu>

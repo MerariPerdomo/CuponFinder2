@@ -63,6 +63,7 @@
             android:text="@string/btnAgregarPromotion"
             android:textColor="@color/white"
             android:textStyle="bold"
+            android:onClick="AgregarPromo"
             app:layout_constraintBottom_toTopOf="@+id/guideline23"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.82"

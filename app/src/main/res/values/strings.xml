@@ -69,4 +69,16 @@
     <string name="txtDescriptionImg">Promotion Image</string>
     <string name="add_photo">Add photo</string>
     <string name="img_perfil">Img perfil</string>
+    <string name="add_promotion">Add promotion</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="selector_de_categor_as">Selector de categorías</string>
+    <string name="stores">Stores</string>
+    <string-array name="categories">
+        <item>Restaurant</item>
+        <item>Market</item>
+        <item>Health</item>
+        <item>Pets</item>
+        <item>Dinks</item>
+    </string-array>
 </resources>
