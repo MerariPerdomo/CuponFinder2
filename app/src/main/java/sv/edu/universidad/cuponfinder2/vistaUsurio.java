@@ -1,15 +1,12 @@
 package sv.edu.universidad.cuponfinder2;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
+//import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -25,7 +22,7 @@ import sv.edu.universidad.cuponfinder2.Model.Usuarios;
 
 public class vistaUsurio extends AppCompatActivity {
     private TextView nombreUsuario, email;
-    private Button btnCerrar;
+    private Button btnEditar;
     private ImageView perfilFoto;
     private FirebaseAuth mAuth;
     StorageReference storageReference;
@@ -37,19 +34,19 @@ public class vistaUsurio extends AppCompatActivity {
         nombreUsuario = findViewById(R.id.Username);
         email=findViewById(R.id.email);
         mAuth = FirebaseAuth.getInstance();
-        btnCerrar = (Button) findViewById(R.id.btnSession);
+        btnEditar = (Button) findViewById(R.id.btnEditarPerfil);
         perfilFoto = findViewById(R.id.img_perfil_negocio);
 
         storageReference= FirebaseStorage.getInstance().getReference();
 
-        btnCerrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mAuth.signOut();
-                startActivity(new Intent(getApplicationContext(), login.class));
-                finish();
-            }
-        });
+//        btnCerrar.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mAuth.signOut();
+//                startActivity(new Intent(getApplicationContext(), login.class));
+//                finish();
+//            }
+//        });
         if (mAuth.getCurrentUser() != null) {
             String id = mAuth.getCurrentUser().getUid();
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -78,18 +75,18 @@ public class vistaUsurio extends AppCompatActivity {
         }else{
             nombreUsuario.setText(R.string.txtPerfil);
             email.setText(R.string.txtEmailStatus);
-            btnCerrar.setText(R.string.txtButtonlogin);
+//            btnCerrar.setText(R.string.txtButtonlogin);
         }
 
     }
 
-    public void ViewSettings(View view) {
-        Intent ir = new Intent(vistaUsurio.this,Configuracion.class);
-        startActivity(ir);
-    }
-
-    public void ViewAboutUs(View view) {
-        Intent ir = new Intent(vistaUsurio.this, AcercaDe.class);
-        startActivity(ir);
-    }
+//    public void ViewSettings(View view) {
+//        Intent ir = new Intent(vistaUsurio.this,Configuracion.class);
+//        startActivity(ir);
+//    }
+//
+//    public void ViewAboutUs(View view) {
+//        Intent ir = new Intent(vistaUsurio.this, AcercaDe.class);
+//        startActivity(ir);
+//    }
 }
