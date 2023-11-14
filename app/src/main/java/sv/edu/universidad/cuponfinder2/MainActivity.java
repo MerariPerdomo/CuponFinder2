@@ -145,7 +145,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (item.getItemId() == R.id.nav_home) {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
-            Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show();
             drawerLayout.closeDrawers();
             return true;
         } else if (item.getItemId() == R.id.nav_profile) {
@@ -153,16 +152,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(intent);
             drawerLayout.closeDrawers();
             return true;
-        }else if (item.getItemId() == R.id.nav_promotios) {
-            Intent intent = new Intent(getApplicationContext(), promotions.class);
-            startActivity(intent);
-            Toast.makeText(this, "Promotions", Toast.LENGTH_SHORT).show();
-            drawerLayout.closeDrawers();
-            return true;
         }else if (item.getItemId() == R.id.nav_acerca) {
             Intent intent = new Intent(MainActivity.this, AcercaDe.class);
             startActivity(intent);
-            Toast.makeText(this, "About Us", Toast.LENGTH_SHORT).show();
             drawerLayout.closeDrawers();
             return true;
         }else if (item.getItemId() == R.id.nav_setting) {
