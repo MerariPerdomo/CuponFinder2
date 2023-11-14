@@ -143,7 +143,7 @@ public class AgregarPromo extends AppCompatActivity {
                                             public void onSuccess(Uri uri) {
                                                 String download_uri = uri.toString();
                                                 HashMap<String, Object> map = new HashMap<>();
-                                                map.put("photo", download_uri);
+                                                map.put("foto", download_uri);
                                                 mfirestore.collection("promocion").document(idProm).update(map);
                                             }
                                         });

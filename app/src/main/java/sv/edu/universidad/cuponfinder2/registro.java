@@ -96,13 +96,13 @@ public class registro extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
+                    String id =mAuth.getCurrentUser().getUid();
                     Map<String, Object> map = new HashMap<>();
+                    map.put("idUser", id);
                     map.put("email",email);
                     map.put("password", password);
                     map.put("nombre", nombre);
                     map.put("negocio", negocio);
-
-                    String id =mAuth.getCurrentUser().getUid();
                     mDatabase.child("Usuarios").child(id).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task2) {
@@ -123,6 +123,7 @@ public class registro extends AppCompatActivity {
                         reference.putBytes(data).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
                             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
                                 Toast.makeText(registro.this, "Bienvenido", Toast.LENGTH_SHORT).show();
                             }
                         }).addOnFailureListener(new OnFailureListener() {

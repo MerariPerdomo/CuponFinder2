@@ -24,8 +24,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:backgroundTint="#3EB4DA"
-        android:onClick="AgregarFoto"
-        android:text="@string/add_photo" />
+        android:onClick="ActualizarFoto"
+        android:text="Update photo" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
@@ -99,7 +99,7 @@
             android:id="@+id/txtPs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/txtPasswordInput"
+            android:hint="New password"
             android:inputType="textPassword"
             android:textColorHint="#8D6E63" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -130,8 +130,8 @@
         android:layout_height="70dp"
         android:layout_marginTop="15dp"
         android:backgroundTint="#3EB4DA"
-        android:onClick="CreateCount"
-        android:text="Actualizar datos"
+        android:onClick="UpdateData"
+        android:text="Update"
         android:textColor="@color/white"
         android:textSize="20sp" />
 

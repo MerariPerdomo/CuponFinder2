@@ -2,7 +2,7 @@ package sv.edu.universidad.cuponfinder2;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-//import android.view.View;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -79,6 +79,12 @@ public class vistaUsurio extends AppCompatActivity {
         }
 
     }
+
+    public void Editar(View view) {
+        Intent i = new Intent(getApplicationContext(),editar_usuario.class);
+        startActivity(i);
+    }
+
 
 
 //    public void ViewSettings(View view) {
