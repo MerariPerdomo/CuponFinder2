@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.MotionEvent;
@@ -91,19 +92,12 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-        Thread hilo = new Thread(){
-            @Override
-            public void run() {
-                try {
-                    sleep(2000);
-                    Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                    startActivity(intent);
-                }catch (InterruptedException e){
-                    e.printStackTrace();
-                }
-            }
-        };
-        hilo.start();
+        new Handler().postDelayed(() -> {
+            Intent i = new Intent(SplashScreen.this, MainActivity.class);
+            startActivity(i);
+        }, 3000);
+
+
     }
 
     @Override

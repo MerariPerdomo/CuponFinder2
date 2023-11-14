@@ -69,4 +69,12 @@
     <string name="txtDescriptionImg">Promotion Image</string>
     <string name="add_photo">Add photo</string>
     <string name="img_perfil">Img perfil</string>
+    <string name="img_splashscreen">SplashScreen</string>
+    <string-array name="categories">
+        <item>Restaurant</item>
+        <item>Market</item>
+        <item>Health</item>
+        <item>Pests</item>
+        <item>Coffee Shops</item>
+    </string-array>
 </resources>

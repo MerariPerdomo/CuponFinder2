@@ -107,7 +107,7 @@ public class AgregarPromo extends AppCompatActivity {
     private String twoDigits(int n) {
         return (n<=9) ? ("0"+n) : String.valueOf(n);
     }
-/*
+
     public void GuardarPromo(View view) {
         String categoria = txtSpinner.getText().toString();
         String titulo = Objects.requireNonNull(txtTitulo.getText()).toString();
@@ -139,7 +139,7 @@ public class AgregarPromo extends AppCompatActivity {
                 }
             });
             //imagen
-            SharedPreferences sharedPreferences = getSharedPreferences("CuponFinder2", MODE_PRIVATE);
+         /*   SharedPreferences sharedPreferences = getSharedPreferences("CuponFinder2", MODE_PRIVATE);
             String imageBitmapString = sharedPreferences.getString("tempImageBitmap", null);
             if (imageBitmapString != null) {
                 Bitmap imageBitmap = stringToBitmap(imageBitmapString);
@@ -157,9 +157,9 @@ public class AgregarPromo extends AppCompatActivity {
                     }
                 });
 
-            }
+            }*/
         }
-    }*/
+    }
 
         @Override
         protected void onActivityResult ( int requestCode, int resultCode, @Nullable Intent data){

@@ -5,6 +5,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +16,16 @@ public class Negocios extends AppCompatActivity {
     private NegociosAdapter adapter;
     private List<Negocio> negocios;
 
+    Button btnRegresarNegocios;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_negocios);
+
+        btnRegresarNegocios=findViewById(R.id.btnRegresarNegocios);
+
+        btnRegresarNegocios.setOnClickListener(v -> onBackPressed());
 
         negocios = obtenerNegocios();
 
@@ -29,8 +37,9 @@ public class Negocios extends AppCompatActivity {
     public List<Negocio> obtenerNegocios() {
         negocios = new ArrayList<>();
         // Agregar algunos productos a la lista
-        negocios.add(new Negocio("Nombre del producto 1", "Categoría del producto 1", R.drawable.publicidadejemplo));
-        negocios.add(new Negocio("Nombre del producto 2", "Categoría del producto 2", R.drawable.publicidadejemplo));
+        negocios.add(new Negocio("Pizzeria BRAND", "Fast Food", R.drawable.pizzeria_portada, R.drawable.pizzeria_logo));
+        negocios.add(new Negocio("Hedgy Shop", "Clothe & Style", R.drawable.ropa_fondo, R.drawable.ropa_logo));
+        negocios.add(new Negocio("Coffee House", "Coffee Shops and Drinks", R.drawable.cafe_fondo, R.drawable.cafe_logo));
         // Puedes agregar más productos aquí
 
         // Devolver la lista de productos
