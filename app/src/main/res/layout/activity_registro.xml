@@ -8,7 +8,6 @@
     android:layout_margin="10dp"
     tools:context=".registro">
 
-
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -33,18 +32,6 @@
                 android:onClick="AgregarFoto"
                 android:text="@string/add_photo"
                 android:layout_margin="5dp" />
-
-        <!--    <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="20dp"
-                android:contentDescription="@string/txtContentDescriptionLogo"
-                app:srcCompat="@drawable/logoapp"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="4dp"
-                tools:layout_editor_absoluteY="7dp" />-->
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

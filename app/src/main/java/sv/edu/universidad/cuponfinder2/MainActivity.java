@@ -153,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawerLayout.closeDrawers();
             return true;
         }else if (item.getItemId() == R.id.nav_acerca) {
-            Intent intent = new Intent(MainActivity.this, AcercaDe.class);
+            Intent intent = new Intent(getApplicationContext(), AcercaDe.class);
             startActivity(intent);
             drawerLayout.closeDrawers();
             return true;

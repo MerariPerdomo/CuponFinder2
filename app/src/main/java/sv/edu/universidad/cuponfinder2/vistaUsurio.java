@@ -3,6 +3,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 //import android.view.View;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -78,6 +79,7 @@ public class vistaUsurio extends AppCompatActivity {
         }
 
     }
+
 
 //    public void ViewSettings(View view) {
 //        Intent ir = new Intent(vistaUsurio.this,Configuracion.class);
