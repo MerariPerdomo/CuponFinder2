@@ -4,94 +4,68 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layoutPromo"
     android:layout_width="350dp"
-    android:layout_height="90dp"
-    android:layout_margin="8dp">
+    android:layout_height="200dp"
+    android:layout_margin="8dp"
+    android:background="@drawable/promo_background"
+    android:elevation="5dp">
 
     <ImageView
-        android:id="@+id/imgPromoRecycle"
-        android:layout_width="86dp"
-        android:layout_height="58dp"
-        android:contentDescription="@string/txtDescriptionImg"
+        android:id="@+id/img_fotopromo"
+        android:layout_width="316dp"
+        android:layout_height="73dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="11dp"
+        android:src="@drawable/no_img"
+        app:civ_border_width="1dp"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.064"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/vista" />
+        app:layout_constraintVertical_bias="0.038" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_perfilnegocio"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="33dp"
+        android:src="@drawable/no_img"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/txtTituloPromo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="7dp"
-        android:layout_marginEnd="107dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="63dp"
         android:text="@string/promotion_name"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imgPromoRecycle"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/txtDescripPromo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="140dp"
-        android:layout_marginBottom="38dp"
-        android:text="@string/description_promotion"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.217"
-        app:layout_constraintStart_toEndOf="@+id/imgPromoRecycle"
-        app:layout_constraintTop_toBottomOf="@+id/txtTituloPromo"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/txtStarDateTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="101dp"
-        android:layout_marginTop="68dp"
-        android:layout_marginEnd="61dp"
-        android:text="@string/start_date"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imgPromoRecycle"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/txtEndDatePromo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="68dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="2dp"
-        android:text="@string/end_date"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.23"
-        app:layout_constraintStart_toEndOf="@+id/txtStarDateTitle"
+        app:layout_constraintHorizontal_bias="0.323"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/txtTitleLocalName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="55dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginBottom="30dp"
         android:text="@string/txtLocalName"
-        android:textStyle="bold"
+        android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.281"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.466" />
+        app:layout_constraintVertical_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

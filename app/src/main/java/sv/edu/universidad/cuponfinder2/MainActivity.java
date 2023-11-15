@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     /*-------------Seccion de Categorias -------------*/
 
     private RecyclerView.Adapter adapter;
-    private RecyclerView recyclerViewListCategorias;
+    private RecyclerView recyclerViewListCategorias, recyclerViewListPromo;
 
 
 
