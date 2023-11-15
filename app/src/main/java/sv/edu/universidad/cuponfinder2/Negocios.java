@@ -5,8 +5,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.view.View;
+import android.util.Log;
 import android.widget.Button;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +23,7 @@ import java.util.List;
 public class Negocios extends AppCompatActivity {
     private RecyclerView recyclerView;
     private NegociosAdapter adapter;
-    private List<Negocio> negocios;
+    private List<Negocio> negocios = new ArrayList<>();
 
     Button btnRegresarNegocios;
 
@@ -23,26 +32,37 @@ public class Negocios extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_negocios);
 
-        btnRegresarNegocios=findViewById(R.id.btnRegresarNegocios);
+        btnRegresarNegocios = findViewById(R.id.btnRegresarNegocios);
 
         btnRegresarNegocios.setOnClickListener(v -> onBackPressed());
 
-        negocios = obtenerNegocios();
-
         recyclerView = findViewById(R.id.rvNegocios);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new NegociosAdapter(negocios);
-        recyclerView.setAdapter(adapter);
-    }
-    public List<Negocio> obtenerNegocios() {
-        negocios = new ArrayList<>();
-        // Agregar algunos productos a la lista
-        negocios.add(new Negocio("Pizzeria BRAND", "Fast Food", R.drawable.pizzeria_portada, R.drawable.pizzeria_logo));
-        negocios.add(new Negocio("Hedgy Shop", "Clothe & Style", R.drawable.ropa_fondo, R.drawable.ropa_logo));
-        negocios.add(new Negocio("Coffee House", "Coffee Shops and Drinks", R.drawable.cafe_fondo, R.drawable.cafe_logo));
-        // Puedes agregar más productos aquí
 
-        // Devolver la lista de productos
-        return negocios;
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("Usuarios");
+
+
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<Negocio> nuevosNegocios = new ArrayList<>();
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                    Negocio negocio = dataSnapshot1.getValue(Negocio.class);
+                    nuevosNegocios.add(negocio);
+                }
+                if (adapter == null) {
+                    adapter = new NegociosAdapter(nuevosNegocios);
+                    recyclerView.setAdapter(adapter);
+                } else {
+                    adapter.setNegocios(nuevosNegocios);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e("ERROR", databaseError.getMessage());
+            }
+        });
+
     }
 }

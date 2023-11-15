@@ -13,6 +13,10 @@ public class Negocio {
         this.perfil_negocio= perfil_negocio;
     }
 
+    public Negocio(){
+
+    }
+
     public int getPerfil_negocio() {
         return perfil_negocio;
     }
