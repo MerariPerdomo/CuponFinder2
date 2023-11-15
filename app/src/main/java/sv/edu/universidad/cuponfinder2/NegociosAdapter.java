@@ -15,6 +15,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import sv.edu.universidad.cuponfinder2.Model.Negocio;
 import sv.edu.universidad.cuponfinder2.Model.Usuarios;
 
 public class NegociosAdapter extends RecyclerView.Adapter<NegociosViewHolder> {
@@ -36,18 +37,23 @@ public class NegociosAdapter extends RecyclerView.Adapter<NegociosViewHolder> {
     public void onBindViewHolder(@NonNull NegociosViewHolder holder, int position) {
         Negocio negocio = negocios.get(position);
         holder.nombre.setText(negocio.getNombre());
-        holder.categoria.setText(negocio.getCategoria());
 //        holder.imagen.setImageResource(negocio.getImagen());
 //        holder.perfil_negocio.setImageResource(negocio.getPerfil_negocio());
-        Usuarios user=new Usuarios();
-        StorageReference perfilRef = FirebaseStorage.getInstance().getReference("perfil/*" + user.getIdUser());
-        perfilRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                String imageUrl = uri.toString();
-                Picasso.get().load(imageUrl).error(R.drawable.perfil_estatico).into(holder.perfil_negocio);
-            }
-        });
+        StorageReference perfilRef = FirebaseStorage.getInstance().getReference("perfil/*" + negocio.getIdUser());
+
+        try{
+            perfilRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    String imageUrl = uri.toString();
+                    Picasso.get().load(imageUrl).error(R.drawable.perfil_estatico).into(holder.perfil_negocio);
+                }
+            });
+
+        }catch (Exception e){
+            Picasso.get().load(R.drawable.perfil_estatico).into(holder.perfil_negocio);
+        }
+
     }
     public void setNegocios(List<Negocio> nuevosNegocios) {
         this.negocios = nuevosNegocios;
