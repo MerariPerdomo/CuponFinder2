@@ -1,6 +1,7 @@
 package sv.edu.universidad.cuponfinder2;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,12 +27,13 @@ public class promotions extends AppCompatActivity {
     private RecyclerView recyclerView;
     private PromocionesAdapter adapter;
     private List<Promocion> promocions = new ArrayList<>();
+    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_promotions);
-
+        searchView = findViewById(R.id.searchView);
         recyclerView = findViewById(R.id.rvPromotiones2);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 

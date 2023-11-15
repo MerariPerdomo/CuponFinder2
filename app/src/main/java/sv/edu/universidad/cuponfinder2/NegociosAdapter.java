@@ -13,6 +13,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+
+import java.util.ArrayList;
 import java.util.List;
 
 import sv.edu.universidad.cuponfinder2.Model.Negocio;
@@ -21,7 +23,9 @@ public class NegociosAdapter extends RecyclerView.Adapter<NegociosViewHolder> {
 
     public List<Negocio> negocios;
 
+
     public NegociosAdapter(List<Negocio> negocios) {
+
         this.negocios = negocios;
     }
 
@@ -63,4 +67,24 @@ public class NegociosAdapter extends RecyclerView.Adapter<NegociosViewHolder> {
     public int getItemCount() {
         return negocios.size();
     }
+
+ /*   public void filtrado(String txtBuscar){
+        int longitud = txtBuscar.length();
+        if(longitud == 0){
+            negocios.clear();
+            negocios.addAll(listaOriginal);
+        }else {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                List<Negocio> col = negocios.stream().filter(i -> i.getNegocio().toLowerCase().contains(txtBuscar.toLowerCase())).collect(Collectors.toList());
+            }else{
+                for (Negocio n: listaOriginal) {
+                    if(n.getNegocio().toLowerCase().contains(txtBuscar.toLowerCase())){
+                        negocios.add(n);
+                    }
+                }
+            }
+        }
+        notifyDataSetChanged();
+    }*/
+
 }

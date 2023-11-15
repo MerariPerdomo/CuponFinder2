@@ -24,7 +24,7 @@ import sv.edu.universidad.cuponfinder2.Model.Negocio;
 public class vistaUsurio extends AppCompatActivity {
     private TextView nombreUsuario, email;
     private Button btnEditar;
-    private ImageView perfilFoto;
+    private ImageView perfilFoto, portadaFoto;
     private FirebaseAuth mAuth;
     StorageReference storageReference;
 
@@ -37,6 +37,7 @@ public class vistaUsurio extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         btnEditar = (Button) findViewById(R.id.btnEditarPerfil);
         perfilFoto = findViewById(R.id.img_perfil_negocio);
+        portadaFoto = findViewById(R.id.user_portada);
 
         storageReference = FirebaseStorage.getInstance().getReference();
 
@@ -73,6 +74,15 @@ public class vistaUsurio extends AppCompatActivity {
                     Picasso.get().load(imageUrl).into(perfilFoto);
                 }
             });
+            StorageReference reference2 = storageReference.child("fondo/*" + id);
+            reference2.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    //Foto de portada
+                    String imageUrl = uri.toString();
+                    Picasso.get().load(imageUrl).into(portadaFoto);
+                }
+            });
         } else {
             nombreUsuario.setText("");
             email.setText("");
@@ -90,7 +100,7 @@ public class vistaUsurio extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void Regregsar(View view) {
+    public void Regresar(View view) {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
     }

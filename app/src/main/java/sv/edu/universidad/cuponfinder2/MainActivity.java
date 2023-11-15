@@ -3,6 +3,7 @@ package sv.edu.universidad.cuponfinder2;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private RecyclerView recyclerViewListCategorias, recyclerViewListPromo;
     private PromocionesAdapter adapterPromocion;
     private List<Promocion> promocions = new ArrayList<>();
+    private SearchView searchView;
 
 
 

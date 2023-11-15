@@ -42,10 +42,10 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.08" />
 
-        <SearchView
+        <androidx.appcompat.widget.SearchView
             android:id="@+id/searchView"
             android:layout_width="match_parent"
-            android:layout_height="37dp"
+            android:layout_height="45dp"
             android:layout_marginTop="12dp"
             android:background="@drawable/fondo_search"
             app:iconifiedByDefault="false"
