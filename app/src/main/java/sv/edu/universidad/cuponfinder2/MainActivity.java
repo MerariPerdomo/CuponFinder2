@@ -33,6 +33,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import sv.edu.universidad.cuponfinder2.Adaptor.CategoryAdaptor;
+import sv.edu.universidad.cuponfinder2.Model.Promocion;
 import sv.edu.universidad.cuponfinder2.Model.Usuarios;
 import sv.edu.universidad.cuponfinder2.domain.CategoryDomain;
 
@@ -143,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.nav_home) {
-            Intent intent = new Intent(getApplicationContext(), AgregarPromo.class);
+            Intent intent = new Intent(getApplicationContext(), promotions.class);
             startActivity(intent);
             drawerLayout.closeDrawers();
             return true;

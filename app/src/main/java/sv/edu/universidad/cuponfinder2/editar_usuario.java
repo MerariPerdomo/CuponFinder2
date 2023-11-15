@@ -86,8 +86,8 @@ public class editar_usuario extends AppCompatActivity {
                     nombre.setText(name);
                     email.setText(email1);
                     negocio.setText(local);
-                    Picasso.with(getApplicationContext()).load("perfil/*"+id).into(fotoPerfil);
-                    Picasso.with(getApplicationContext()).load("fondo/*"+id).into(fotoFondo);
+                    Picasso.get().load("perfil/*"+id).into(fotoPerfil);
+                    Picasso.get().load("fondo/*"+id).into(fotoFondo);
                 }
 
                 @Override
@@ -174,9 +174,9 @@ public class editar_usuario extends AppCompatActivity {
     }
     public void cargarImagen(Uri imageUrl) {
         if(url.equals("perfil/*")){
-            Picasso.with(getApplicationContext()).load(imageUrl).into(fotoPerfil);
+            Picasso.get().load(imageUrl).into(fotoPerfil);
         } else if (url.equals("fondo/*")) {
-            Picasso.with(getApplicationContext()).load(imageUrl).into(fotoFondo);
+            Picasso.get().load(imageUrl).into(fotoFondo);
         }
 
 
