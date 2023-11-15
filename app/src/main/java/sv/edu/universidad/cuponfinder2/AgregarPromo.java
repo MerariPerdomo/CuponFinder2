@@ -25,8 +25,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -116,66 +119,78 @@ public class AgregarPromo extends AppCompatActivity {
             Toast.makeText(this, "Rellene todos los campos", Toast.LENGTH_SHORT).show();
         } else {
             String id = mAuth.getCurrentUser().getUid();
-            Negocio neg = new Negocio();
-            String negocio = neg.getNegocio();
-            Map<String, Object> map = new HashMap<>();
-            map.put("idUser", id);
-            map.put("titulo", titulo);
-            map.put("descripcion", descripcion);
-            map.put("categoria", categoria);
-            map.put("fechaInicio", fechaInicio);
-            map.put("fechaFinal", fechaFinal);
-            map.put("negocio", neg);
-            mDatabase.child("Promociones").child(id).setValue(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+            databaseReference.child("Usuarios").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
-                public void onSuccess(Void unused) {
-                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Promociones").push();
-                    String idProm = ref.getKey();
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    Negocio usuarios = dataSnapshot.getValue(Negocio.class);
+                    String negocio = usuarios.getNegocio();
                     Map<String, Object> map = new HashMap<>();
-                    map.put("idPromo",idProm);
-                    mDatabase.child("Promociones").child(id).updateChildren(map);
-                    SharedPreferences sharedPreferences = getSharedPreferences("CuponFinder2", MODE_PRIVATE);
-                    String imageBitmapString = sharedPreferences.getString("tempImageBitmap", null);
-                    if (imageBitmapString != null) {
-                        Bitmap imageBitmap = stringToBitmap(imageBitmapString);
-                        byte[] data = bitmapToByte(imageBitmap);
-                        StorageReference reference = storageReference.child("promocion/*" + id + "" + idProm);
-                        reference.putBytes(data).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                    Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                                    while (!uriTask.isSuccessful());
-                                    if (uriTask.isSuccessful()){
-                                        uriTask.addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                            @Override
-                                            public void onSuccess(Uri uri) {
-                                                String download_uri = uri.toString();
-                                                HashMap<String, Object> map = new HashMap<>();
-                                                map.put("foto", download_uri);
-                                                mfirestore.collection("promocion").document(idProm).update(map);
-                                            }
-                                        });
+                    map.put("idUser", id);
+                    map.put("titulo", titulo);
+                    map.put("descripcion", descripcion);
+                    map.put("categoria", categoria);
+                    map.put("fechaInicio", fechaInicio);
+                    map.put("fechaFinal", fechaFinal);
+                    map.put("negocio", negocio);
+                    mDatabase.child("Promociones").child(id).setValue(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Promociones").push();
+                            String idProm = ref.getKey();
+                            Map<String, Object> map = new HashMap<>();
+                            map.put("idPromo",idProm);
+                            mDatabase.child("Promociones").child(id).updateChildren(map);
+                            SharedPreferences sharedPreferences = getSharedPreferences("CuponFinder2", MODE_PRIVATE);
+                            String imageBitmapString = sharedPreferences.getString("tempImageBitmap", null);
+                            if (imageBitmapString != null) {
+                                Bitmap imageBitmap = stringToBitmap(imageBitmapString);
+                                byte[] data = bitmapToByte(imageBitmap);
+                                StorageReference reference = storageReference.child("promocion/*" + id + "" + idProm);
+                                reference.putBytes(data).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                        Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                                        while (!uriTask.isSuccessful());
+                                        if (uriTask.isSuccessful()){
+                                            uriTask.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                @Override
+                                                public void onSuccess(Uri uri) {
+                                                    String download_uri = uri.toString();
+                                                    HashMap<String, Object> map = new HashMap<>();
+                                                    map.put("foto", download_uri);
+                                                    mfirestore.collection("promocion").document(idProm).update(map);
+                                                }
+                                            });
+                                        }
                                     }
-                                }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(getApplicationContext(), "Error al subir la imagen", Toast.LENGTH_SHORT).show();
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(getApplicationContext(), "Error al subir la imagen", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
                             }
-                        });
+                            Toast.makeText(AgregarPromo.this, "Se creo correctamente", Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(getApplicationContext(), vistaUsurio.class);
+                            startActivity(i);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
 
-                    }
-                    Toast.makeText(AgregarPromo.this, "Se creo correctamente", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(getApplicationContext(), vistaUsurio.class);
-                    startActivity(i);
+                            Toast.makeText(AgregarPromo.this, "Algo salio mal", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
 
-                    Toast.makeText(AgregarPromo.this, "Algo salio mal", Toast.LENGTH_SHORT).show();
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
                 }
             });
+
         }
     }
 
