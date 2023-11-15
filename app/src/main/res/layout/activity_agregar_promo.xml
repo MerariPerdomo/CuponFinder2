@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:orientation="vertical"
     android:padding="20dp"
     tools:context=".AgregarPromo">
@@ -18,26 +17,34 @@
         android:textAlignment="center"
         android:textSize="20dp" />
 
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
     <ImageView
         android:id="@+id/imgPromo"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:maxHeight="400dp"
         android:layout_marginTop="10dp"
         android:contentDescription="@string/img_perfil"
         android:scaleType="centerCrop" />
 
-    <Button
-        android:id="@+id/agregarFoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:backgroundTint="#3EB4DA"
-        android:onClick="AgregarFoto"
-        android:text="@string/add_photo" />
 
+        <Button
+            android:id="@+id/agregarFoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:backgroundTint="#3EB4DA"
+            android:onClick="AgregarFoto"
+            android:text="@string/add_photo" />
 
-    <com.google.android.material.textfield.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -69,9 +76,11 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtDescription"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="153dp"
             android:hint="Description"
-            android:inputType="text"
+            android:inputType="textMultiLine"
+            android:gravity="start|top"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
             android:textColorHint="#8D6E63" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -150,10 +159,14 @@
             style="?attr/materialButtonOutlinedStyle"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
             android:onClick="GuardarPromo"
             android:text="Confirm"
             app:icon="@drawable/ic_confirm"
-            android:layout_marginEnd="5dp"/>
+            app:iconSize="22dp"
+            app:iconTint="#4CAF50"
+            app:strokeColor="#4CAF50"
+            android:textColor="@color/black"/>
         <Button
             style="?attr/materialButtonOutlinedStyle"
             android:layout_width="160dp"
@@ -161,7 +174,13 @@
             android:onClick="Cancelar"
             android:text="Cancel"
             app:icon="@drawable/ic_cancel"
-            android:layout_marginStart="5dp"/>
+            app:iconSize = "22dp"
+            app:iconTint ="#FFF44336"
+            app:strokeColor="#BC3B32"
+            android:layout_marginStart="5dp"
+            android:textColor="@color/black"/>
     </LinearLayout>
+</LinearLayout>
+</ScrollView>
 
 </LinearLayout>

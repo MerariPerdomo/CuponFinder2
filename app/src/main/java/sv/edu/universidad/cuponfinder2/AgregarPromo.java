@@ -116,16 +116,20 @@ public class AgregarPromo extends AppCompatActivity {
         } else {
             String id = mAuth.getCurrentUser().getUid();
             Map<String, Object> map = new HashMap<>();
+            map.put("idUser", id);
             map.put("titulo", titulo);
             map.put("descripcion", descripcion);
             map.put("categoria", categoria);
             map.put("fechaInicio", fechaInicio);
             map.put("fechaFinal", fechaFinal);
-            mDatabase.child("Promocion").child(id).setValue(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+            mDatabase.child("Promociones").child(id).setValue(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
-                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference("promociones").push();
+                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Promociones").push();
                     String idProm = ref.getKey();
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("idPromo",idProm);
+                    mDatabase.child("Promociones").child(id).updateChildren(map);
                     SharedPreferences sharedPreferences = getSharedPreferences("CuponFinder2", MODE_PRIVATE);
                     String imageBitmapString = sharedPreferences.getString("tempImageBitmap", null);
                     if (imageBitmapString != null) {
@@ -252,4 +256,9 @@ public class AgregarPromo extends AppCompatActivity {
             }
             return tempFile;
         }
+
+    public void Cancelar(View view) {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
     }
+}

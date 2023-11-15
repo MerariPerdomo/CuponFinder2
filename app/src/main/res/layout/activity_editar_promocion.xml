@@ -9,174 +9,91 @@
     android:padding="15dp"
     tools:context=".Editar_promocion">
 
+    <Button
+        android:id="@+id/btnRegresarEditarPromocion"
+        style="@style/Widget.Material3.Button.TextButton.Icon"
+        android:layout_width="209dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="32dp"
+        app:icon="@drawable/ic_regresar"
+        android:text="@string/edit_promotion"
+        android:textColor="@color/light_blue_600"
+        android:textSize="20sp"
+        tools:ignore="MissingConstraints" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="193dp">
+        tools:layout_editor_absoluteX="-19dp"
+        tools:layout_editor_absoluteY="-329dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.1" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
 
             <ImageView
                 android:id="@+id/imageView6"
-                android:layout_width="294dp"
-                android:layout_height="207dp"
-                android:layout_marginTop="120dp"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
                 android:contentDescription="@string/publicidad_ex"
-                app:layout_constraintBottom_toTopOf="@+id/guideline12"
+                android:maxHeight="400dp"
+                tools:ignore="MissingConstraints" />
+            <!--    app:layout_constraintBottom_toTopOf="@+id/guideline12"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.494"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                app:srcCompat="@drawable/publicidadejemplo" />
+                app:layout_constraintVertical_bias="0.0"-->
 
-            <Button
-                android:id="@+id/button5"
-                android:layout_width="120dp"
-                android:layout_height="56dp"
-                android:layout_marginStart="22dp"
-                android:backgroundTint="@color/rojo"
-                android:text="@string/delete_image"
-                android:textColor="@color/celeste"
-                app:icon="@drawable/ic_delete"
-                app:iconTint="@color/celeste"
-                app:layout_constraintBottom_toTopOf="@+id/guideline12"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.828"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/guideline10"
-                app:layout_constraintVertical_bias="0.977" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_margin="10dp">
+                <Button
+                    android:id="@+id/button5"
+                    android:layout_width="120dp"
+                    android:layout_height="56dp"
+                    android:backgroundTint="@color/rojo"
+                    android:text="@string/delete_image"
+                    android:textColor="@color/celeste"
+                    android:layout_marginEnd="15dp"/>
 
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="117dp"
-                android:layout_height="53dp"
-                android:layout_marginTop="252dp"
-                android:layout_marginEnd="22dp"
-                android:backgroundTint="@color/amarillo"
-                android:text="@string/edit_image"
-                android:textColor="@color/verdeOscuro"
-                app:icon="@drawable/ic_edit"
-                app:iconTint="@color/verdeOscuro"
-                app:layout_constraintBottom_toTopOf="@+id/guideline12"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.162"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/guideline10" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_begin="835dp" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.46" />
-
-            <TextView
-                android:id="@+id/etEditarFechaFinal"
-                style="@style/Widget.AppCompat.PopupMenu"
-                android:layout_width="300dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="148dp"
-                android:background="#2303FF0E"
-                android:clickable="true"
-                android:ems="10"
-                android:focusable="true"
-                android:gravity="center_vertical"
-                android:hint="@string/end_date"
-                android:importantForAutofill="no"
-                android:inputType="date"
-                android:padding="10dp"
-                android:textSize="20sp"
-                app:drawableStartCompat="@drawable/ic_calendar"
-                app:drawableTint="@color/verde_lima"
-                app:layout_constraintBottom_toTopOf="@+id/guideline11"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.53"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/guideline12"
-                app:layout_constraintVertical_bias="0.0"
-                tools:ignore="TextViewEdits,TextContrastCheck" />
+                <Button
+                    android:id="@+id/button4"
+                    android:layout_width="117dp"
+                    android:layout_height="53dp"
+                    android:backgroundTint="@color/amarillo"
+                    android:text="@string/edit_image"
+                    android:textColor="@color/verdeOscuro"
+                    android:layout_marginStart="15dp"
+                    tools:ignore="MissingConstraints" />
+    </LinearLayout>
 
             <EditText
                 android:id="@+id/txtTitulo"
                 android:layout_width="300dp"
                 android:layout_height="50dp"
-                android:layout_marginBottom="252dp"
                 android:drawableStart="@drawable/ic_canasta"
                 android:drawableTint="@color/verde_lima"
                 android:ems="10"
                 android:hint="@string/promotion_name"
                 android:importantForAutofill="no"
                 android:inputType="text"
-                app:layout_constraintBottom_toTopOf="@+id/guideline11"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/guideline12"
-                app:layout_constraintVertical_bias="0.188"
-                tools:ignore="TextContrastCheck" />
-
-            <TextView
-                android:id="@+id/etEditarFechaInicio"
-                style="@android:style/Widget.TextView.PopupMenu"
-                android:layout_width="300dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="88dp"
-                android:background="#86D0F2FF"
-                android:ems="10"
-                android:gravity="center|start"
-                android:hint="@string/start_date"
-                android:importantForAutofill="no"
-                android:inputType="date"
-                android:padding="10dp"
-                android:textSize="20sp"
-                app:drawableStartCompat="@drawable/ic_calendar"
-                app:drawableTint="@color/verde_lima"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.53"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/guideline12"
-                tools:ignore="TextViewEdits,TextContrastCheck" />
-
-            <Button
-                android:id="@+id/button6"
-                android:layout_width="239dp"
-                android:layout_height="61dp"
-                android:layout_marginBottom="36dp"
-                android:backgroundTint="@color/azul_brillante"
-                android:text="@string/save"
-                android:textColor="@color/white"
-                android:onClick="Actualizar"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:ignore="TextContrastCheck" />
-
+                tools:ignore="TextContrastCheck"
+                android:layout_margin="10dp"/>
             <EditText
                 android:id="@+id/txtDescripcion"
-                style="@style/Widget.Material3.AutoCompleteTextView.OutlinedBox"
                 android:layout_width="301dp"
                 android:layout_height="153dp"
                 android:layout_marginStart="41dp"
                 android:layout_marginTop="7dp"
                 android:layout_marginEnd="40dp"
                 android:layout_marginBottom="19dp"
+                android:padding="10dp"
                 android:autofillHints=""
                 android:background="#FFFCE4"
                 android:ems="10"
@@ -187,40 +104,55 @@
                 android:scrollbarAlwaysDrawVerticalTrack="true"
                 android:scrollbarSize="10dp"
                 android:scrollbarStyle="insideInset"
-                app:layout_constraintBottom_toTopOf="@+id/button6"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etEditarFechaFinal"
-                app:layout_constraintVertical_bias="0.0"
+                android:layout_margin="10dp"
                 tools:ignore="TextContrastCheck" />
+
+            <TextView
+                android:id="@+id/etEditarFechaInicio"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:background="#86D0F2FF"
+                android:ems="10"
+                android:gravity="center|start"
+                android:hint="@string/start_date"
+                android:importantForAutofill="no"
+                android:inputType="date"
+                android:padding="10dp"
+                android:textSize="20sp"
+                android:layout_margin="10dp"
+                tools:ignore="TextViewEdits,TextContrastCheck" />
+            <TextView
+                android:id="@+id/etEditarFechaFinal"
+                style="@style/Widget.AppCompat.PopupMenu"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:background="#2303FF0E"
+                android:clickable="true"
+                android:ems="10"
+                android:focusable="true"
+                android:hint="@string/end_date"
+                android:importantForAutofill="no"
+                android:inputType="date"
+                android:padding="10dp"
+                android:textSize="20sp"
+                android:layout_margin="10dp"
+                app:drawableStartCompat="@drawable/ic_calendar"
+                app:drawableTint="@color/verde_lima"
+                tools:ignore="TextViewEdits,TextContrastCheck" />
 
 
             <Button
-                android:id="@+id/btnRegresarEditarPromocion"
-                style="@style/Widget.Material3.Button.TextButton"
-                android:layout_width="209dp"
-                android:layout_height="55dp"
-                android:layout_marginBottom="32dp"
-                android:text="@string/edit_promotion"
-                android:textColor="@color/light_blue_600"
-                android:textSize="20sp"
-                app:icon="@drawable/ic_regresar"
-                app:iconSize="30dp"
-                app:iconTint="@color/light_blue_600"
-                app:layout_constraintBottom_toTopOf="@+id/guideline10"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.093"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:id="@+id/button6"
+                android:layout_width="239dp"
+                android:layout_height="61dp"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/azul_brillante"
+                android:onClick="Actualizar"
+                android:text="@string/save"
+                android:textColor="@color/white"
+                tools:ignore="TextContrastCheck" />
 
-            <androidx.constraintlayout.widget.Group
-                android:id="@+id/group"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:constraint_referenced_ids="button5,button4" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
     </ScrollView>
 
