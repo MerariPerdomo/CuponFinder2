@@ -12,11 +12,13 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import sv.edu.universidad.cuponfinder2.Model.Negocio;
 import sv.edu.universidad.cuponfinder2.Model.Promocion;
 
 
@@ -34,30 +36,55 @@ public class promotions extends AppCompatActivity {
         searchView = findViewById(R.id.searchView);
         recyclerView = findViewById(R.id.rvPromotiones2);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        String title = getIntent().getStringExtra("title");
+        if(title.isEmpty()) {
+            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("Promociones");
 
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("Promociones");
+            mDatabase.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    promocions.clear();
+                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                        Promocion promotion = dataSnapshot1.getValue(Promocion.class);
+                        promocions.add(promotion);
+                    }
+                    if (adapter == null) {
+                        adapter = new PromocionesAdapter(promocions);
+                        recyclerView.setAdapter(adapter);
+                    } else {
+                        adapter.notifyDataSetChanged();
+                    }
+                }
 
-        mDatabase.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Log.e("ERROR", databaseError.getMessage());
+                }
+            });
+        }else{
+            search(title);
+        }
+    }
+    public void search(String s) {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Promociones");
+        Query query = ref.orderByChild("categoria").startAt(s).endAt(s+"\uf8ff");
+
+        query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                promocions.clear();
-                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                    Promocion promotion = dataSnapshot1.getValue(Promocion.class);
-                    promocions.add(promotion);
+                List<Promocion> list = new ArrayList<>();
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    Promocion promo = ds.getValue(Promocion.class);
+                    list.add(promo);
                 }
-                if (adapter == null) {
-                    adapter = new PromocionesAdapter(promocions);
-                    recyclerView.setAdapter(adapter);
-                } else {
-                    adapter.notifyDataSetChanged();
-                }
+                PromocionesAdapter adapter = new PromocionesAdapter(list);
+                recyclerView.setAdapter(adapter);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.e("ERROR", databaseError.getMessage());
+                // manejar error
             }
         });
     }
-
 }

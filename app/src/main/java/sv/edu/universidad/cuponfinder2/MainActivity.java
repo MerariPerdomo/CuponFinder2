@@ -18,7 +18,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
@@ -216,7 +215,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     /*----------------Fin----------------*/
     @Override
     public void onItemClick(String title) {
-        Toast.makeText(this, "SElecciono "+ title, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, promotions.class);
+        intent.putExtra("title", title);
+        startActivity(intent);
     }
 
 }
