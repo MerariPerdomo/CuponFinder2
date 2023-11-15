@@ -6,10 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,9 +34,12 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+
+import sv.edu.universidad.cuponfinder2.Model.Usuarios;
 
 public class editar_usuario extends AppCompatActivity {
     private TextInputEditText nombre, email, negocio, psw, cpsw;
@@ -69,8 +76,6 @@ public class editar_usuario extends AppCompatActivity {
 
         if (mAuth.getCurrentUser() != null) {
             String id = mAuth.getCurrentUser().getUid();
-            Picasso.get().load("perfil/*"+id).into(fotoPerfil);
-            Picasso.get().load("fondo/*"+id).into(fotoFondo);
             mDatabase.child("Usuarios").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -81,6 +86,8 @@ public class editar_usuario extends AppCompatActivity {
                     nombre.setText(name);
                     email.setText(email1);
                     negocio.setText(local);
+                    Picasso.get().load("perfil/*"+id).into(fotoPerfil);
+                    Picasso.get().load("fondo/*"+id).into(fotoFondo);
                 }
 
                 @Override
@@ -214,10 +221,5 @@ public class editar_usuario extends AppCompatActivity {
             }
         });
 
-    }
-
-    public void Cancelar(View view) {
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(intent);
     }
 }
