@@ -28,7 +28,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline17"
         app:layout_constraintVertical_bias="0.888"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        android:onClick="Editar"/>
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline30"
@@ -152,6 +154,7 @@
         app:layout_constraintGuide_percent="0.6" />
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="412dp"
         android:layout_height="340dp"
         android:layout_marginEnd="1dp"

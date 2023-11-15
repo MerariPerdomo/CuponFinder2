@@ -1,16 +1,25 @@
 package sv.edu.universidad.cuponfinder2.Model;
 
 public class Usuarios {
-    String email, negocio, nombre, password;
+    String email, negocio, nombre, password, idUser;
 
     public Usuarios(){
 
     }
-    public Usuarios(String email, String negocio, String nombre, String password){
+    public Usuarios(String email, String negocio, String nombre, String password, String idUser){
         this.email = email;
         this.negocio = negocio;
         this.nombre = nombre;
         this.password = password;
+        this.idUser = idUser;
+    }
+
+    public String getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
     }
 
     public String getEmail() {

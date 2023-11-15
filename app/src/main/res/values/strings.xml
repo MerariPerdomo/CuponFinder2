@@ -75,6 +75,7 @@
         <item>Market</item>
         <item>Health</item>
         <item>Pests</item>
+        <item>Drinks</item>
         <item>Coffee Shops</item>
     </string-array>
 </resources>
