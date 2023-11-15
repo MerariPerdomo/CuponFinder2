@@ -230,7 +230,7 @@ public class registro extends AppCompatActivity {
         if (imageBitmapString != null) {
             Bitmap imageBitmap = stringToBitmap(imageBitmapString);
             File tempFile = createTempFile(imageBitmap);
-            Picasso.with(getApplicationContext()).load(tempFile).into(perfil);
+            Picasso.get().load(tempFile).into(perfil);
             progressDialog.dismiss();
         }
     }
