@@ -89,4 +89,9 @@ public class vistaUsurio extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), AgregarPromo.class);
         startActivity(intent);
     }
+
+    public void Regregsar(View view) {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+    }
 }

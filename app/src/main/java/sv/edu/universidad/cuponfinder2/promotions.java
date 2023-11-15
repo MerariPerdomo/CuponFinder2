@@ -60,9 +60,4 @@ public class promotions extends AppCompatActivity {
         });
     }
 
-
-    public void AgregarPromo(View view) {
-        Intent intent = new Intent(getApplicationContext(), AgregarPromo.class);
-        startActivity(intent);
-    }
 }
