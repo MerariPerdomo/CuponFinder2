@@ -16,7 +16,6 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import sv.edu.universidad.cuponfinder2.Model.Negocio;
-import sv.edu.universidad.cuponfinder2.Model.Usuarios;
 
 public class NegociosAdapter extends RecyclerView.Adapter<NegociosViewHolder> {
 

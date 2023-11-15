@@ -204,7 +204,8 @@
         app:layout_constraintVertical_bias="0.0"
         app:rippleColor="@color/azul_brillante"
         app:strokeColor="@color/azul_brillante"
-        tools:ignore="TouchTargetSizeCheck" />
+        tools:ignore="TouchTargetSizeCheck"
+        android:onClick="AgregarProm"/>
 
     <Button
         android:id="@+id/button8"

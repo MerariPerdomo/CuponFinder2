@@ -43,6 +43,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import sv.edu.universidad.cuponfinder2.Model.Negocio;
+
 public class AgregarPromo extends AppCompatActivity {
     private TextInputEditText txtTitulo, txtDescripcion, txtInicio, txtFinal;
     private AutoCompleteTextView txtSpinner;
@@ -55,7 +57,6 @@ public class AgregarPromo extends AppCompatActivity {
     private static final int COD_SEL_IMAGE =300;
     ProgressDialog progressDialog;
     StorageReference storageReference;
-
 
 
     @Override
@@ -115,6 +116,8 @@ public class AgregarPromo extends AppCompatActivity {
             Toast.makeText(this, "Rellene todos los campos", Toast.LENGTH_SHORT).show();
         } else {
             String id = mAuth.getCurrentUser().getUid();
+            Negocio neg = new Negocio();
+            String negocio = neg.getNegocio();
             Map<String, Object> map = new HashMap<>();
             map.put("idUser", id);
             map.put("titulo", titulo);
@@ -122,6 +125,7 @@ public class AgregarPromo extends AppCompatActivity {
             map.put("categoria", categoria);
             map.put("fechaInicio", fechaInicio);
             map.put("fechaFinal", fechaFinal);
+            map.put("negocio", neg);
             mDatabase.child("Promociones").child(id).setValue(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {

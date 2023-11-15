@@ -19,7 +19,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
-import sv.edu.universidad.cuponfinder2.Model.Usuarios;
+import sv.edu.universidad.cuponfinder2.Model.Negocio;
 
 public class vistaUsurio extends AppCompatActivity {
     private TextView nombreUsuario, email;
@@ -33,12 +33,12 @@ public class vistaUsurio extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vista_usurio);
         nombreUsuario = findViewById(R.id.Username);
-        email=findViewById(R.id.email);
+        email = findViewById(R.id.email);
         mAuth = FirebaseAuth.getInstance();
         btnEditar = (Button) findViewById(R.id.btnEditarPerfil);
         perfilFoto = findViewById(R.id.img_perfil_negocio);
 
-        storageReference= FirebaseStorage.getInstance().getReference();
+        storageReference = FirebaseStorage.getInstance().getReference();
 
 //        btnCerrar.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -54,7 +54,7 @@ public class vistaUsurio extends AppCompatActivity {
             databaseReference.child("Usuarios").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    Usuarios usuarios = dataSnapshot.getValue(Usuarios.class);
+                    Negocio usuarios = dataSnapshot.getValue(Negocio.class);
                     nombreUsuario.setText(usuarios.getNombre());
                     email.setText(usuarios.getEmail());
                 }
@@ -73,27 +73,20 @@ public class vistaUsurio extends AppCompatActivity {
                     Picasso.get().load(imageUrl).into(perfilFoto);
                 }
             });
-        }else{
-            nombreUsuario.setText("Sin usuario");
-            email.setText("sin email");
+        } else {
+            nombreUsuario.setText("");
+            email.setText("");
         }
 
     }
 
     public void Editar(View view) {
-        Intent i = new Intent(getApplicationContext(),editar_usuario.class);
+        Intent i = new Intent(getApplicationContext(), editar_usuario.class);
         startActivity(i);
     }
 
-
-
-//    public void ViewSettings(View view) {
-//        Intent ir = new Intent(vistaUsurio.this,Configuracion.class);
-//        startActivity(ir);
-//    }
-//
-//    public void ViewAboutUs(View view) {
-//        Intent ir = new Intent(vistaUsurio.this, AcercaDe.class);
-//        startActivity(ir);
-//    }
+    public void AgregarProm(View view) {
+        Intent intent = new Intent(getApplicationContext(), AgregarPromo.class);
+        startActivity(intent);
+    }
 }

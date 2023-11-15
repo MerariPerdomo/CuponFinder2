@@ -1,35 +1,42 @@
 package sv.edu.universidad.cuponfinder2;
 
-import android.content.Intent;
+import android.app.ProgressDialog;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 import sv.edu.universidad.cuponfinder2.Model.Promocion;
-import sv.edu.universidad.cuponfinder2.Model.Usuarios;
 
 public class Editar_promocion extends AppCompatActivity {
     Button btnRegresarEditarPromocion;
     private TextView etEditarFechaFinal, etEditaFechaInicio, etTitulo, etDescripcion;
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
+    private static final int COD_SEL_IMAGE = 300;
+    private Uri image_url;
+    private FirebaseFirestore mfirestore;
+
+    private ProgressDialog progressDialog;
+    private StorageReference storageReference;
+    private AutoCompleteTextView etCategoria;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +46,7 @@ public class Editar_promocion extends AppCompatActivity {
         btnRegresarEditarPromocion.setOnClickListener(v -> onBackPressed());
         etTitulo = findViewById(R.id.txtTitulo);
         etDescripcion = findViewById(R.id.txtDescripcion);
+        etCategoria = findViewById(R.id.SpinCategories);
 
         /*DATE PICKER*/
         etEditarFechaFinal= findViewById(R.id.etEditarFechaFinal);
@@ -66,18 +74,18 @@ public class Editar_promocion extends AppCompatActivity {
             mDatabase.child("Promocion").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    String titulo1 = snapshot.child("nombre").getValue(String.class);
-                    String descripcion1 = snapshot.child("email").getValue(String.class);
-               //     String categoria1 = snapshot.child("negocio").getValue(String.class);
                     Promocion promocion = snapshot.getValue(Promocion.class);
-                    String inicio = promocion.getFechaInicio();
-                    String fin = promocion.getFechaFin();
+                    String titulo1 = promocion.getTitulo();
+                    String descripcion1 = promocion.getDescripcion();
+                    String categoria1 = promocion.getCategoria();
+                    String inicio1 = promocion.getFechaInicio();
+                    String fin1 = promocion.getFechaFin();
 
                     etTitulo.setText(titulo1);
                     etDescripcion.setText(descripcion1);
                    // etEditaFechaInicio.setText(local);
-                    etEditaFechaInicio.setText(inicio);
-                    etEditarFechaFinal.setText(fin);
+                    etEditaFechaInicio.setText(inicio1);
+                    etEditarFechaFinal.setText(fin1);
                 }
 
                 @Override
