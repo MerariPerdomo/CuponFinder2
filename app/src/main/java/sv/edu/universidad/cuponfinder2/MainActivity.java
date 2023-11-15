@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -31,6 +32,7 @@ import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import sv.edu.universidad.cuponfinder2.Adaptor.CategoryAdaptor;
 import sv.edu.universidad.cuponfinder2.Model.Promocion;
@@ -39,10 +41,12 @@ import sv.edu.universidad.cuponfinder2.domain.CategoryDomain;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    /*-------------Seccion de Categorias -------------*/
+    /*-------------Seccion de Categorias y promociones-------------*/
 
     private RecyclerView.Adapter adapter;
     private RecyclerView recyclerViewListCategorias, recyclerViewListPromo;
+    private PromocionesAdapter adapterPromocion;
+    private List<Promocion> promocions = new ArrayList<>();
 
 
 
@@ -59,7 +63,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        /*--------------Para las cards de promocion ---------------*/
+        recyclerViewListPromo=findViewById(R.id.rvPromotiones);
+        recyclerViewListPromo.setLayoutManager(new LinearLayoutManager(this));
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("Promociones");
 
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                promocions.clear();
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                    Promocion promotion = dataSnapshot1.getValue(Promocion.class);
+                    promocions.add(promotion);
+                }
+                if (adapterPromocion == null) {
+                    adapterPromocion = new PromocionesAdapter(promocions);
+                    recyclerViewListPromo.setAdapter(adapterPromocion);
+                } else {
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e("ERROR", databaseError.getMessage());
+            }
+        });
+
+        /*--------------Para las cards de promocion ---------------*/
         /*--------------Para menu lateral ---------------*/
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
