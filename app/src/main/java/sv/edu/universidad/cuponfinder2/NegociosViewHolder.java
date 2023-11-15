@@ -18,7 +18,6 @@ public class NegociosViewHolder extends RecyclerView.ViewHolder {
     public NegociosViewHolder(@NonNull View itemView) {
         super(itemView);
         nombre = itemView.findViewById(R.id.etNombre);
-        categoria = itemView.findViewById(R.id.tvCategory);
         imagen = itemView.findViewById(R.id.imgEjemplo);
         perfil_negocio=itemView.findViewById(R.id.img_perfil_negocio);
 

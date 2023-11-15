@@ -238,7 +238,7 @@ public class AgregarPromo extends AppCompatActivity {
             if (imageBitmapString != null) {
                 Bitmap imageBitmap = stringToBitmap(imageBitmapString);
                 File tempFile = createTempFile(imageBitmap);
-                Picasso.with(getApplicationContext()).load(tempFile).into(imgPromo);
+                Picasso.get().load(tempFile).into(imgPromo);
                 progressDialog.dismiss();
             }
         }

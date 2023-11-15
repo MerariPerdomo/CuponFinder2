@@ -16,7 +16,7 @@
             android:layout_width="365dp"
             android:layout_height="112dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/publicidadejemplo" />
+            android:src="@drawable/fondo_pordefecto" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_perfil_negocio"
@@ -24,7 +24,7 @@
             android:layout_height="67dp"
             android:layout_below="@id/imgEjemplo"
             android:layout_marginTop="15dp"
-            android:src="@drawable/publicidadejemplo"
+            android:src="@drawable/perfil_estatico"
             app:civ_border_color="#FF000000"
             app:civ_border_width="2dp" />
 
@@ -33,30 +33,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/imgEjemplo"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="17dp"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="24dp"
             android:layout_toEndOf="@id/img_perfil_negocio"
             android:text="Business name"
             android:textColor="@color/light_blue_900"
             android:textSize="24sp" />
 
-        <TextView
-            android:id="@+id/tvCategory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/etNombre"
-            android:layout_marginStart="8dp"
-            android:layout_toEndOf="@id/img_perfil_negocio"
-            android:text="Category" />
-
         <com.google.android.material.button.MaterialButton
             style="?attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvCategory"
+            android:layout_below="@+id/etNombre"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="19dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="5dp"
             android:gravity="center"
             android:text="See Inside"
             android:textColor="@color/verdeOscuro"

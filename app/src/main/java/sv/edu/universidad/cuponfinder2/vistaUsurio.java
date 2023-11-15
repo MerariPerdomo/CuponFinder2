@@ -70,7 +70,7 @@ public class vistaUsurio extends AppCompatActivity {
                 public void onSuccess(Uri uri) {
                     //Foto de perfil
                     String imageUrl = uri.toString();
-                    Picasso.with(getApplicationContext()).load(imageUrl).into(perfilFoto);
+                    Picasso.get().load(imageUrl).into(perfilFoto);
                 }
             });
         }else{

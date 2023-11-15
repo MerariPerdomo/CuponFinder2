@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     /*-------------Seccion de Categorias -------------*/
 
     private RecyclerView.Adapter adapter;
-    private RecyclerView recyclerViewListCategorias;
+    private RecyclerView recyclerViewListCategorias, recyclerViewListPromo;
 
 
 
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 public void onSuccess(Uri uri) {
                     //Foto de perfil
                     String imageUrl = uri.toString();
-                    Picasso.with(getApplicationContext()).load(imageUrl).into(perfil_foto);
+                    Picasso.get().load(imageUrl).into(perfil_foto);
                 }
             });
         }else{
