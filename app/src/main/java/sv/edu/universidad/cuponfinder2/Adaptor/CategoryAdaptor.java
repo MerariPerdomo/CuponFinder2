@@ -20,18 +20,21 @@ import sv.edu.universidad.cuponfinder2.domain.CategoryDomain;
 
 public class CategoryAdaptor extends RecyclerView.Adapter<CategoryAdaptor.ViewHolder> {
     ArrayList<CategoryDomain>categoryDomains;
+    private final OnItemClickListener listener;
 
-    public CategoryAdaptor(ArrayList<CategoryDomain> categoryDomains) {
+    public CategoryAdaptor(ArrayList<CategoryDomain> categoryDomains, OnItemClickListener listener) {
         this.categoryDomains = categoryDomains;
+        this.listener = listener;
     }
-
+    public interface OnItemClickListener {
+        void onItemClick(String title);
+    }
     @NonNull
     @Override
     public CategoryAdaptor.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.categoria_recycle,parent,false);
-        return new ViewHolder(inflate);
+        return new ViewHolder(inflate, listener);
     }
-
     @Override
     public void onBindViewHolder(@NonNull CategoryAdaptor.ViewHolder holder, int position) {
         holder.categoriaNombre.setText(categoryDomains.get(position).getTitulo());
@@ -76,11 +79,21 @@ public class CategoryAdaptor extends RecyclerView.Adapter<CategoryAdaptor.ViewHo
         TextView categoriaNombre;
         ImageView categoriaPhoto;
         ConstraintLayout principal;
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
             categoriaNombre=itemView.findViewById(R.id.NombreCategoria);
             categoriaPhoto=itemView.findViewById(R.id.PhotoCat);
             principal=itemView.findViewById(R.id.layoutCat1);
+            principal.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if(position != RecyclerView.NO_POSITION){
+                        String title = categoriaNombre.getText().toString();
+                        listener.onItemClick(title);
+                    }
+                }
+            });
         }
     }
 }

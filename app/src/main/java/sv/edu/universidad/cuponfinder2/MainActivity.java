@@ -40,7 +40,7 @@ import sv.edu.universidad.cuponfinder2.Model.Promocion;
 import sv.edu.universidad.cuponfinder2.Model.Negocio;
 import sv.edu.universidad.cuponfinder2.domain.CategoryDomain;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, CategoryAdaptor.OnItemClickListener {
 
     /*-------------Seccion de Categorias y promociones-------------*/
 
@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         categoria.add(new CategoryDomain("Drinks","C5"));
         categoria.add(new CategoryDomain("Coffee Shops","C6"));
 
-        adapter=new CategoryAdaptor(categoria);
+        adapter=new CategoryAdaptor(categoria, this);
         recyclerViewListCategorias.setAdapter(adapter);
 
     }
@@ -214,4 +214,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onPointerCaptureChanged(hasCapture);
     }
     /*----------------Fin----------------*/
+    @Override
+    public void onItemClick(String title) {
+        Toast.makeText(this, "SElecciono "+ title, Toast.LENGTH_SHORT).show();
+    }
+
 }
