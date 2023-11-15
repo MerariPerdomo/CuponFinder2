@@ -34,7 +34,7 @@ import java.util.ArrayList;
 
 import sv.edu.universidad.cuponfinder2.Adaptor.CategoryAdaptor;
 import sv.edu.universidad.cuponfinder2.Model.Promocion;
-import sv.edu.universidad.cuponfinder2.Model.Usuarios;
+import sv.edu.universidad.cuponfinder2.Model.Negocio;
 import sv.edu.universidad.cuponfinder2.domain.CategoryDomain;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             databaseReference.child("Usuarios").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    Usuarios usuarios = dataSnapshot.getValue(Usuarios.class);
+                    Negocio usuarios = dataSnapshot.getValue(Negocio.class);
                     nombreUsuario.setText(usuarios.getNombre());
                 }
 

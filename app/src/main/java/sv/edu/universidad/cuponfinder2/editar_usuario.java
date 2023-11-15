@@ -39,7 +39,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import sv.edu.universidad.cuponfinder2.Model.Usuarios;
+import sv.edu.universidad.cuponfinder2.Model.Negocio;
 
 public class editar_usuario extends AppCompatActivity {
     private TextInputEditText nombre, email, negocio, psw, cpsw;
