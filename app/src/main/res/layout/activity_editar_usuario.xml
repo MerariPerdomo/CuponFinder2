@@ -10,13 +10,19 @@
     tools:context=".editar_usuario">
 
 <LinearLayout
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="ver"
+    android:orientation="vertical">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginBottom="10dp">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            tools:ignore="MissingConstraints"
+            android:contentDescription="Img Fondo"
+            android:id="@+id/imgFondo"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imgUsuario"
@@ -26,10 +32,10 @@
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.162"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="1.0"/>
 
         <Button
             android:id="@+id/agregarFoto"
@@ -39,8 +45,25 @@
             android:backgroundTint="#3EB4DA"
             android:onClick="ActualizarFoto"
             android:text="Update photo"
-            tools:layout_editor_absoluteX="115dp"
-            tools:layout_editor_absoluteY="696dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imgFondo"
+            app:layout_constraintVertical_bias="0.894"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/agregarFondo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:backgroundTint="#3EB4DA"
+            android:onClick="ActualizarFondo"
+            android:text="Update background"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="173dp"
+            tools:layout_editor_absoluteY="33dp" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -171,5 +194,6 @@
             android:layout_marginStart="5dp"
             android:textColor="@color/black"/>
     </LinearLayout>
+</LinearLayout>
 
 </LinearLayout>

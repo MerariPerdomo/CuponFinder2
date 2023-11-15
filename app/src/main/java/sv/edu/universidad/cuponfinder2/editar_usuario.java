@@ -1,13 +1,19 @@
 package sv.edu.universidad.cuponfinder2;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,9 +28,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -33,14 +43,26 @@ import sv.edu.universidad.cuponfinder2.Model.Usuarios;
 
 public class editar_usuario extends AppCompatActivity {
     private TextInputEditText nombre, email, negocio, psw, cpsw;
+    private ImageView fotoPerfil, fotoFondo;
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
     private FirebaseUser user;
+    private static final int COD_SEL_STORAGE = 200;
+    private static final int COD_SEL_IMAGE = 300;
+    private Uri image_url;
+    private FirebaseFirestore mfirestore;
+
+    ProgressDialog progressDialog;
+    StorageReference storageReference;
+    private String url;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_usuario);
+        fotoPerfil= findViewById(R.id.imgUsuario);
+        fotoFondo = findViewById(R.id.imgFondo);
         nombre = findViewById(R.id.txtName);
         email = findViewById(R.id.txtEmail);
         negocio = findViewById(R.id.txtLocal);
@@ -49,6 +71,8 @@ public class editar_usuario extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
+        progressDialog = new ProgressDialog(this);
+        storageReference= FirebaseStorage.getInstance().getReference();
 
         if (mAuth.getCurrentUser() != null) {
             String id = mAuth.getCurrentUser().getUid();
@@ -62,6 +86,8 @@ public class editar_usuario extends AppCompatActivity {
                     nombre.setText(name);
                     email.setText(email1);
                     negocio.setText(local);
+                    Picasso.with(getApplicationContext()).load("perfil/*"+id).into(fotoPerfil);
+                    Picasso.with(getApplicationContext()).load("fondo/*"+id).into(fotoFondo);
                 }
 
                 @Override
@@ -111,7 +137,7 @@ public class editar_usuario extends AppCompatActivity {
                         }
                     });
         }
-/*
+
         Map<String, Object> map = new HashMap<>();
         map.put("nombre", name);
         map.put("email", correo);
@@ -126,8 +152,74 @@ public class editar_usuario extends AppCompatActivity {
             public void onSuccess(Void unused) {
                 Toast.makeText(editar_usuario.this, "Successful update", Toast.LENGTH_SHORT).show();
             }
-        });*/
+        });
         Intent i = new Intent(getApplicationContext(),vistaUsurio.class);
         startActivity(i);
+    }
+
+    public void ActualizarFoto(View view) {
+        url = "perfil/*";
+        cargarFoto();
+    }
+
+    public void ActualizarFondo(View view) {
+        url = "fondo/*";
+        cargarFoto();
+    }
+    private void cargarFoto() {
+        Intent i = new Intent(Intent.ACTION_PICK);
+        i.setType("image/*");
+
+        startActivityForResult(i, COD_SEL_IMAGE);
+    }
+    public void cargarImagen(Uri imageUrl) {
+        if(url.equals("perfil/*")){
+            Picasso.with(getApplicationContext()).load(imageUrl).into(fotoPerfil);
+        } else if (url.equals("fondo/*")) {
+            Picasso.with(getApplicationContext()).load(imageUrl).into(fotoFondo);
+        }
+
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(resultCode == RESULT_OK){
+            if (requestCode == COD_SEL_IMAGE){
+                image_url = data.getData();
+                subirFoto(image_url, url);
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void subirFoto(Uri image_url, String url) {
+        progressDialog.setMessage("Actualizando foto");
+        progressDialog.show();
+        String rute_storage_photo = url + mAuth.getUid();
+        StorageReference reference = storageReference.child(rute_storage_photo);
+        reference.putFile(image_url).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                while (!uriTask.isSuccessful());
+                if (uriTask.isSuccessful()){
+                    uriTask.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            cargarImagen(image_url);
+                            progressDialog.dismiss();
+                        }
+                    });
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                progressDialog.dismiss();
+                Toast.makeText(getApplicationContext(), "Error al cargar foto", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 }
