@@ -3,11 +3,15 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -19,7 +23,11 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import sv.edu.universidad.cuponfinder2.Model.Negocio;
+import sv.edu.universidad.cuponfinder2.Model.Promocion;
 
 public class vistaUsurio extends AppCompatActivity {
     private TextView nombreUsuario, email;
@@ -27,6 +35,15 @@ public class vistaUsurio extends AppCompatActivity {
     private ImageView perfilFoto, portadaFoto;
     private FirebaseAuth mAuth;
     StorageReference storageReference;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView recyclerViewListCategorias, recyclerViewListPromo;
+    private PromocionesAdapter adapterPromocion;
+    private List<Promocion> promocions = new ArrayList<>();
+
+
+    /*Cards*/
+
+    /*Cards*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +57,34 @@ public class vistaUsurio extends AppCompatActivity {
         portadaFoto = findViewById(R.id.user_portada);
 
         storageReference = FirebaseStorage.getInstance().getReference();
+
+
+        recyclerViewListPromo=findViewById(R.id.rvPromosUser);
+        recyclerViewListPromo.setLayoutManager(new LinearLayoutManager(this));
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("Promociones");
+
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                promocions.clear();
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                    Promocion promotion = dataSnapshot1.getValue(Promocion.class);
+                    promocions.add(promotion);
+                }
+                if (adapterPromocion == null) {
+                    adapterPromocion = new PromocionesAdapter(promocions);
+                    recyclerViewListPromo.setAdapter(adapterPromocion);
+                } else {
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e("ERROR", databaseError.getMessage());
+            }
+        });
+
 
 //        btnCerrar.setOnClickListener(new View.OnClickListener() {
 //            @Override
