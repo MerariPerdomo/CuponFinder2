@@ -32,29 +32,13 @@ public class PromocionesAdapter extends RecyclerView.Adapter<PromocionesHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull PromocionesHolder holder, int position) {
-        Negocios negocio = new Negocios();
         Promocion promocion = promocions.get(position);
 
         holder.txtTituloPromo.setText(promocion.getTitulo());
+        holder.txtTitleLocalName.setText(promocion.getNegocio());
 //        holder.txtTitleLocalName.setText(negocio.ge);
 //        holder.imagen.setImageResource(negocio.getImagen());
 //        holder.perfil_negocio.setImageResource(negocio.getPerfil_negocio());
-        StorageReference perfilRef = FirebaseStorage.getInstance().getReference("promocion/*" + promocion.getIdUser());
-
-        try{
-            perfilRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                @Override
-                public void onSuccess(Uri uri) {
-                    String imageUrl = uri.toString();
-                    Picasso.get().load(imageUrl).error(R.drawable.perfil_estatico).into(holder.img_perfilnegocio);
-                }
-            });
-
-        }catch (Exception e){
-            Picasso.get().load(R.drawable.perfil_estatico).into(holder.img_perfilnegocio);
-        }
-
-
 
     }
     public void setPromocions(List<Promocion> nuevasPromociones) {

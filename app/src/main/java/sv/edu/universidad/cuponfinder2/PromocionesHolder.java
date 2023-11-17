@@ -20,6 +20,7 @@ public class PromocionesHolder extends RecyclerView.ViewHolder {
     public PromocionesHolder(@NonNull View itemView) {
         super(itemView);
         txtTituloPromo = itemView.findViewById(R.id.txtTituloPromo);
+        txtTitleLocalName = itemView.findViewById(R.id.txtTitleLocalName);
         img_perfilnegocio=itemView.findViewById(R.id.img_perfil_negocio);
         img_fotopromo=itemView.findViewById(R.id.img_fotopromo);
     }
