@@ -1,5 +1,6 @@
 package sv.edu.universidad.cuponfinder2;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +14,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
-
-import java.util.ArrayList;
 import java.util.List;
 
 import sv.edu.universidad.cuponfinder2.Model.Negocio;
@@ -42,6 +41,7 @@ public class NegociosAdapter extends RecyclerView.Adapter<NegociosViewHolder> {
         holder.nombre.setText(negocio.getNombre());
 //        holder.imagen.setImageResource(negocio.getImagen());
 //        holder.perfil_negocio.setImageResource(negocio.getPerfil_negocio());
+        String id = negocio.getIdUser();
         StorageReference perfilRef = FirebaseStorage.getInstance().getReference("perfil/*" + negocio.getIdUser());
 
         try{
@@ -56,6 +56,29 @@ public class NegociosAdapter extends RecyclerView.Adapter<NegociosViewHolder> {
         }catch (Exception e){
             Picasso.get().load(R.drawable.perfil_estatico).into(holder.perfil_negocio);
         }
+        StorageReference fondoRef = FirebaseStorage.getInstance().getReference("fondo/*"+negocio.getIdUser());
+
+        try{
+            fondoRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    String imageUrl = uri.toString();
+                    Picasso.get().load(imageUrl).error(R.drawable.fondo_pordefecto).into(holder.fondo_negocio);
+                }
+            });
+
+        }catch (Exception e){
+            Picasso.get().load(R.drawable.perfil_estatico).into(holder.perfil_negocio);
+        }
+        holder.verNegocio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), vistaNegocio.class);
+                i.putExtra("id", id);
+                v.getContext().startActivity(i);
+            }
+        });
+
 
     }
     public void setNegocios(List<Negocio> nuevosNegocios) {
@@ -67,24 +90,4 @@ public class NegociosAdapter extends RecyclerView.Adapter<NegociosViewHolder> {
     public int getItemCount() {
         return negocios.size();
     }
-
- /*   public void filtrado(String txtBuscar){
-        int longitud = txtBuscar.length();
-        if(longitud == 0){
-            negocios.clear();
-            negocios.addAll(listaOriginal);
-        }else {
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                List<Negocio> col = negocios.stream().filter(i -> i.getNegocio().toLowerCase().contains(txtBuscar.toLowerCase())).collect(Collectors.toList());
-            }else{
-                for (Negocio n: listaOriginal) {
-                    if(n.getNegocio().toLowerCase().contains(txtBuscar.toLowerCase())){
-                        negocios.add(n);
-                    }
-                }
-            }
-        }
-        notifyDataSetChanged();
-    }*/
-
 }
