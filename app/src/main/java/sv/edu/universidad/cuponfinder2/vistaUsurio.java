@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,15 +33,14 @@ import sv.edu.universidad.cuponfinder2.Model.Promocion;
 
 public class vistaUsurio extends AppCompatActivity {
     private TextView nombreUsuario, email;
-    private Button btnEditar;
     private ImageView perfilFoto, portadaFoto;
     private FirebaseAuth mAuth;
     StorageReference storageReference;
+    private DatabaseReference mDatabase;
     private RecyclerView.Adapter adapter;
     private RecyclerView recyclerViewListCategorias, recyclerViewListPromo;
     private PromocionesAdapter adapterPromocion;
     private List<Promocion> promocions = new ArrayList<>();
-
 
     /*Cards*/
 
@@ -52,82 +53,17 @@ public class vistaUsurio extends AppCompatActivity {
         nombreUsuario = findViewById(R.id.Username);
         email = findViewById(R.id.email);
         mAuth = FirebaseAuth.getInstance();
-        btnEditar = (Button) findViewById(R.id.btnEditarPerfil);
         perfilFoto = findViewById(R.id.img_perfil_negocio);
         portadaFoto = findViewById(R.id.user_portada);
-
         storageReference = FirebaseStorage.getInstance().getReference();
-
-
         recyclerViewListPromo=findViewById(R.id.rvPromosUser);
         recyclerViewListPromo.setLayoutManager(new LinearLayoutManager(this));
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("Promociones");
+        mDatabase = FirebaseDatabase.getInstance().getReference("Promociones");
+        String id = mAuth.getCurrentUser().getUid();
+        MostrarPromos(id);
 
-        mDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                promocions.clear();
-                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                    Promocion promotion = dataSnapshot1.getValue(Promocion.class);
-                    promocions.add(promotion);
-                }
-                if (adapterPromocion == null) {
-                    adapterPromocion = new PromocionesAdapter(promocions);
-                    recyclerViewListPromo.setAdapter(adapterPromocion);
-                } else {
-                    adapter.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.e("ERROR", databaseError.getMessage());
-            }
-        });
-
-
-//        btnCerrar.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mAuth.signOut();
-//                startActivity(new Intent(getApplicationContext(), login.class));
-//                finish();
-//            }
-//        });
         if (mAuth.getCurrentUser() != null) {
-            String id = mAuth.getCurrentUser().getUid();
-            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-            databaseReference.child("Usuarios").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    Negocio usuarios = dataSnapshot.getValue(Negocio.class);
-                    nombreUsuario.setText(usuarios.getNombre());
-                    email.setText(usuarios.getEmail());
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    // Manejar error
-                }
-            });
-            StorageReference reference = storageReference.child("perfil/*" + id);
-            reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                @Override
-                public void onSuccess(Uri uri) {
-                    //Foto de perfil
-                    String imageUrl = uri.toString();
-                    Picasso.get().load(imageUrl).into(perfilFoto);
-                }
-            });
-            StorageReference reference2 = storageReference.child("fondo/*" + id);
-            reference2.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                @Override
-                public void onSuccess(Uri uri) {
-                    //Foto de portada
-                    String imageUrl = uri.toString();
-                    Picasso.get().load(imageUrl).into(portadaFoto);
-                }
-            });
+            ObtenerUsuario(id);
         } else {
             nombreUsuario.setText("");
             email.setText("");
@@ -148,5 +84,62 @@ public class vistaUsurio extends AppCompatActivity {
     public void Regresar(View view) {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
+    }
+    public void MostrarPromos(String id){
+        mDatabase.orderByChild("idUser").equalTo(id).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<Promocion> promocions = new ArrayList<>();
+                for (DataSnapshot dataSnapshot1 : snapshot.getChildren()) {
+                    Promocion promotion = dataSnapshot1.getValue(Promocion.class);
+                    promocions.add(promotion);
+                }
+                if (adapter == null) {
+                    adapter = new PromocionesAdapter(promocions);
+                    recyclerViewListPromo.setAdapter(adapter);
+                } else {
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    public void ObtenerUsuario(String id){
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference.child("Usuarios").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Negocio usuarios = dataSnapshot.getValue(Negocio.class);
+                nombreUsuario.setText(usuarios.getNombre());
+                email.setText(usuarios.getEmail());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Manejar error
+            }
+        });
+        StorageReference reference = storageReference.child("perfil/*" + id);
+        reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                //Foto de perfil
+                String imageUrl = uri.toString();
+                Picasso.get().load(imageUrl).into(perfilFoto);
+            }
+        });
+        StorageReference reference2 = storageReference.child("fondo/*" + id);
+        reference2.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                //Foto de portada
+                String imageUrl = uri.toString();
+                Picasso.get().load(imageUrl).into(portadaFoto);
+            }
+        });
     }
 }

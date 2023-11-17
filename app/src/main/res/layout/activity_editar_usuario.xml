@@ -8,10 +8,7 @@
     android:orientation="vertical"
     tools:context=".editar_usuario">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"
@@ -36,32 +33,47 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0"/>
 
+
         <Button
             android:id="@+id/agregarFoto"
+            style="?attr/materialButtonOutlinedStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:backgroundTint="#3EB4DA"
+            android:layout_height="45dp"
             android:onClick="ActualizarFoto"
+            android:padding="10dp"
             android:text="Update photo"
+            android:textColor="@color/black"
+            android:textSize="13dp"
+            app:icon="@drawable/ic_edit"
+            app:iconSize="15dp"
+            app:iconTint="#00BCD4"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.45"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/imgFondo"
-            app:layout_constraintVertical_bias="0.894"
-            tools:ignore="MissingConstraints" />
+            app:layout_constraintVertical_bias="1.0"
+            app:strokeColor="#03A9F4"
+            tools:ignore="MissingConstraints,TextSizeCheck" />
 
         <Button
             android:id="@+id/agregarFondo"
+            style="?attr/materialButtonOutlinedStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:backgroundTint="#3EB4DA"
+            android:layout_height="40dp"
             android:onClick="ActualizarFondo"
             android:text="Update background"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="173dp"
-            tools:layout_editor_absoluteY="33dp" />
+            android:textColor="@color/black"
+            android:textSize="13dp"
+            app:icon="@drawable/ic_edit"
+            app:iconSize="15dp"
+            app:iconTint="#00BCD4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:strokeColor="#03A9F4"
+            tools:ignore="MissingConstraints,TextSizeCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -193,6 +205,4 @@
             android:layout_marginStart="5dp"
             android:textColor="@color/black"/>
     </LinearLayout>
-</LinearLayout>
-
 </LinearLayout>

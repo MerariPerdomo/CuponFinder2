@@ -20,12 +20,16 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="250dp">
+
                 <ImageView
                     android:id="@+id/imgPortada"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:contentDescription="@string/imagen_portada"
                     android:scaleType="centerCrop"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/fondo_pordefecto"
                     tools:ignore="MissingConstraints" />
 

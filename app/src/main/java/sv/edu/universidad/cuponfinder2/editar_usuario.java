@@ -215,4 +215,9 @@ public class editar_usuario extends AppCompatActivity {
         });
 
     }
+
+    public void Cancelar(View view) {
+        Intent intent = new Intent(getApplicationContext(), vistaUsurio.class);
+        startActivity(intent);
+    }
 }
