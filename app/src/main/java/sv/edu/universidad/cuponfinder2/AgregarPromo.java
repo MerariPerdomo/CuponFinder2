@@ -56,7 +56,6 @@ public class AgregarPromo extends AppCompatActivity {
     private FirebaseFirestore mfirestore;
     private DatabaseReference mDatabase;
     Uri image_url;
-    private static final int COD_SEL_STORAGE =200;
     private static final int COD_SEL_IMAGE =300;
     ProgressDialog progressDialog;
     StorageReference storageReference;

@@ -41,24 +41,25 @@ public class PromocionesAdapter extends RecyclerView.Adapter<PromocionesHolder> 
 //        holder.imagen.setImageResource(negocio.getImagen());
 //        holder.perfil_negocio.setImageResource(negocio.getPerfil_negocio());
 
-
+        String idPromo = promocion.getIdPromo();
+        String idUser = promocion.getIdUser();
         /*Foto de la promo*/
-//        StorageReference promoRef = FirebaseStorage.getInstance().getReference("promocion/*"+promocion.getIdUser());
-//
-//        try{
-//            promoRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                @Override
-//                public void onSuccess(Uri uri) {
-//                    String imageUrl2 = uri.toString();
-//                    Picasso.get().load(imageUrl2).error(R.drawable.fondo_pordefecto).into(holder.img_fotopromo);
-//                }
-//            });
-//
-//        }catch (Exception e){
-//            Picasso.get().load(R.drawable.fondo_pordefecto).into(holder.img_fotopromo);
-//        }
+        StorageReference promoRef = FirebaseStorage.getInstance().getReference("promocion/*"+ idUser + "" + idPromo);
+
+        try{
+            promoRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    String imageUrl2 = uri.toString();
+                    Picasso.get().load(imageUrl2).error(R.drawable.fondo_pordefecto).into(holder.img_fotopromo);
+                }
+            });
+
+        }catch (Exception e){
+            Picasso.get().load(R.drawable.fondo_pordefecto).into(holder.img_fotopromo);
+        }
         /*Foto del negocio*/
-//        StorageReference tiendaRef = FirebaseStorage.getInstance().getReference("perfil/*"+promocion.getIdUser());
+//        StorageReference tiendaRef = FirebaseStorage.getInstance().getReference("perfil/*"+idUser);
 //
 //        try{
 //            tiendaRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {

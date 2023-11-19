@@ -1,12 +1,11 @@
 package sv.edu.universidad.cuponfinder2;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
 import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,7 +17,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import sv.edu.universidad.cuponfinder2.Model.Negocio;
 import sv.edu.universidad.cuponfinder2.Model.Promocion;
 
 
@@ -27,13 +25,11 @@ public class promotions extends AppCompatActivity {
     private RecyclerView recyclerView;
     private PromocionesAdapter adapter;
     private List<Promocion> promocions = new ArrayList<>();
-    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_promotions);
-        searchView = findViewById(R.id.searchView);
         recyclerView = findViewById(R.id.rvPromotiones2);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         String title = getIntent().getStringExtra("title");
