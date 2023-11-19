@@ -20,6 +20,7 @@ import sv.edu.universidad.cuponfinder2.Model.Promocion;
 public class PromocionesAdapter extends RecyclerView.Adapter<PromocionesHolder> {
 
     public List<Promocion> promocions;
+    Promocion promo =new Promocion();
     public PromocionesAdapter(List<Promocion> promocions) {
         this.promocions = promocions;
     }
@@ -39,6 +40,38 @@ public class PromocionesAdapter extends RecyclerView.Adapter<PromocionesHolder> 
 //        holder.txtTitleLocalName.setText(negocio.ge);
 //        holder.imagen.setImageResource(negocio.getImagen());
 //        holder.perfil_negocio.setImageResource(negocio.getPerfil_negocio());
+
+
+        /*Foto de la promo*/
+//        StorageReference promoRef = FirebaseStorage.getInstance().getReference("promocion/*"+promocion.getIdUser());
+//
+//        try{
+//            promoRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                @Override
+//                public void onSuccess(Uri uri) {
+//                    String imageUrl2 = uri.toString();
+//                    Picasso.get().load(imageUrl2).error(R.drawable.fondo_pordefecto).into(holder.img_fotopromo);
+//                }
+//            });
+//
+//        }catch (Exception e){
+//            Picasso.get().load(R.drawable.fondo_pordefecto).into(holder.img_fotopromo);
+//        }
+        /*Foto del negocio*/
+//        StorageReference tiendaRef = FirebaseStorage.getInstance().getReference("perfil/*"+promocion.getIdUser());
+//
+//        try{
+//            tiendaRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                @Override
+//                public void onSuccess(Uri uri) {
+//                    String imageUrl = uri.toString();
+//                    Picasso.get().load(imageUrl).error(R.drawable.perfil_estatico).into(holder.img_perfilnegocio);
+//                }
+//            });
+//
+//        }catch (Exception e){
+//            Picasso.get().load(R.drawable.perfil_estatico).into(holder.img_perfilnegocio);
+//        }
 
     }
     public void setPromocions(List<Promocion> nuevasPromociones) {

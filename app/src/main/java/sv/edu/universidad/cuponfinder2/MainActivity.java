@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     adapterPromocion = new PromocionesAdapter(promocions);
                     recyclerViewListPromo.setAdapter(adapterPromocion);
                 } else {
-                    adapter.notifyDataSetChanged();
+                    adapterPromocion.setPromocions(promocions);
                 }
             }
 

@@ -38,7 +38,7 @@ public class NegociosAdapter extends RecyclerView.Adapter<NegociosViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull NegociosViewHolder holder, int position) {
         Negocio negocio = negocios.get(position);
-        holder.nombre.setText(negocio.getNombre());
+        holder.nombre.setText(negocio.getNegocio());
 //        holder.imagen.setImageResource(negocio.getImagen());
 //        holder.perfil_negocio.setImageResource(negocio.getPerfil_negocio());
         String id = negocio.getIdUser();
