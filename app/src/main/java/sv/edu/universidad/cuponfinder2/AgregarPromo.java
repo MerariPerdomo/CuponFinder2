@@ -123,6 +123,7 @@ public class AgregarPromo extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     Negocio usuarios = dataSnapshot.getValue(Negocio.class);
+                    String idPromo = mDatabase.child("Promociones").push().getKey();
                     Map<String, Object> map = new HashMap<>();
                     map.put("idUser", id);
                     map.put("titulo", titulo);
@@ -130,20 +131,16 @@ public class AgregarPromo extends AppCompatActivity {
                     map.put("categoria", categoria);
                     map.put("fechaInicio", fechaInicio);
                     map.put("fechaFinal", fechaFinal);
-                    mDatabase.child("Promociones").child(id).setValue(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    map.put("idPromo", idPromo);
+                    mDatabase.child("Promociones").child(idPromo).setValue(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
-                            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Promociones").push();
-                            String idProm = ref.getKey();
-                            Map<String, Object> map = new HashMap<>();
-                            map.put("idPromo",idProm);
-                            mDatabase.child("Promociones").child(id).updateChildren(map);
                             SharedPreferences sharedPreferences = getSharedPreferences("CuponFinder2", MODE_PRIVATE);
                             String imageBitmapString = sharedPreferences.getString("tempImageBitmap", null);
                             if (imageBitmapString != null) {
                                 Bitmap imageBitmap = stringToBitmap(imageBitmapString);
                                 byte[] data = bitmapToByte(imageBitmap);
-                                StorageReference reference = storageReference.child("promocion/*" + id + "" + idProm);
+                                StorageReference reference = storageReference.child("promocion/*" + id + "" + idPromo);
                                 reference.putBytes(data).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                     @Override
                                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -156,7 +153,7 @@ public class AgregarPromo extends AppCompatActivity {
                                                     String download_uri = uri.toString();
                                                     HashMap<String, Object> map = new HashMap<>();
                                                     map.put("foto", download_uri);
-                                                    mfirestore.collection("promocion").document(idProm).update(map);
+                                                    mfirestore.collection("promocion").document(idPromo).update(map);
                                                 }
                                             });
                                         }

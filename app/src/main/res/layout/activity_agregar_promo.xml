@@ -27,9 +27,9 @@
         android:gravity="center">
     <ImageView
         android:id="@+id/imgPromo"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxHeight="400dp"
+        android:maxHeight="350dp"
         android:layout_marginTop="10dp"
         android:contentDescription="@string/img_perfil"
         android:scaleType="centerCrop" />
