@@ -10,7 +10,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -41,6 +44,9 @@ import sv.edu.universidad.cuponfinder2.domain.CategoryDomain;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, CategoryAdaptor.OnItemClickListener {
 
+    /*-------------Validacion de conexion-------------*/
+    private noConexion noConnectionFragment;
+
     /*-------------Seccion de Categorias y promociones-------------*/
 
     private RecyclerView.Adapter adapter;
@@ -64,32 +70,43 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        noConnectionFragment = new noConexion();
+
+
         /*--------------Para las cards de promocion ---------------*/
-        recyclerViewListPromo=findViewById(R.id.rvPromotiones);
-        recyclerViewListPromo.setLayoutManager(new LinearLayoutManager(this));
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("Promociones");
+        if(!isConnectedToInternet()){
+            // Reemplaza el fragmento actual con tu fragmento de "sin señal"
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.noConnectionContainer, noConnectionFragment)// Oculta el fragmento al inicio
+                    .commit();
+        }else{
+            recyclerViewListPromo=findViewById(R.id.rvPromotiones);
+            recyclerViewListPromo.setLayoutManager(new LinearLayoutManager(this));
+            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("Promociones");
 
-        mDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                promocions.clear();
-                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                    Promocion promotion = dataSnapshot1.getValue(Promocion.class);
-                    promocions.add(promotion);
+            mDatabase.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    promocions.clear();
+                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                        Promocion promotion = dataSnapshot1.getValue(Promocion.class);
+                        promocions.add(promotion);
+                    }
+                    if (adapterPromocion == null) {
+                        adapterPromocion = new PromocionesAdapter(promocions);
+                        recyclerViewListPromo.setAdapter(adapterPromocion);
+                    } else {
+                        adapterPromocion.setPromocions(promocions);
+                    }
                 }
-                if (adapterPromocion == null) {
-                    adapterPromocion = new PromocionesAdapter(promocions);
-                    recyclerViewListPromo.setAdapter(adapterPromocion);
-                } else {
-                    adapterPromocion.setPromocions(promocions);
-                }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.e("ERROR", databaseError.getMessage());
-            }
-        });
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Log.e("ERROR", databaseError.getMessage());
+                }
+            });
+        }
+
 
         /*--------------Para las cards de promocion ---------------*/
         /*--------------Para menu lateral ---------------*/
@@ -219,5 +236,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         intent.putExtra("title", title);
         startActivity(intent);
     }
+
+    public boolean isConnectedToInternet(){
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
 
 }
