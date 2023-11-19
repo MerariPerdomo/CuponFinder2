@@ -123,7 +123,6 @@ public class AgregarPromo extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     Negocio usuarios = dataSnapshot.getValue(Negocio.class);
-                    String negocio = usuarios.getNegocio();
                     Map<String, Object> map = new HashMap<>();
                     map.put("idUser", id);
                     map.put("titulo", titulo);
@@ -131,7 +130,6 @@ public class AgregarPromo extends AppCompatActivity {
                     map.put("categoria", categoria);
                     map.put("fechaInicio", fechaInicio);
                     map.put("fechaFinal", fechaFinal);
-                    map.put("negocio", negocio);
                     mDatabase.child("Promociones").child(id).setValue(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
