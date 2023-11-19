@@ -22,7 +22,7 @@
         <ImageView
             android:id="@+id/img_fotopromo"
             android:layout_width="361dp"
-            android:layout_height="283dp"
+            android:layout_height="240dp"
             android:scaleType="centerCrop"
             android:src="@drawable/fondo_pordefecto"
             app:civ_border_width="1dp"

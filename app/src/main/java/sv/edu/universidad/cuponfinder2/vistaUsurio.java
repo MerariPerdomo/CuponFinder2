@@ -3,9 +3,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,6 +26,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import sv.edu.universidad.cuponfinder2.Adaptor.MypromoAdaptor;
 import sv.edu.universidad.cuponfinder2.Model.Negocio;
 import sv.edu.universidad.cuponfinder2.Model.Promocion;
 
@@ -39,7 +38,6 @@ public class vistaUsurio extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private RecyclerView.Adapter adapter;
     private RecyclerView recyclerViewListCategorias, recyclerViewListPromo;
-    private PromocionesAdapter adapterPromocion;
     private List<Promocion> promocions = new ArrayList<>();
 
     /*Cards*/
@@ -59,11 +57,11 @@ public class vistaUsurio extends AppCompatActivity {
         recyclerViewListPromo=findViewById(R.id.rvPromosUser);
         recyclerViewListPromo.setLayoutManager(new LinearLayoutManager(this));
         mDatabase = FirebaseDatabase.getInstance().getReference("Promociones");
-        String id = mAuth.getCurrentUser().getUid();
-        MostrarPromos(id);
 
         if (mAuth.getCurrentUser() != null) {
+            String id = mAuth.getCurrentUser().getUid();
             ObtenerUsuario(id);
+            MostrarPromos(id);
         } else {
             nombreUsuario.setText("");
             email.setText("");
@@ -95,7 +93,7 @@ public class vistaUsurio extends AppCompatActivity {
                     promocions.add(promotion);
                 }
                 if (adapter == null) {
-                    adapter = new PromocionesAdapter(promocions);
+                    adapter = new MypromoAdaptor(promocions);
                     recyclerViewListPromo.setAdapter(adapter);
                 } else {
                     adapter.notifyDataSetChanged();

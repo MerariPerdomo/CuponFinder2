@@ -48,6 +48,7 @@ public class Editar_promocion extends AppCompatActivity {
         etDescripcion = findViewById(R.id.txtDescripcion);
         etCategoria = findViewById(R.id.SpinCategories);
 
+        String idPromo = getIntent().getStringExtra("idPromo");
         /*DATE PICKER*/
         etEditarFechaFinal= findViewById(R.id.etEditarFechaFinal);
         etEditaFechaInicio= findViewById(R.id.etEditarFechaInicio);
