@@ -23,8 +23,10 @@
         app:iconTint="@color/light_blue_900"
         app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.413"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -62,7 +64,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
                 android:scaleType="centerCrop"
-                app:srcCompat="@drawable/no_img" />
+                app:srcCompat="@drawable/fondo_pordefecto" />
 
             <TextView
                 android:id="@+id/txtLocalNameDet"
@@ -70,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/txtLocalName"
                 android:textAlignment="center"
-                android:textSize="20sp" />
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/txtCatDetallePromo"
@@ -78,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/txtCategoria"
                 android:textAlignment="center"
-                android:textSize="12sp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/txtDescripDetalle"
@@ -89,7 +91,7 @@
                 android:layout_marginBottom="10dp"
                 android:text="@string/description_promotion"
                 android:textAlignment="center"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
