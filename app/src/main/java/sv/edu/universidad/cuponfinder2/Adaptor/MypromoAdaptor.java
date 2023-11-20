@@ -1,5 +1,7 @@
 package sv.edu.universidad.cuponfinder2.Adaptor;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -8,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,6 +20,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -28,6 +32,7 @@ import sv.edu.universidad.cuponfinder2.Editar_promocion;
 import sv.edu.universidad.cuponfinder2.Model.Negocio;
 import sv.edu.universidad.cuponfinder2.Model.Promocion;
 import sv.edu.universidad.cuponfinder2.R;
+import sv.edu.universidad.cuponfinder2.vistaUsurio;
 
 public class MypromoAdaptor extends RecyclerView.Adapter<MypromoAdaptor.MypromoHolder> {
     public List<Promocion> promocions;
@@ -83,6 +88,41 @@ public class MypromoAdaptor extends RecyclerView.Adapter<MypromoAdaptor.MypromoH
             Intent i = new Intent(v.getContext(), Editar_promocion.class);
             i.putExtra("idPromo", idPromo);
             v.getContext().startActivity(i);
+        });
+        holder.btnBorrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(v.getContext())
+                        .setTitle("Confirm")
+                        .setMessage("Are you sure to delete this promotion?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+                                        Query promoQuery = ref.child("Promociones").orderByChild("idPromo").equalTo(idPromo);
+                                        promoQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                                for (DataSnapshot promoSnapshot: dataSnapshot.getChildren()) {
+                                                    promoSnapshot.getRef().removeValue();
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(DatabaseError databaseError) {
+                                                Toast.makeText(v.getContext(), "Not deleted", Toast.LENGTH_SHORT).show();
+                                            }
+                                            });
+                                            StorageReference storageRef = FirebaseStorage.getInstance().getReference("promocion/*"+ idUser + "" + idPromo);
+                                            storageRef.delete();
+                                            Intent i = new Intent(v.getContext(), vistaUsurio.class);
+                                            v.getContext().startActivity(i);
+                                    }
+                                }).setNegativeButton(android.R.string.no, null)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+
+            }
         });
 
     }
