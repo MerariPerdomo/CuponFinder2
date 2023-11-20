@@ -88,7 +88,7 @@
                     android:textSize="22sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvPromoNegocio"
+                    android:id="@+id/rvPromo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>

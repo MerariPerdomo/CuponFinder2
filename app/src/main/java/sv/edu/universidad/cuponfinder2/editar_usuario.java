@@ -171,8 +171,6 @@ public class editar_usuario extends AppCompatActivity {
         } else if (url.equals("fondo/*")) {
             Picasso.get().load(imageUrl).into(fotoFondo);
         }
-
-
     }
 
     @Override

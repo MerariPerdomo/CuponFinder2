@@ -19,7 +19,8 @@
         android:text="@string/edit_promotion"
         android:textColor="@color/light_blue_600"
         android:textSize="20sp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        android:onClick="Regresar"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -48,7 +49,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0"-->
 
-    <LinearLayout
+ <!--   <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -71,7 +72,7 @@
                     android:textColor="@color/verdeOscuro"
                     android:layout_marginStart="15dp"
                     tools:ignore="MissingConstraints" />
-    </LinearLayout>
+    </LinearLayout> -->
 
             <EditText
                 android:id="@+id/txtTitulo"
@@ -173,8 +174,8 @@
                 android:onClick="Actualizar"
                 android:text="@string/save"
                 android:textColor="@color/white"
-                tools:ignore="TextContrastCheck"
-                android:textSize="20dp"/>
+                android:textSize="20dp"
+                tools:ignore="TextContrastCheck,TextSizeCheck" />
 
         </LinearLayout>
 

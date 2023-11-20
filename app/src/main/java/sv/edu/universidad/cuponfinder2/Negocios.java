@@ -25,7 +25,6 @@ import sv.edu.universidad.cuponfinder2.Model.Negocio;
 public class Negocios extends AppCompatActivity implements SearchView.OnQueryTextListener{
     private RecyclerView recyclerView;
     private NegociosAdapter adapter;
-    private List<Negocio> negocios;
     private SearchView searchView;
     private Button btnRegresarNegocios;
     private DatabaseReference mDatabase;

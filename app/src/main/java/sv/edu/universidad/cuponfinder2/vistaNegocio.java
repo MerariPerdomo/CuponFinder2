@@ -47,7 +47,7 @@ public class vistaNegocio extends AppCompatActivity {
         regresar=findViewById(R.id.btnRegresar);
         regresar.setOnClickListener(v -> onBackPressed());
         storageReference = FirebaseStorage.getInstance().getReference();
-        recyclerView = findViewById(R.id.rvPromoNegocio);
+        recyclerView = findViewById(R.id.rvPromo);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         mDatabase = FirebaseDatabase.getInstance().getReference("Promociones");
 

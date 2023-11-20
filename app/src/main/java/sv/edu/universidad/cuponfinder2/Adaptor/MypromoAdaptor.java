@@ -27,14 +27,10 @@ import java.util.List;
 import sv.edu.universidad.cuponfinder2.Editar_promocion;
 import sv.edu.universidad.cuponfinder2.Model.Negocio;
 import sv.edu.universidad.cuponfinder2.Model.Promocion;
-import sv.edu.universidad.cuponfinder2.PromocionesHolder;
 import sv.edu.universidad.cuponfinder2.R;
-import sv.edu.universidad.cuponfinder2.editar_usuario;
-import sv.edu.universidad.cuponfinder2.vistaNegocio;
 
 public class MypromoAdaptor extends RecyclerView.Adapter<MypromoAdaptor.MypromoHolder> {
     public List<Promocion> promocions;
-    Promocion promo =new Promocion();
     public MypromoAdaptor(List<Promocion> promocions) {
         this.promocions = promocions;
     }
@@ -58,6 +54,7 @@ public class MypromoAdaptor extends RecyclerView.Adapter<MypromoAdaptor.MypromoH
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot childSnapshot: snapshot.getChildren()) {
                     Negocio negocio = childSnapshot.getValue(Negocio.class);
+                    assert negocio != null;
                     holder.txtTitleLocalName.setText(negocio.getNegocio());
                 }
             }
@@ -82,13 +79,10 @@ public class MypromoAdaptor extends RecyclerView.Adapter<MypromoAdaptor.MypromoH
         }catch (Exception e){
             Picasso.get().load(R.drawable.fondo_pordefecto).into(holder.img_fotopromo);
         }
-        holder.btnEditar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(v.getContext(), Editar_promocion.class);
-                i.putExtra("idPromo", idPromo);
-                v.getContext().startActivity(i);
-            }
+        holder.btnEditar.setOnClickListener(v -> {
+            Intent i = new Intent(v.getContext(), Editar_promocion.class);
+            i.putExtra("idPromo", idPromo);
+            v.getContext().startActivity(i);
         });
 
     }
@@ -101,7 +95,7 @@ public class MypromoAdaptor extends RecyclerView.Adapter<MypromoAdaptor.MypromoH
         return promocions.size();
     }
 
-    public class MypromoHolder extends RecyclerView.ViewHolder {
+    public static class MypromoHolder extends RecyclerView.ViewHolder {
 
         Button btnEditar, btnBorrar;
         TextView txtTituloPromo, txtTitleLocalName;
@@ -112,7 +106,7 @@ public class MypromoAdaptor extends RecyclerView.Adapter<MypromoAdaptor.MypromoH
             txtTituloPromo = itemView.findViewById(R.id.txtTituloPromo);
             txtTitleLocalName = itemView.findViewById(R.id.txtTitleLocalName);
             img_fotopromo = itemView.findViewById(R.id.img_fotopromo);
-            btnEditar = itemView.findViewById(R.id.btnEliminarPromo);
+            btnEditar = itemView.findViewById(R.id.btnEditarPromo);
             btnBorrar = itemView.findViewById(R.id.btnEliminarPromo);
         }
     }
