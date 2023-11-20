@@ -1,5 +1,8 @@
 package sv.edu.universidad.cuponfinder2;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
+import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +49,15 @@ public class PromocionesAdapter extends RecyclerView.Adapter<PromocionesHolder> 
 //        holder.txtTitleLocalName.setText(negocio.ge);
 //        holder.imagen.setImageResource(negocio.getImagen());
 //        holder.perfil_negocio.setImageResource(negocio.getPerfil_negocio());
+        holder.layoutPromo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String idPromo = promocion.getIdPromo();
+                Intent i = new Intent(v.getContext(), detalle_promo.class);
+                i.putExtra("id",idPromo);
+                v.getContext().startActivity(i);
+            }
+        });
         String idPromo = promocion.getIdPromo();
         String idUser = promocion.getIdUser();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
@@ -98,6 +110,7 @@ public class PromocionesAdapter extends RecyclerView.Adapter<PromocionesHolder> 
     public void setPromocions(List<Promocion> nuevasPromociones) {
         this.promocions = nuevasPromociones;
         notifyDataSetChanged();}
+
 
     @Override
     public int getItemCount() {

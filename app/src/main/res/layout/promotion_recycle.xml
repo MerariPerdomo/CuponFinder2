@@ -7,12 +7,14 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:background="@drawable/promo_background"
-    android:elevation="5dp">
+    android:clickable="true"
+    android:elevation="5dp"
+    android:focusable="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cvPromocion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clickable="true"
         android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,23 +34,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/img_perfilnegocio"
-            android:layout_width="66dp"
-            android:layout_height="55dp"
-            android:src="@drawable/perfil_estatico"
-            app:layout_constraintBottom_toTopOf="@+id/guideline22"
-            app:layout_constraintEnd_toStartOf="@+id/guideline10"
-            app:layout_constraintHorizontal_bias="0.044"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline19"
-            app:layout_constraintVertical_bias="0.442" />
-
         <TextView
             android:id="@+id/txtTituloPromo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toStartOf="@+id/img_perfilnegocio"
             android:clickable="false"
             android:text="@string/promotion_name"
             android:textColor="@color/light_blue_900"
@@ -56,10 +45,10 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/guideline22"
             app:layout_constraintEnd_toStartOf="@+id/guideline11"
-            app:layout_constraintHorizontal_bias="0.157"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline10"
             app:layout_constraintTop_toTopOf="@+id/guideline19"
-            app:layout_constraintVertical_bias="0.311" />
+            app:layout_constraintVertical_bias="0.2" />
 
         <TextView
             android:id="@+id/txtTitleLocalName"
@@ -70,10 +59,10 @@
             android:textStyle="normal"
             app:layout_constraintBottom_toTopOf="@+id/guideline22"
             app:layout_constraintEnd_toStartOf="@+id/guideline11"
-            app:layout_constraintHorizontal_bias="0.075"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline10"
             app:layout_constraintTop_toBottomOf="@+id/txtTituloPromo"
-            app:layout_constraintVertical_bias="0.088" />
+            app:layout_constraintVertical_bias="0.214" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline19"
@@ -94,7 +83,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.3443038" />
+            app:layout_constraintGuide_percent="0.01" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline11"
