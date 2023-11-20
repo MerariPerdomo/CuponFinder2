@@ -19,7 +19,7 @@
         android:text="@string/edit_promotion"
         android:textColor="@color/light_blue_600"
         android:textSize="20sp"
-        tools:ignore="MissingConstraints"
+        tools:ignore="MissingConstraints,VisualLintOverlap"
         android:onClick="Regresar"/>
 
     <ScrollView
@@ -112,18 +112,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:hint="Selector de categorías">
+                android:hint="@string/selector_de_categoriasEditarPromo">
 
                 <AutoCompleteTextView
                     android:id="@+id/SpinCategories"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
                     android:entries="@array/categories"
+                    android:inputType="none"
                     android:minHeight="48dp"
-                  android:layout_margin="10dp"
                     android:textSize="18sp"
-                    tools:ignore="LabelFor"
-                    android:inputType="none"/>
+                    tools:ignore="LabelFor,TextContrastCheck" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -174,7 +174,7 @@
                 android:onClick="Actualizar"
                 android:text="@string/save"
                 android:textColor="@color/white"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 tools:ignore="TextContrastCheck,TextSizeCheck" />
 
         </LinearLayout>

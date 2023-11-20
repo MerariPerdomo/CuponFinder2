@@ -12,13 +12,16 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:ignore="ScrollViewSize">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -57,9 +60,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="Regresar"
-                    android:text="Back"
+                    android:text="@string/backUser"
                     android:textColor="@color/light_blue_900"
-                    android:textSize="30dp"
+                    android:textSize="30sp"
                     app:icon="@drawable/ic_regresar"
                     app:iconSize="35dp"
                     app:iconTint="@color/light_blue_900"
@@ -73,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:text="User"
+                android:text="@string/userView"
                 android:textColor="@color/light_blue_900"
                 android:textSize="24sp"
                 android:textStyle="bold" />
@@ -83,7 +86,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Correo"
+                android:text="@string/correoUsuario"
                 android:textSize="18sp" />
 
             <Button
@@ -106,13 +109,15 @@
                 android:id="@+id/divider"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="?android:attr/listDivider"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="10dp"
+                android:background="?android:attr/listDivider" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="54dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -120,24 +125,24 @@
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="My promotions"
+                    android:text="@string/my_promotionsUser"
                     android:textSize="20sp" />
 
                 <Button
                     android:id="@+id/button7"
                     style="?attr/materialButtonOutlinedStyle"
-                    android:layout_width="110dp"
-                    android:layout_height="51dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginStart="50dp"
                     android:onClick="AgregarProm"
-                    android:text="Add"
+                    android:text="@string/addPromotionUserView"
                     android:textColor="@color/azul_brillante"
                     app:icon="@drawable/ic_add"
                     app:iconSize="30dp"
                     app:iconTint="@color/azul_brillante"
                     app:rippleColor="@color/azul_brillante"
                     app:strokeColor="@color/azul_brillante"
-                    tools:ignore="TouchTargetSizeCheck" />
+                    tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView

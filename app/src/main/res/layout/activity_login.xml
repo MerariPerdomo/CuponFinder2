@@ -37,12 +37,13 @@
             app:startIconDrawable="@android:drawable/sym_action_email">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/txtInputLabelMail"
                 android:inputType="textEmailAddress"
                 android:textColorHint="#8D6E63"
-                android:id="@+id/txtEmail"/>
+                tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -56,24 +57,26 @@
             app:startIconDrawable="@android:drawable/ic_lock_idle_lock">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtPssw"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/txtPasswordInput"
                 android:inputType="textPassword"
                 android:textColorHint="#8D6E63"
-                android:id="@+id/txtPssw"/>
+                tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
 
             android:id="@+id/btnLogin"
             android:layout_width="232dp"
-            android:textColor="@color/white"
             android:layout_height="70dp"
             android:layout_marginTop="15dp"
             android:backgroundTint="#3EB4DA"
             android:text="@string/txtButtonlogin"
-            android:textSize="20sp" />
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            tools:ignore="TextContrastCheck" />
 
 
         <Button
@@ -83,7 +86,8 @@
             android:layout_gravity="center_horizontal"
             android:text="@string/textContraseña"
             android:textAlignment="center"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="VisualLintButtonSize" />
 <!--            android:textColor="@color/black"-->
 
 
@@ -101,7 +105,8 @@
         android:textAlignment="center"
         android:textStyle="bold"
         app:layout_anchor="@+id/linearLayout"
-        app:layout_anchorGravity="bottom|center" />
+        app:layout_anchorGravity="bottom|center"
+        tools:ignore="VisualLintButtonSize" />
 <!--        android:textColor="@color/black"-->
 
 

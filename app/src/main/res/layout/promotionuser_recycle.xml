@@ -20,7 +20,8 @@
             android:layout_width="361dp"
             android:layout_height="230dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/fondo_pordefecto" />
+            android:src="@drawable/fondo_pordefecto"
+            android:contentDescription="@string/fotoPromoEditar" />
 
 
             <LinearLayout
@@ -61,31 +62,31 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="5dp"
-                    android:text="Delete"
+                    android:text="@string/deletePromoCard"
                     android:textColor="@color/black"
-                    android:textSize="10dp"
+                    android:textSize="10sp"
                     app:icon="@drawable/ic_delete"
                     app:iconGravity="textStart"
                     app:iconPadding="0dp"
                     app:iconSize="16dp"
                     app:iconTint="#F44336"
                     app:strokeColor="#F44336"
-                    tools:ignore="TextSizeCheck" />
+                    tools:ignore="SmallSp,TextSizeCheck" />
 
                 <Button
                     android:id="@+id/btnEditarPromo"
                     style="@style/MyButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Edit"
+                    android:text="@string/editPromoCard"
                     android:textColor="@color/black"
-                    android:textSize="10dp"
+                    android:textSize="10sp"
                     app:icon="@drawable/ic_edit"
                     app:iconGravity="textStart"
                     app:iconSize="16dp"
                     app:iconTint="#4F8FD5"
                     app:strokeColor="#4F8FD5"
-                    tools:ignore="TextSizeCheck" />
+                    tools:ignore="SmallSp,TextSizeCheck" />
             </LinearLayout>
         </LinearLayout>
 
