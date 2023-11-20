@@ -38,7 +38,7 @@
                 android:id="@+id/imageView6"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="60dp"
                 android:contentDescription="@string/publicidad_ex"
                 android:maxHeight="400dp"
                 tools:ignore="MissingConstraints" />

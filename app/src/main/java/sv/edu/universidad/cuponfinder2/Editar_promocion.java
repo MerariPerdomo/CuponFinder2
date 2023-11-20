@@ -1,6 +1,5 @@
 package sv.edu.universidad.cuponfinder2;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,11 +7,13 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -21,12 +22,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import sv.edu.universidad.cuponfinder2.Model.Promocion;
 
 public class Editar_promocion extends AppCompatActivity {
     Button btnRegresarEditarPromocion;
@@ -39,6 +40,7 @@ public class Editar_promocion extends AppCompatActivity {
     private FirebaseFirestore mfirestore;
 
     private StorageReference storageReference;
+    ImageView imgPromo;
 
 
     @Override
@@ -53,6 +55,7 @@ public class Editar_promocion extends AppCompatActivity {
         etEditaFechaInicio = findViewById(R.id.etEditarFechaInicio);
         etEditarFechaFinal = findViewById(R.id.etEditarFechaFinal);
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        imgPromo=findViewById(R.id.imageView6);
 
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -95,11 +98,28 @@ public class Editar_promocion extends AppCompatActivity {
                 String Inicio = snapshot.child("fechaInicio").getValue(String.class);
                 String Final = snapshot.child("fechaFinal").getValue(String.class);
                 String categoria = snapshot.child("categoria").getValue(String.class);
+                String idUser = snapshot.child("idUser").getValue(String.class);
+                String idPromo = snapshot.child("idPromo").getValue(String.class);
                 etTitulo.setText(titulo);
                 etDescripcion.setText(descripcion);
                 etEditaFechaInicio.setText(Inicio);
                 etEditarFechaFinal.setText(Final);
                 txtSpinner.setText(categoria);
+
+                StorageReference promoRef = FirebaseStorage.getInstance().getReference("promocion/*"+ idUser + "" + idPromo);
+
+                try{
+                    promoRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            String imageUrl2 = uri.toString();
+                            Picasso.get().load(imageUrl2).error(R.drawable.fondo_pordefecto).into(imgPromo);
+                        }
+                    });
+
+                }catch (Exception e){
+                    Picasso.get().load(R.drawable.fondo_pordefecto).into(imgPromo);
+                }
             }
 
             @Override
@@ -131,7 +151,6 @@ public class Editar_promocion extends AppCompatActivity {
         });*/
         Intent i = new Intent(getApplicationContext(),vistaUsurio.class);
         startActivity(i);
-
     }
 
     public void Regresar(View view) {
