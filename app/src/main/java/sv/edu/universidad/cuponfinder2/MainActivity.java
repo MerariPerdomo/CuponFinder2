@@ -34,7 +34,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import sv.edu.universidad.cuponfinder2.Adaptor.CategoryAdaptor;
@@ -87,9 +89,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     promocions.clear();
+                    Date currentDate = new Date();
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd / MM / yyyy");
+                    String dateToday = sdf.format(currentDate);
                     for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                         Promocion promotion = dataSnapshot1.getValue(Promocion.class);
-                        promocions.add(promotion);
+                        // Compara las cadenas de texto
+                        if (promotion.getFechaInicio().compareTo(dateToday) <= 0 && promotion.getFechaFinal().compareTo(dateToday) >= 0) {
+                            promocions.add(promotion);
+                        }
                     }
                     if (adapterPromocion == null) {
                         adapterPromocion = new PromocionesAdapter(promocions);
