@@ -1,19 +1,27 @@
 package sv.edu.universidad.cuponfinder2.Model;
 
 public class Promocion {
-    String titulo, descripcion, categoria, fechaInicio, fechaFin, idUser, idPromo;
+    String titulo, descripcion, categoria, fechaInicio, fechaFinal, idUser, idPromo;
     public Promocion(){
 
     }
 
-    public Promocion(String titulo, String descripcion, String categoria, String fechaInicio, String fechaFin, String idUser, String idPromo) {
+    public Promocion(String titulo, String descripcion, String categoria, String fechaInicio, String fechaFinal, String idUser, String idPromo) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.categoria = categoria;
         this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
+        this.fechaFinal = fechaFinal;
         this.idUser = idUser;
         this.idPromo = idPromo;
+    }
+
+    public String getFechaFinal() {
+        return fechaFinal;
+    }
+
+    public void setFechaFinal(String fechaFinal) {
+        this.fechaFinal = fechaFinal;
     }
 
     public String getIdPromo() {
@@ -64,11 +72,4 @@ public class Promocion {
         this.fechaInicio = fechaInicio;
     }
 
-    public String getFechaFin() {
-        return fechaFin;
-    }
-
-    public void setFechaFin(String fechaFin) {
-        this.fechaFin = fechaFin;
-    }
 }

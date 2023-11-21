@@ -51,6 +51,8 @@ public class MypromoAdaptor extends RecyclerView.Adapter<MypromoAdaptor.MypromoH
     public void onBindViewHolder(@NonNull MypromoHolder holder, int position) {
         Promocion promocion = promocions.get(position);
         holder.txtTituloPromo.setText(promocion.getTitulo());
+        holder.txtInicio.setText(promocion.getFechaInicio());
+        holder.txtFin.setText(promocion.getFechaFinal());
         String idPromo = promocion.getIdPromo();
         String idUser = promocion.getIdUser();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
@@ -139,13 +141,15 @@ public class MypromoAdaptor extends RecyclerView.Adapter<MypromoAdaptor.MypromoH
     public static class MypromoHolder extends RecyclerView.ViewHolder {
 
         Button btnEditar, btnBorrar;
-        TextView txtTituloPromo, txtTitleLocalName;
+        TextView txtTituloPromo, txtTitleLocalName, txtInicio, txtFin;
         ImageView img_fotopromo;
 
         public MypromoHolder(@NonNull View itemView) {
             super(itemView);
             txtTituloPromo = itemView.findViewById(R.id.txtTituloPromo);
             txtTitleLocalName = itemView.findViewById(R.id.txtTitleLocalName);
+            txtInicio = itemView.findViewById(R.id.inicio);
+            txtFin = itemView.findViewById(R.id.fin);
             img_fotopromo = itemView.findViewById(R.id.img_fotopromo);
             btnEditar = itemView.findViewById(R.id.btnEditarPromo);
             btnBorrar = itemView.findViewById(R.id.btnEliminarPromo);

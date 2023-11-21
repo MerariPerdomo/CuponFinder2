@@ -56,7 +56,7 @@ public class detalle_promo extends AppCompatActivity {
                 categoria.setText(promos.getCategoria());
                 descripcion.setText(promos.getDescripcion());
                 fechaInicio.setText(getString(R.string.iniciaPromo)+promos.getFechaInicio());
-                fechaFin.setText(getString(R.string.terminaPromo)+promos.getFechaFin());
+                fechaFin.setText(getString(R.string.terminaPromo)+promos.getFechaFinal());
 
                 // Aquí es donde cargamos la imagen
                 StorageReference promoRef = FirebaseStorage.getInstance().getReference("promocion/*"+ promos.getIdUser() + "" + id);

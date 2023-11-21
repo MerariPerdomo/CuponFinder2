@@ -99,4 +99,5 @@
     <string name="terminaPromo">"Termina: "</string>
     <string name="choose_a_language">Elija un idioma</string>
     <string name="successful_update">Cambios actualizados</string>
+    <string name="to">a</string>
 </resources>

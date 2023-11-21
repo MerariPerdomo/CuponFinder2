@@ -75,7 +75,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         /*--------------Para las cards de promocion ---------------*/
         if(!isConnectedToInternet()){
-            // Reemplaza el fragmento actual con tu fragmento de "sin señal"
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.noConnectionContainer, noConnectionFragment)// Oculta el fragmento al inicio
                     .commit();
