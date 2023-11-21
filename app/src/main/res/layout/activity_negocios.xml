@@ -63,6 +63,7 @@
         app:queryHint="Search..." />
 
     <LinearLayout
+        android:id="@+id/linearLayout4"
         android:layout_width="409dp"
         android:layout_height="0dp"
         android:gravity="center_horizontal"
@@ -95,6 +96,17 @@
 
             </LinearLayout>
         </ScrollView>
+
     </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/noConnectionContainer2"
+        android:layout_width="390dp"
+        android:layout_height="649dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

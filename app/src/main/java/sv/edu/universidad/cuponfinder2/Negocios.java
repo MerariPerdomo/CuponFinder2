@@ -5,6 +5,9 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -24,6 +27,7 @@ import sv.edu.universidad.cuponfinder2.Model.Negocio;
 
 public class Negocios extends AppCompatActivity implements SearchView.OnQueryTextListener{
     private RecyclerView recyclerView;
+    private noConexion noConnectionFragment;
     private NegociosAdapter adapter;
     private SearchView searchView;
     private Button btnRegresarNegocios;
@@ -33,38 +37,45 @@ public class Negocios extends AppCompatActivity implements SearchView.OnQueryTex
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_negocios);
-
-        btnRegresarNegocios = findViewById(R.id.btnRegresarNegocios);
-        btnRegresarNegocios.setOnClickListener(v -> onBackPressed());
-        searchView = findViewById(R.id.searchView);
-
         recyclerView = findViewById(R.id.rvNegocios);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         mDatabase = FirebaseDatabase.getInstance().getReference("Usuarios");
 
-        mDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                List<Negocio> nuevosNegocios = new ArrayList<>();
-                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                    Negocio negocio = dataSnapshot1.getValue(Negocio.class);
-                    nuevosNegocios.add(negocio);
-                }
-                if (adapter == null) {
-                    adapter = new NegociosAdapter(nuevosNegocios);
-                    recyclerView.setAdapter(adapter);
-                } else {
-                    adapter.setNegocios(nuevosNegocios);
-                }
-            }
+        btnRegresarNegocios = findViewById(R.id.btnRegresarNegocios);
+        btnRegresarNegocios.setOnClickListener(v -> onBackPressed());
+        searchView = findViewById(R.id.searchView);
+        noConnectionFragment = new noConexion();
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.e("ERROR", databaseError.getMessage());
-            }
-        });
+        if(!isConnectedToInternet()){
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.noConnectionContainer2, noConnectionFragment)// Oculta el fragmento al inicio
+                    .commit();
+        }else{
+            mDatabase.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    List<Negocio> nuevosNegocios = new ArrayList<>();
+                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                        Negocio negocio = dataSnapshot1.getValue(Negocio.class);
+                        nuevosNegocios.add(negocio);
+                    }
+                    if (adapter == null) {
+                        adapter = new NegociosAdapter(nuevosNegocios);
+                        recyclerView.setAdapter(adapter);
+                    } else {
+                        adapter.setNegocios(nuevosNegocios);
+                    }
+                }
 
-        searchView.setOnQueryTextListener(this);
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Log.e("ERROR", databaseError.getMessage());
+                }
+            });
+            searchView.setOnQueryTextListener(this);
+        }
+
+
 
     }
 
@@ -100,6 +111,11 @@ public class Negocios extends AppCompatActivity implements SearchView.OnQueryTex
                 // manejar error
             }
         });
+    }
+    public boolean isConnectedToInternet(){
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
 }
