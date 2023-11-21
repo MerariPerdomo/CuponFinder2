@@ -2,9 +2,11 @@ package sv.edu.universidad.cuponfinder2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -14,7 +16,7 @@ import java.util.Locale;
 
 public class Configuracion extends AppCompatActivity {
     Button btnRegresarConfig;
-    Button btnCambiarLenguaje;
+    Button btnCambiarLenguaje, btnAcercaDe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +24,20 @@ public class Configuracion extends AppCompatActivity {
         setContentView(R.layout.activity_configuracion);
 
         btnRegresarConfig=(Button) findViewById(R.id.btnRegresarConfig);
-        btnRegresarConfig.setOnClickListener(v -> onBackPressed());
+        btnAcercaDe=(Button) findViewById(R.id.btnAcercadeConfig);
+        btnAcercaDe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(getApplicationContext(), AcercaDe.class);
+            }
+        });
+        btnRegresarConfig.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         btnCambiarLenguaje = findViewById(R.id.btnCambiarLenguaje);
         btnCambiarLenguaje.setOnClickListener(v -> showChangeLangDialog());
@@ -38,10 +53,10 @@ public class Configuracion extends AppCompatActivity {
         resources.updateConfiguration(config, resources.getDisplayMetrics());
     }
     public void showChangeLangDialog() {
-        String[] listItems = {"English", "Español"};
+        String[] listItems = {"English", "Español", "Português"};
 
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this);
-        builder.setTitle("Choose a language");
+        builder.setTitle(R.string.choose_a_language);
         builder.setSingleChoiceItems(listItems, -1, (dialog, which) -> {
             if (which == 0) {
                 updateLocale("en");
@@ -49,6 +64,9 @@ public class Configuracion extends AppCompatActivity {
             } else if (which == 1) {
                 updateLocale("es");
                 Toast.makeText(getApplicationContext(), "Español establecido", Toast.LENGTH_SHORT).show();
+            }else if (which == 2) {
+                updateLocale("pt");
+                Toast.makeText(getApplicationContext(), "Português estabelecido", Toast.LENGTH_SHORT).show();
             }
             dialog.dismiss();
             recreate(); // Reinicia la actividad para aplicar los cambios de idioma

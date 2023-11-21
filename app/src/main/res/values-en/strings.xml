@@ -119,4 +119,8 @@
     <string name="editPromoCard">Edit</string>
     <string name="stores">Stores</string>
     <string name="log_out">Log out</string>
+    <string name="iniciaPromo">"Begins: "</string>
+    <string name="terminaPromo">"Ends: "</string>
+    <string name="choose_a_language">Choose a language</string>
+    <string name="successful_update">Successful Update</string>
 </resources>

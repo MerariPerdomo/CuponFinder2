@@ -95,4 +95,8 @@
     <string name="editPromoCard">Editar</string>
     <string name="stores">Negocios</string>
     <string name="log_out">Cerrar Sesión</string>
+    <string name="iniciaPromo">"Empieza: "</string>
+    <string name="terminaPromo">"Termina: "</string>
+    <string name="choose_a_language">Elija un idioma</string>
+    <string name="successful_update">Cambios actualizados</string>
 </resources>

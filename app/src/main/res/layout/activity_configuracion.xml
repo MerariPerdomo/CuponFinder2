@@ -48,7 +48,7 @@
         tools:ignore="VisualLintButtonSize" />
 
     <Button
-        android:id="@+id/textView7"
+        android:id="@+id/btnAcercadeConfig"
         style="@style/Widget.Material3.Button.TextButton"
         android:layout_width="0dp"
         android:layout_height="59dp"
