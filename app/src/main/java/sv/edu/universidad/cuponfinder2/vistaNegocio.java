@@ -21,7 +21,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import sv.edu.universidad.cuponfinder2.Model.Negocio;
@@ -62,9 +64,14 @@ public class vistaNegocio extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 List<Promocion> promocions = new ArrayList<>();
+                Date currentDate = new Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd / MM / yyyy");
+                String dateToday = sdf.format(currentDate);
                 for (DataSnapshot dataSnapshot1 : snapshot.getChildren()) {
                     Promocion promotion = dataSnapshot1.getValue(Promocion.class);
-                    promocions.add(promotion);
+                    if (promotion.getFechaInicio().compareTo(dateToday) <= 0 && promotion.getFechaFinal().compareTo(dateToday) >= 0) {
+                        promocions.add(promotion);
+                    }
                 }
                 if (adapter == null) {
                     adapter = new PromocionesAdapter(promocions);

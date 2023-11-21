@@ -17,7 +17,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import sv.edu.universidad.cuponfinder2.Model.Promocion;
@@ -28,7 +30,7 @@ public class promotions extends AppCompatActivity {
     private RecyclerView recyclerView;
     private PromocionesAdapter adapter;
     private List<Promocion> promocions = new ArrayList<>();
-    TextView txtCategoria;
+    private TextView txtCategoria;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,16 +40,24 @@ public class promotions extends AppCompatActivity {
         txtCategoria = findViewById(R.id.categoria);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         String title = getIntent().getStringExtra("title");
-        if(title.isEmpty()) {
-            txtCategoria.setText(title);
-            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("Promociones");
+        txtCategoria.setText(title);
+        search(title);
 
-            mDatabase.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    promocions.clear();
-                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                        Promocion promotion = dataSnapshot1.getValue(Promocion.class);
+    }
+    public void search(String s) {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Promociones");
+        Query query = ref.orderByChild("categoria").startAt(s).endAt(s+"\uf8ff");
+
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<Promocion> promocions = new ArrayList<>();
+                Date currentDate = new Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd / MM / yyyy");
+                String dateToday = sdf.format(currentDate);
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                    Promocion promotion = dataSnapshot1.getValue(Promocion.class);
+                    if (promotion.getFechaInicio().compareTo(dateToday) <= 0 && promotion.getFechaFinal().compareTo(dateToday) >= 0) {
                         promocions.add(promotion);
                     }
                     if (adapter == null) {
@@ -57,30 +67,6 @@ public class promotions extends AppCompatActivity {
                         adapter.notifyDataSetChanged();
                     }
                 }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    Log.e("ERROR", databaseError.getMessage());
-                }
-            });
-        }else{
-            search(title);
-        }
-    }
-    public void search(String s) {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Promociones");
-        Query query = ref.orderByChild("categoria").startAt(s).endAt(s+"\uf8ff");
-
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                List<Promocion> list = new ArrayList<>();
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    Promocion promo = ds.getValue(Promocion.class);
-                    list.add(promo);
-                }
-                PromocionesAdapter adapter = new PromocionesAdapter(list);
-                recyclerView.setAdapter(adapter);
             }
 
             @Override

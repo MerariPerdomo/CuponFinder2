@@ -94,7 +94,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     String dateToday = sdf.format(currentDate);
                     for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                         Promocion promotion = dataSnapshot1.getValue(Promocion.class);
-                        // Compara las cadenas de texto
                         if (promotion.getFechaInicio().compareTo(dateToday) <= 0 && promotion.getFechaFinal().compareTo(dateToday) >= 0) {
                             promocions.add(promotion);
                         }
