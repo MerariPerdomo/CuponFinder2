@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -35,7 +34,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class editar_usuario extends AppCompatActivity {
-    private TextInputEditText nombre, email, negocio, psw, cpsw;
+    private TextInputEditText nombre, negocio;
     private ImageView fotoPerfil, fotoFondo;
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
@@ -56,83 +55,48 @@ public class editar_usuario extends AppCompatActivity {
         fotoPerfil= findViewById(R.id.imgUsuario);
         fotoFondo = findViewById(R.id.imgFondo);
         nombre = findViewById(R.id.txtName);
-        email = findViewById(R.id.txtEmail);
         negocio = findViewById(R.id.txtLocal);
-        psw = findViewById(R.id.txtPs);
-        cpsw = findViewById(R.id.txtPs2);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
         progressDialog = new ProgressDialog(this);
         storageReference= FirebaseStorage.getInstance().getReference();
+        String id = mAuth.getCurrentUser().getUid();
 
         if (mAuth.getCurrentUser() != null) {
-            String id = mAuth.getCurrentUser().getUid();
-            mDatabase.child("Usuarios").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    String name = snapshot.child("nombre").getValue(String.class);
-                    String email1 = snapshot.child("email").getValue(String.class);
-                    String local = snapshot.child("negocio").getValue(String.class);
-
-                    nombre.setText(name);
-                    email.setText(email1);
-                    negocio.setText(local);
-                    Picasso.get().load("perfil/*"+id).into(fotoPerfil);
-                    Picasso.get().load("fondo/*"+id).into(fotoFondo);
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-
+            MostrarDatos(id);
         }
     }
 
-    public void UpdateData(View view) {
-        String contra = psw.getText().toString();
-        String id = mAuth.getCurrentUser().getUid();
-        String correoActual = user.getEmail();
-        String name = Objects.requireNonNull(nombre.getText()).toString();
-        String correo = Objects.requireNonNull(email.getText()).toString();
-        String local = Objects.requireNonNull(negocio.getText()).toString();
+    private void MostrarDatos(String id) {
+        mDatabase.child("Usuarios").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String name = snapshot.child("nombre").getValue(String.class);
+                String local = snapshot.child("negocio").getValue(String.class);
 
-
-        if (!contra.isEmpty()) {
-            if(psw.equals(cpsw)){
-                user.updatePassword(contra)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    String contra = psw.getText().toString();
-                                    Map<String, Object> map = new HashMap<>();
-                                    map.put("password",contra);
-                                    mDatabase.child("Usuarios").child(id).updateChildren(map);
-                                    Toast.makeText(editar_usuario.this, "Contraseña actualizada", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
+                nombre.setText(name);
+                negocio.setText(local);
+                Picasso.get().load("perfil/*"+id).into(fotoPerfil);
+                Picasso.get().load("fondo/*"+id).into(fotoFondo);
             }
-        }
-        if (!correoActual.equals(correo)){
-            Toast.makeText(this, "entro a cambio", Toast.LENGTH_SHORT).show();
-            user.updateEmail(correo)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(editar_usuario.this, "Completo", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-        }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
+
+    public void UpdateData(View view) {
+        String id = mAuth.getCurrentUser().getUid();
+        String name = Objects.requireNonNull(nombre.getText()).toString();
+        String local = Objects.requireNonNull(negocio.getText()).toString();
 
         Map<String, Object> map = new HashMap<>();
         map.put("nombre", name);
-        map.put("email", correo);
         map.put("negocio", local);
         mDatabase.child("Usuarios").child(id).updateChildren(map).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -215,6 +179,11 @@ public class editar_usuario extends AppCompatActivity {
 
     public void Cancelar(View view) {
         Intent intent = new Intent(getApplicationContext(), vistaUsurio.class);
+        startActivity(intent);
+    }
+
+    public void CambiarContra(View view) {
+        Intent intent = new Intent(getApplicationContext(), CambiarContra.class);
         startActivity(intent);
     }
 }

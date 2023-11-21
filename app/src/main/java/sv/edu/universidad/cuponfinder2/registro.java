@@ -85,7 +85,6 @@ public class registro extends AppCompatActivity {
                     Map<String, Object> map = new HashMap<>();
                     map.put("idUser", id);
                     map.put("email",email);
-                    map.put("password", password);
                     map.put("nombre", nombre);
                     map.put("negocio", negocio);
                     mDatabase.child("Usuarios").child(id).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {

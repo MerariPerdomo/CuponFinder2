@@ -11,7 +11,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="230dp"
         android:layout_marginBottom="10dp">
 
         <ImageView
@@ -19,7 +19,10 @@
             android:layout_width="match_parent"
             android:layout_height="180dp"
             android:contentDescription="@string/img_fondo"
+            app:srcCompat="@drawable/fondo_pordefecto"
+            android:scaleType="centerCrop"
             tools:ignore="MissingConstraints,ImageContrastCheck" />
+
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imgUsuario"
@@ -27,20 +30,21 @@
             android:layout_height="100dp"
             android:contentDescription="@string/img_perfil"
             android:scaleType="centerCrop"
+            android:src="@drawable/perfil_estatico"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.162"
+            app:layout_constraintHorizontal_bias="0.147"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
+            app:layout_constraintVertical_bias="0.876"
             tools:ignore="ImageContrastCheck" />
-
 
         <Button
             android:id="@+id/agregarFoto"
             style="?attr/materialButtonOutlinedStyle"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
+            android:backgroundTint="#FFFFFF"
             android:onClick="ActualizarFoto"
             android:padding="10dp"
             android:text="@string/update_photo"
@@ -51,10 +55,9 @@
             app:iconTint="#00BCD4"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.45"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/imgFondo"
-            app:layout_constraintVertical_bias="1.0"
+            app:layout_constraintVertical_bias="0.989"
             app:strokeColor="#03A9F4"
             tools:ignore="MissingConstraints,TextSizeCheck" />
 
@@ -70,6 +73,7 @@
             app:icon="@drawable/ic_edit"
             app:iconSize="15dp"
             app:iconTint="#00BCD4"
+            android:backgroundTint="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -103,7 +107,7 @@
         android:id="@+id/textInputLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
         android:gravity="center_horizontal"
         app:boxStrokeColor="#39A4C6"
         app:boxStrokeErrorColor="@color/design_default_color_error"
@@ -119,66 +123,6 @@
             tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:gravity="center_horizontal"
-        app:boxStrokeColor="#39A4C6"
-        app:boxStrokeErrorColor="@color/design_default_color_error"
-        app:startIconDrawable="@android:drawable/sym_action_email">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/txtInputLabelMail"
-            android:inputType="textEmailAddress"
-            android:textColorHint="#8D6E63"
-            tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:gravity="center_horizontal"
-        app:boxStrokeColor="#39A4C6"
-        app:boxStrokeErrorColor="@color/design_default_color_error"
-        app:endIconMode="password_toggle"
-        app:startIconDrawable="@android:drawable/ic_lock_idle_lock">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtPs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/new_password"
-            android:inputType="textPassword"
-            android:textColorHint="#8D6E63"
-            tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        app:boxStrokeColor="#39A4C6"
-        app:boxStrokeErrorColor="@color/design_default_color_error"
-        app:endIconMode="password_toggle"
-        app:startIconDrawable="@android:drawable/ic_lock_idle_lock">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtPs2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/txtConfirmPassword"
-            android:inputType="textPassword"
-            android:textColorHint="#8D6E63"
-            tools:ignore="VisualLintTextFieldSize,TextContrastCheck" />
-    </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -215,4 +159,16 @@
             app:strokeColor="#BC3B32"
             tools:ignore="ButtonOrder" />
     </LinearLayout>
+    <Button
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/do_you_want_to_change_your_password"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        tools:ignore="VisualLintButtonSize"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/light_blue_900"
+        android:onClick="CambiarContra"/>
 </LinearLayout>

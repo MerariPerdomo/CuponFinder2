@@ -73,4 +73,8 @@ public class login extends AppCompatActivity {
         startActivity(signUp);
     }
 
+    public void OlvidoContra(View view) {
+        Intent intent = new Intent(getApplicationContext(), CambiarContra.class);
+        startActivity(intent);
+    }
 }

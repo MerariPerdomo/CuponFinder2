@@ -100,4 +100,12 @@
     <string name="choose_a_language">Elija un idioma</string>
     <string name="successful_update">Cambios actualizados</string>
     <string name="to">a</string>
+    <string name="edit_user">Edit user</string>
+    <string name="do_you_want_to_change_your_password">do you want to change your password?</string>
+    <string name="restore_password">Restore password</string>
+    <string name="email_reset">Enter your email, you will receive a message where you can reset your password</string>
+    <string name="enter_your_email">Enter your email</string>
+    <string name="could_not_send_password_reset_email">Could not send password reset email</string>
+    <string name="check_your_email">Check your email</string>
+    <string name="please_wait_a_moment">Please wait a moment</string>
 </resources>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".CambiarContra"
+    android:layout_margin="20dp">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:text="@string/email_reset"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/light_blue_900"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:gravity="center_horizontal"
+        app:boxStrokeColor="#39A4C6"
+        app:boxStrokeErrorColor="@color/design_default_color_error"
+        app:startIconDrawable="@android:drawable/sym_action_email">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/txtInputLabelMail"
+            android:inputType="textEmailAddress"
+            android:textColorHint="#8D6E63"
+            tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/button"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginEnd="5dp"
+        android:onClick="Cambiar"
+        android:text="@string/restore_password"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        app:strokeColor="#3F51B5"
+        android:layout_margin="20dp"/>
+
+    <Button
+        style="?attr/materialButtonOutlinedStyle"
+        android:id="@+id/Regresar"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_margin="20dp"
+        android:layout_marginStart="5dp"
+        android:text="@string/cancelEditUser"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        app:icon="@drawable/ic_cancel"
+        app:iconSize="22dp"
+        app:iconTint="#FFF44336"
+        app:strokeColor="#BC3B32"
+        tools:ignore="ButtonOrder" />
+
+</LinearLayout>
