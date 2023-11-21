@@ -1,5 +1,6 @@
 package sv.edu.universidad.cuponfinder2;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.net.Uri;
@@ -17,18 +18,14 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
-import java.util.List;
-
 import sv.edu.universidad.cuponfinder2.Model.Negocio;
 import sv.edu.universidad.cuponfinder2.Model.Promocion;
 
 public class detalle_promo extends AppCompatActivity {
     TextView nombrePromo, nombreLocal, categoria, descripcion, fechaInicio, fechaFin;
     ImageView imgDetallePromo;
-    public List<Promocion> promocions;
     Promocion promo2=new Promocion();
-    private StorageReference storageReference;
-    Negocio negocio=new Negocio();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +57,37 @@ public class detalle_promo extends AppCompatActivity {
                 descripcion.setText(promos.getDescripcion());
                 fechaInicio.setText("Inicia: "+promos.getFechaInicio());
                 fechaFin.setText("Termina: "+promos.getFechaFin());
+
+                // Aquí es donde cargamos la imagen
+                StorageReference promoRef = FirebaseStorage.getInstance().getReference("promocion/*"+ promos.getIdUser() + "" + id);
+
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+                ref.child("Usuarios").orderByChild("idUser").equalTo(promos.getIdUser()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot childSnapshot: snapshot.getChildren()) {
+                            Negocio negocio = childSnapshot.getValue(Negocio.class);
+                            nombreLocal.setText(negocio.getNegocio());
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+                try{
+                    promoRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            String imageUrl2 = uri.toString();
+                            Picasso.get().load(imageUrl2).error(R.drawable.fondo_pordefecto).into(imgDetallePromo);
+                        }
+                    });
+
+                }catch (Exception e){
+                    Picasso.get().load(R.drawable.fondo_pordefecto).into(imgDetallePromo);
+                }
             }
 
             @Override
@@ -67,20 +95,6 @@ public class detalle_promo extends AppCompatActivity {
                 // Manejar error
             }
         });
-
-        StorageReference promoRef = FirebaseStorage.getInstance().getReference("promocion/*"+ negocio.getIdUser() + "" + id);
-
-        try{
-            promoRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                @Override
-                public void onSuccess(Uri uri) {
-                    String imageUrl2 = uri.toString();
-                    Picasso.get().load(imageUrl2).error(R.drawable.fondo_pordefecto).into(imgDetallePromo);
-                }
-            });
-
-        }catch (Exception e){
-            Picasso.get().load(R.drawable.fondo_pordefecto).into(imgDetallePromo);
-        }
     }
 }
+
