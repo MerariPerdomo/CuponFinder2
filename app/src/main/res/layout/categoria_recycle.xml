@@ -21,7 +21,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/restauran_c1" />
+        app:srcCompat="@drawable/restauran_c1"
+        android:contentDescription="@string/imgCat" />
 
     <TextView
         android:id="@+id/NombreCategoria"
@@ -32,7 +33,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:gravity="center_horizontal"
-        android:text="Title"
+        android:text="@string/titleCat"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -40,5 +41,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/PhotoCat"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="TextContrastCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,7 @@
     <Button
         android:id="@+id/btnRegresarConfig"
         style="@style/Widget.Material3.Button.TextButton.Icon"
-        android:layout_width="140dp"
+        android:layout_width="wrap_content"
         android:layout_height="64dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"

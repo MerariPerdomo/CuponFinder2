@@ -24,14 +24,15 @@
                 android:scaleType="centerCrop"
                 android:contentDescription="@string/img_perfil" />
 
-            <Button
-                android:id="@+id/agregarFoto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#3EB4DA"
-                android:onClick="AgregarFoto"
-                android:text="@string/add_photo"
-                android:layout_margin="5dp" />
+        <Button
+            android:id="@+id/agregarFoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:backgroundTint="#3EB4DA"
+            android:onClick="AgregarFoto"
+            android:text="@string/add_photo"
+            tools:ignore="TextContrastCheck" />
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -49,7 +50,8 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/txtNombre_completo"
                 android:inputType="text"
-                android:textColorHint="#8D6E63" />
+                android:textColorHint="#8D6E63"
+                tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -68,7 +70,8 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/txtLocalName"
                 android:inputType="text"
-                android:textColorHint="#8D6E63" />
+                android:textColorHint="#8D6E63"
+                tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -87,7 +90,8 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/txtInputLabelMail"
                 android:inputType="textEmailAddress"
-                android:textColorHint="#8D6E63" />
+                android:textColorHint="#8D6E63"
+                tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -107,7 +111,8 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/txtPasswordInput"
                 android:inputType="textPassword"
-                android:textColorHint="#8D6E63" />
+                android:textColorHint="#8D6E63"
+                tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -126,7 +131,8 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/txtConfirmPassword"
                 android:inputType="textPassword"
-                android:textColorHint="#8D6E63" />
+                android:textColorHint="#8D6E63"
+                tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -135,10 +141,11 @@
             android:layout_height="70dp"
             android:layout_marginTop="15dp"
             android:backgroundTint="#3EB4DA"
+            android:onClick="CreateCount"
             android:text="@string/txtcreate_account"
             android:textColor="@color/white"
             android:textSize="20sp"
-            android:onClick="CreateCount"/>
+            tools:ignore="TextContrastCheck" />
 
     </LinearLayout>
 
@@ -154,6 +161,7 @@
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_anchor="@+id/linearLayout"
-        app:layout_anchorGravity="bottom|center" />
+        app:layout_anchorGravity="bottom|center"
+        tools:ignore="VisualLintButtonSize" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

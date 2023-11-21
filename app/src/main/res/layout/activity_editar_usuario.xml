@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="20dp"
+    android:layout_margin="30dp"
     android:orientation="vertical"
     tools:context=".editar_usuario">
 
@@ -13,12 +13,13 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginBottom="10dp">
+
         <ImageView
+            android:id="@+id/imgFondo"
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            tools:ignore="MissingConstraints"
-            android:contentDescription="Img Fondo"
-            android:id="@+id/imgFondo"/>
+            android:contentDescription="@string/img_fondo"
+            tools:ignore="MissingConstraints,ImageContrastCheck" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imgUsuario"
@@ -31,7 +32,8 @@
             app:layout_constraintHorizontal_bias="0.162"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"/>
+            app:layout_constraintVertical_bias="1.0"
+            tools:ignore="ImageContrastCheck" />
 
 
         <Button
@@ -41,9 +43,9 @@
             android:layout_height="48dp"
             android:onClick="ActualizarFoto"
             android:padding="10dp"
-            android:text="Update photo"
+            android:text="@string/update_photo"
             android:textColor="@color/black"
-            android:textSize="13dp"
+            android:textSize="13sp"
             app:icon="@drawable/ic_edit"
             app:iconSize="15dp"
             app:iconTint="#00BCD4"
@@ -62,9 +64,9 @@
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:onClick="ActualizarFondo"
-            android:text="Update background"
+            android:text="@string/update_background"
             android:textColor="@color/black"
-            android:textSize="13dp"
+            android:textSize="13sp"
             app:icon="@drawable/ic_edit"
             app:iconSize="15dp"
             app:iconTint="#00BCD4"
@@ -93,7 +95,8 @@
             android:layout_height="wrap_content"
             android:hint="@string/txtNombre_completo"
             android:inputType="text"
-            android:textColorHint="#8D6E63" />
+            android:textColorHint="#8D6E63"
+            tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -112,7 +115,8 @@
             android:layout_height="wrap_content"
             android:hint="@string/txtLocalName"
             android:inputType="text"
-            android:textColorHint="#8D6E63" />
+            android:textColorHint="#8D6E63"
+            tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -131,7 +135,8 @@
             android:layout_height="wrap_content"
             android:hint="@string/txtInputLabelMail"
             android:inputType="textEmailAddress"
-            android:textColorHint="#8D6E63" />
+            android:textColorHint="#8D6E63"
+            tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -149,9 +154,10 @@
             android:id="@+id/txtPs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="New password"
+            android:hint="@string/new_password"
             android:inputType="textPassword"
-            android:textColorHint="#8D6E63" />
+            android:textColorHint="#8D6E63"
+            tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -170,14 +176,16 @@
             android:layout_height="wrap_content"
             android:hint="@string/txtConfirmPassword"
             android:inputType="textPassword"
-            android:textColorHint="#8D6E63" />
+            android:textColorHint="#8D6E63"
+            tools:ignore="VisualLintTextFieldSize,TextContrastCheck" />
     </com.google.android.material.textfield.TextInputLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/button"
@@ -185,24 +193,26 @@
             android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
-            android:text="Update"
             android:onClick="UpdateData"
+            android:text="@string/update"
+            android:textColor="@color/black"
             app:icon="@drawable/ic_confirm"
             app:iconSize="22dp"
             app:iconTint="#4CAF50"
-            app:strokeColor="#4CAF50"
-            android:textColor="@color/black"/>
+            app:strokeColor="#4CAF50" />
+
         <Button
             style="?attr/materialButtonOutlinedStyle"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
-            android:onClick="Cancelar"
-            android:text="Cancel"
-            app:icon="@drawable/ic_cancel"
-            app:iconSize = "22dp"
-            app:iconTint ="#FFF44336"
-            app:strokeColor="#BC3B32"
             android:layout_marginStart="5dp"
-            android:textColor="@color/black"/>
+            android:onClick="Cancelar"
+            android:text="@string/cancelEditUser"
+            android:textColor="@color/black"
+            app:icon="@drawable/ic_cancel"
+            app:iconSize="22dp"
+            app:iconTint="#FFF44336"
+            app:strokeColor="#BC3B32"
+            tools:ignore="ButtonOrder" />
     </LinearLayout>
 </LinearLayout>

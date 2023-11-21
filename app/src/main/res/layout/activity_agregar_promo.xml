@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="30dp"
     android:orientation="vertical"
-    android:padding="20dp"
     tools:context=".AgregarPromo">
 
 
@@ -13,174 +13,183 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:text="Add Promotion"
+        android:text="@string/add_promotion"
         android:textAlignment="center"
-        android:textSize="20dp" />
+        android:textSize="20sp" />
 
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center">
-    <ImageView
-        android:id="@+id/imgPromo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:maxHeight="350dp"
-        android:layout_marginTop="10dp"
-        android:contentDescription="@string/img_perfil"
-        android:scaleType="centerCrop" />
+        android:layout_height="wrap_content">
 
-
-        <Button
-            android:id="@+id/agregarFoto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:backgroundTint="#3EB4DA"
-            android:onClick="AgregarFoto"
-            android:text="@string/add_photo" />
-
-        <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:gravity="center_horizontal"
-        app:boxStrokeColor="#39A4C6"
-        app:boxStrokeErrorColor="@color/design_default_color_error"
-        app:endIconMode="clear_text">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtTitle"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Title"
-            android:inputType="text"
-            android:textColorHint="#8D6E63" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:gravity="center"
+            android:orientation="vertical">
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:gravity="center_horizontal"
-        app:boxStrokeColor="#39A4C6"
-        app:boxStrokeErrorColor="@color/design_default_color_error"
-        app:endIconMode="clear_text">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtDescription"
-            android:layout_width="match_parent"
-            android:layout_height="153dp"
-            android:hint="Description"
-            android:inputType="textMultiLine"
-            android:gravity="start|top"
-            android:scrollbarAlwaysDrawVerticalTrack="true"
-            android:textColorHint="#8D6E63" />
-    </com.google.android.material.textfield.TextInputLayout>
+            <ImageView
+                android:id="@+id/imgPromo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:contentDescription="@string/img_perfil"
+                android:maxHeight="350dp"
+                android:scaleType="centerCrop" />
 
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Selector de categorías">
+            <Button
+                android:id="@+id/agregarFoto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:backgroundTint="#3EB4DA"
+                android:onClick="AgregarFoto"
+                android:text="@string/add_photo"
+                tools:ignore="TextContrastCheck" />
 
-        <AutoCompleteTextView
-            android:id="@+id/SpinCategories"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:entries="@array/categories"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center_horizontal"
+                app:boxStrokeColor="#39A4C6"
+                app:boxStrokeErrorColor="@color/design_default_color_error"
+                app:endIconMode="clear_text">
 
-            android:minHeight="48dp"
-            tools:ignore="LabelFor"
-            android:inputType="none"/>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/titlePromotion"
+                    android:inputType="text"
+                    android:textColorHint="#8D6E63"
+                    tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center_horizontal"
+                app:boxStrokeColor="#39A4C6"
+                app:boxStrokeErrorColor="@color/design_default_color_error"
+                app:endIconMode="clear_text">
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:gravity="center_horizontal"
-        app:boxStrokeColor="#39A4C6"
-        app:boxStrokeErrorColor="@color/design_default_color_error">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inicioF"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:focusable="false"
-            android:hint="Start date"
-            android:inputType="date"
-            android:maxLines="1"
-            android:onClick="llamarFecha"
-            android:textColorHint="#8D6E63" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:gravity="center_horizontal"
-        app:boxStrokeColor="#39A4C6"
-        app:boxStrokeErrorColor="@color/design_default_color_error">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/finalF"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:focusable="false"
-            android:hint="End date"
-            android:inputType="date"
-            android:maxLines="1"
-            android:onClick="llamarFecha"
-            android:textColorHint="#8D6E63" />
-    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="153dp"
+                    android:gravity="start|top"
+                    android:hint="@string/description"
+                    android:inputType="textMultiLine"
+                    android:scrollbarAlwaysDrawVerticalTrack="true"
+                    android:textColorHint="#8D6E63"
+                    tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:orientation="horizontal"
-        android:gravity="center">
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/selector_de_categorias">
 
-        <Button
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
-            android:onClick="GuardarPromo"
-            android:text="Confirm"
-            app:icon="@drawable/ic_confirm"
-            app:iconSize="22dp"
-            app:iconTint="#4CAF50"
-            app:strokeColor="#4CAF50"
-            android:textColor="@color/black"/>
-        <Button
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:onClick="Cancelar"
-            android:text="Cancel"
-            app:icon="@drawable/ic_cancel"
-            app:iconSize = "22dp"
-            app:iconTint ="#FFF44336"
-            app:strokeColor="#BC3B32"
-            android:layout_marginStart="5dp"
-            android:textColor="@color/black"/>
-    </LinearLayout>
-</LinearLayout>
-</ScrollView>
+                <AutoCompleteTextView
+                    android:id="@+id/SpinCategories"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/categories"
+
+                    android:inputType="none"
+                    android:minHeight="48dp"
+                    tools:ignore="LabelFor,TextContrastCheck,VisualLintTextFieldSize" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center_horizontal"
+                app:boxStrokeColor="#39A4C6"
+                app:boxStrokeErrorColor="@color/design_default_color_error">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inicioF"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:hint="@string/start_date_addPromo"
+                    android:inputType="date"
+                    android:maxLines="1"
+                    android:onClick="llamarFecha"
+                    android:textColorHint="#8D6E63"
+                    tools:ignore="KeyboardInaccessibleWidget,TextContrastCheck,VisualLintTextFieldSize" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center_horizontal"
+                app:boxStrokeColor="#39A4C6"
+                app:boxStrokeErrorColor="@color/design_default_color_error">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/finalF"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:hint="@string/end_date_AddPromo"
+                    android:inputType="date"
+                    android:maxLines="1"
+                    android:onClick="llamarFecha"
+                    android:textColorHint="#8D6E63"
+                    tools:ignore="KeyboardInaccessibleWidget,TextContrastCheck,VisualLintTextFieldSize" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="143dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:onClick="GuardarPromo"
+                    android:text="@string/confirmAddPromo"
+                    android:textColor="@color/black"
+                    app:icon="@drawable/ic_confirm"
+                    app:iconSize="22dp"
+                    app:iconTint="#4CAF50"
+                    app:strokeColor="#4CAF50" />
+
+                <Button
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="143dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:onClick="Cancelar"
+                    android:text="@string/cancelAddPromo"
+                    android:textColor="@color/black"
+                    app:icon="@drawable/ic_cancel"
+                    app:iconSize="22dp"
+                    app:iconTint="#FFF44336"
+                    app:strokeColor="#BC3B32"
+                    tools:ignore="ButtonOrder" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

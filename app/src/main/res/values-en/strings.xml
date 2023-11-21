@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Cupon Finder</string>
+    <string name="nav_drawer_open">Open navigation drawer</string>
+    <string name="nav_drawer_close">Close navigation drawer</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="about_it">About Us</string>
+    <string name="setting">Setting</string>
+    <string name="exit">Exit</string>
+    <string name="settings">Settings</string>
+    <string name="user">User</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="change_language">Change Language</string>
+    <string name="enable_notifications">Enable Notifications</string>
+    <string name="txtSetting">Settings</string>
+    <string name="txtAbout">About us</string>
+    <string name="appName">Cupon Finder</string>
+    <string name="txtuserName">Username</string>
+    <string name="txtEmail">Email</string>
+    <string name="drawSettings">Dibujo de engranaje</string>
+    <string name="drawInfo">Dibujo de informacion</string>
+    <string name="txtdescriptionLogo">logo</string>
+    <string name="txtContentDescriptionLogo">Logo de aplicacion</string>
+    <string name="txtPasswordInput">Password</string>
+    <string name="txtInputLabelMail">Email</string>
+    <string name="txtButtonlogin">Login</string>
+    <string name="textContraseña">Forgot your password?</string>
+    <string name="Crearcuentatxt">Do not have an account? Sign Up</string>
+    <string name="txtPregunta">Which user do you want to be?</string>
+    <string name="txtbtn1">Salesperson</string>
+    <string name="txtbtn2">Client</string>
+    <string name="txtConfirmPassword">Confirm password</string>
+    <string name="configuracion">Settings</string>
+    <string name="editar_perfil">Edit profile</string>
+    <string name="idioma">Language</string>
+    <string name="cerrar_sesion">Logout</string>
+    <string name="activar_notificaciones" translatable="false">Enable notifications</string>
+    <string name="usuario">User</string>
+    <string name="txtNombre_completo">Full name</string>
+    <string name="txtLocalName">Local Name</string>
+    <string name="txtCuestionAccount">Already have an account?</string>
+    <string name="txtcreate_account">Create Account</string>
+    <string name="title_activity_splash_screen">Cupon Finder</string>
+    <string name="about_us">About Us</string>
+    <string name="img_aboutus" translatable="false">img_aboutUs</string>
+    <string name="version">Version</string>
+    <string name="cupon_finder_1_0_0" translatable="false">Cupon Finder 1.0.0</string>
+    <string name="developed_by">Developed by</string>
+    <string name="karen_andrea_l_pez_maga_a">Karen López</string>
+    <string name="ver_nica_lisseth_mar_n_santos">Verónica Marín </string>
+    <string name="merari_ang_lica_perdomo_figueroa">Merari Perdomo </string>
+    <string name="config">Settings</string>
+    <string name="txtCategoria">Categories</string>
+    <string name="txtHomePromotes">Promotions of the day</string>
+    <string name="edit_promotion">Edit Promotion</string>
+    <string name="promotion_name"> Promotion Name</string>
+    <string name="promotion_price" translatable="false"> Promotion Price</string>
+    <string name="start_date"> Start Date</string>
+    <string name="end_date"> End Date</string>
+    <string name="save"> Save Changes</string>
+    <string name="publicidad_ex">publicity</string>
+    <string name="edit_image">Edit</string>
+    <string name="delete_image">Delete</string>
+    <string name="txtNavPromotions">Promotions</string>
+    <string name="txtPromotions">Promotions</string>
+    <string name="btnAgregarPromotion">Add</string>
+    <string name="description_promotion">Description</string>
+    <string name="txtDescriptionImg" translatable="false">Promotion Image</string>
+    <string name="add_photo">Add photo</string>
+    <string name="img_perfil" translatable="false">Img perfil</string>
+    <string name="img_splashscreen">SplashScreen</string>
+    <string name="imagen_portada" translatable="false">imagen portada</string>
+    <string-array name="categories">
+        <item>Restaurant</item>
+        <item>Market</item>
+        <item>Health</item>
+        <item>Pets</item>
+        <item>Drinks</item>
+        <item>Coffee Shops</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="promotions">Promotions</string>
+    <string name="add_promotion">Add Promotion</string>
+    <string name="titlePromotion">Title</string>
+    <string name="description">Description</string>
+    <string name="selector_de_categorias">Categorys selector</string>
+    <string name="start_date_addPromo">Start date</string>
+    <string name="end_date_AddPromo">End date</string>
+    <string name="confirmAddPromo">Confirm</string>
+    <string name="cancelAddPromo">Cancel</string>
+    <string name="img_detallePromo" translatable="false">DestallePromo</string>
+    <string name="selector_de_categoriasEditarPromo">Selector de categorías</string>
+    <string name="img_fondo" translatable="false">Img Fondo</string>
+    <string name="update_photo">Update photo</string>
+    <string name="update_background">Update background</string>
+    <string name="new_password">New password</string>
+    <string name="update">Update</string>
+    <string name="cancelEditUser">Cancel</string>
+    <string name="RegresarNegocios">Stores</string>
+    <string name="backOtherUsers">Back</string>
+    <string name="OtherUsername">User</string>
+    <string name="Theirpromotions">Promotions</string>
+    <string name="backUser">Back</string>
+    <string name="userView">User</string>
+    <string name="correoUsuario">Correo</string>
+    <string name="my_promotionsUser">My promotions</string>
+    <string name="addPromotionUserView">Add</string>
+    <string name="imgCat" translatable="false">Categoria</string>
+    <string name="titleCat">Title</string>
+    <string name="img_SinInter" translatable="false">Img sin inter</string>
+    <string name="cardNegocios" translatable="false">CardNegocios</string>
+    <string name="store_name">Store name</string>
+    <string name="see_store">See Store</string>
+    <string name="imgPromo" translatable="false">ImgPromo</string>
+    <string name="fotoPromoEditar" translatable="false">FotoPromoEditar</string>
+    <string name="deletePromoCard">Delete</string>
+    <string name="editPromoCard">Edit</string>
+    <string name="stores">Stores</string>
+    <string name="log_out">Log out</string>
+</resources>
