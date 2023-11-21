@@ -1,7 +1,10 @@
 package sv.edu.universidad.cuponfinder2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -25,15 +28,18 @@ public class promotions extends AppCompatActivity {
     private RecyclerView recyclerView;
     private PromocionesAdapter adapter;
     private List<Promocion> promocions = new ArrayList<>();
+    TextView txtCategoria;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_promotions);
         recyclerView = findViewById(R.id.rvPromotiones2);
+        txtCategoria = findViewById(R.id.categoria);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         String title = getIntent().getStringExtra("title");
         if(title.isEmpty()) {
+            txtCategoria.setText(title);
             DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("Promociones");
 
             mDatabase.addValueEventListener(new ValueEventListener() {
@@ -84,4 +90,8 @@ public class promotions extends AppCompatActivity {
         });
     }
 
+    public void Regresar(View view) {
+        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(i);
+    }
 }

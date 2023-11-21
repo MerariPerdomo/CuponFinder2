@@ -1,18 +1,26 @@
 package sv.edu.universidad.cuponfinder2;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,13 +32,20 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Editar_promocion extends AppCompatActivity {
-    Button btnRegresarEditarPromocion;
     private TextView etEditarFechaFinal, etEditaFechaInicio, etTitulo, etDescripcion;
     private DatabaseReference mDatabase;
     private AutoCompleteTextView txtSpinner;
@@ -40,15 +55,17 @@ public class Editar_promocion extends AppCompatActivity {
     private FirebaseFirestore mfirestore;
 
     private StorageReference storageReference;
+    String idPromo, idUser;
     ImageView imgPromo;
+    ProgressDialog progressDialog;
+    SharedPreferences sharedPreferences;
+    Button btnActualizar;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_promocion);
-        btnRegresarEditarPromocion= findViewById(R.id.btnRegresarEditarPromocion);
-        btnRegresarEditarPromocion.setOnClickListener(v -> onBackPressed());
         etTitulo = findViewById(R.id.txtTitulo);
         etDescripcion = findViewById(R.id.txtDescripcion);
         txtSpinner = findViewById(R.id.SpinCategories);
@@ -56,6 +73,9 @@ public class Editar_promocion extends AppCompatActivity {
         etEditarFechaFinal = findViewById(R.id.etEditarFechaFinal);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         imgPromo=findViewById(R.id.imageView6);
+        progressDialog = new ProgressDialog(this);
+        storageReference = FirebaseStorage.getInstance().getReference();
+        sharedPreferences = getSharedPreferences("CuponFinder2", MODE_PRIVATE);
 
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -84,7 +104,8 @@ public class Editar_promocion extends AppCompatActivity {
             materialDatePicker.show(getSupportFragmentManager(), "DATE_PICKER");
             materialDatePicker.addOnPositiveButtonClickListener(selection -> etEditarFechaFinal.setText(materialDatePicker.getHeaderText()));
         });
-        String idPromo = getIntent().getStringExtra("idPromo");
+        idPromo = getIntent().getStringExtra("idPromo");
+        idUser = getIntent().getStringExtra("idUser");
         MostrarPromo(idPromo);
     }
 
@@ -99,7 +120,6 @@ public class Editar_promocion extends AppCompatActivity {
                 String Final = snapshot.child("fechaFinal").getValue(String.class);
                 String categoria = snapshot.child("categoria").getValue(String.class);
                 String idUser = snapshot.child("idUser").getValue(String.class);
-                String idPromo = snapshot.child("idPromo").getValue(String.class);
                 etTitulo.setText(titulo);
                 etDescripcion.setText(descripcion);
                 etEditaFechaInicio.setText(Inicio);
@@ -129,7 +149,6 @@ public class Editar_promocion extends AppCompatActivity {
         });
     }
     public void Actualizar(View view) {
-
         String titulo = etTitulo.getText().toString();
         String categoria = txtSpinner.getText().toString();
         String descripcion =etDescripcion.getText().toString();
@@ -142,19 +161,121 @@ public class Editar_promocion extends AppCompatActivity {
         map.put("fechaInicio", start);
         map.put("fechaFinal", end);
         map.put("titulo", titulo);
-        /*
-        mDatabase.child("Promociones").child(idProm).updateChildren(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+
+        mDatabase.child("Promociones").child(idPromo).updateChildren(map).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
-                Toast.makeText(Editar_promocion.this, "Successful update", Toast.LENGTH_SHORT).show();
+                SharedPreferences sharedPreferences = getSharedPreferences("CuponFinder2", MODE_PRIVATE);
+                String imageBitmapString = sharedPreferences.getString("tempImageBitmap", null);
+                if (imageBitmapString != null) {
+                    Bitmap imageBitmap = stringToBitmap(imageBitmapString);
+                    byte[] data = bitmapToByte(imageBitmap);
+                    StorageReference reference = storageReference.child("promocion/*" + idUser + "" + idPromo);
+                    reference.putBytes(data).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Toast.makeText(Editar_promocion.this, R.string.successful_update, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
-        });*/
-        Intent i = new Intent(getApplicationContext(),vistaUsurio.class);
-        startActivity(i);
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(Editar_promocion.this, "Algo salio mal", Toast.LENGTH_SHORT).show();
+            }
+        });
+           Intent i = new Intent(getApplicationContext(), vistaUsurio.class);
+            startActivity(i);
     }
 
     public void Regresar(View view) {
         Intent i = new Intent(getApplicationContext(),vistaUsurio.class);
         startActivity(i);
+    }
+
+    public void Cancelar(View view) {
+        Intent i = new Intent(getApplicationContext(),vistaUsurio.class);
+        startActivity(i);
+    }
+
+
+    public void AgregarFoto(View view) {
+        Intent i =new Intent(Intent.ACTION_PICK);
+        i.setType("image/*");
+        startActivityForResult(i, COD_SEL_IMAGE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(resultCode == RESULT_OK){
+            if(requestCode == COD_SEL_IMAGE){
+                assert data != null;
+                image_url = data.getData();
+                subirFoto(image_url);
+                Uri selectedImage = data.getData();
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+    public String bitmapToString(Bitmap bitmap){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] b = baos.toByteArray();
+        return Base64.encodeToString(b,Base64.DEFAULT);
+    }
+    public Bitmap stringToBitmap(String encodedString) {
+        try {
+            byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+            return BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+        } catch (Exception e) {
+            e.getMessage();
+            return null;
+        }
+    }
+    public byte[] bitmapToByte(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        return baos.toByteArray();
+    }
+    private void subirFoto(Uri image_url) {
+        try{
+            InputStream imageStream = getContentResolver().openInputStream(image_url);
+            Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+            SharedPreferences sharedPreferences = getSharedPreferences("CuponFinder2", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("tempImageBitmap", bitmapToString(selectedImage));
+            editor.apply();
+            cargarImagen();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), "Error al subir la foto", Toast.LENGTH_SHORT).show();
+        }
+    }
+    public void cargarImagen() {
+        progressDialog.setMessage("Actualizando foto");
+        progressDialog.show();
+        SharedPreferences sharedPreferences = getSharedPreferences("CuponFinder2", MODE_PRIVATE);
+        String imageBitmapString = sharedPreferences.getString("tempImageBitmap", null);
+        if (imageBitmapString != null) {
+            Bitmap imageBitmap = stringToBitmap(imageBitmapString);
+            File tempFile = createTempFile(imageBitmap);
+            Picasso.get().load(tempFile).into(imgPromo);
+            progressDialog.dismiss();
+        }
+    }
+
+    public File createTempFile(Bitmap bitmap) {
+        File tempFile;
+        try {
+            tempFile = File.createTempFile("tempImage", ".png", getCacheDir());
+            tempFile.deleteOnExit();
+            FileOutputStream fos = new FileOutputStream(tempFile);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            fos.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return tempFile;
     }
 }

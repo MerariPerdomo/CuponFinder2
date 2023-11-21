@@ -30,6 +30,7 @@
             app:icon="@drawable/ic_regresar"
             app:iconSize="30dp"
             app:iconTint="@color/light_blue_900"
+            android:onClick="Regresar"
             app:layout_constraintBottom_toTopOf="@id/guideline13"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -42,20 +43,21 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.08" />
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchView"
+        <TextView
+            android:id="@+id/categoria"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginTop="12dp"
-            android:background="@drawable/fondo_search"
-            app:iconifiedByDefault="false"
+            android:text="Categoria"
+            android:textSize="24dp"
+            android:textColor="@color/light_blue_900"
+            android:gravity="center"
             app:layout_constraintBottom_toTopOf="@+id/guideline23"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.073"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline13"
-            app:layout_constraintVertical_bias="0.0"
-            app:queryHint="Search..." />
+            app:layout_constraintVertical_bias="0.0" />
 
 
         <androidx.constraintlayout.widget.Guideline

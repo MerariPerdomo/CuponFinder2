@@ -1,82 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center|start|top"
-    android:padding="15dp"
-    tools:context=".Editar_promocion">
+    android:padding="25dp"
+    tools:context=".Editar_promocion"
+    android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnRegresarEditarPromocion"
-        style="@style/Widget.Material3.Button.TextButton.Icon"
-        android:layout_width="209dp"
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_marginBottom="32dp"
-        app:icon="@drawable/ic_regresar"
+        android:gravity="center"
         android:text="@string/edit_promotion"
         android:textColor="@color/light_blue_600"
         android:textSize="20sp"
-        tools:ignore="MissingConstraints"
-        android:onClick="Regresar"/>
+        tools:ignore="MissingConstraints" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="-19dp"
-        tools:layout_editor_absoluteY="-329dp">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/imageView6"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
+                android:layout_width="wrap_content"
+                android:layout_height="300dp"
+                android:layout_gravity="center"
                 android:contentDescription="@string/publicidad_ex"
-                android:maxHeight="400dp"
                 tools:ignore="MissingConstraints" />
-            <!--    app:layout_constraintBottom_toTopOf="@+id/guideline12"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.494"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"-->
 
- <!--   <LinearLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_margin="10dp">
-                <Button
-                    android:id="@+id/button5"
-                    android:layout_width="120dp"
-                    android:layout_height="56dp"
-                    android:backgroundTint="@color/rojo"
-                    android:text="@string/delete_image"
-                    android:textColor="@color/celeste"
-                    android:layout_marginEnd="15dp"/>
 
                 <Button
                     android:id="@+id/button4"
-                    android:layout_width="117dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="53dp"
-                    android:backgroundTint="@color/amarillo"
+                    android:backgroundTint="@color/amarilloClaro"
                     android:text="@string/edit_image"
-                    android:textColor="@color/verdeOscuro"
-                    android:layout_marginStart="15dp"
+                    android:textColor="@color/black"
+                    app:icon="@drawable/ic_edit"
+                    app:iconTint = "@color/rojo"
+                    android:onClick="AgregarFoto"
                     tools:ignore="MissingConstraints" />
-    </LinearLayout> -->
+    </LinearLayout>
 
             <EditText
                 android:id="@+id/txtTitulo"
-                android:layout_width="300dp"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:drawableStart="@drawable/ic_canasta"
                 android:drawableTint="@color/verde_lima"
@@ -88,7 +69,7 @@
                 android:layout_margin="10dp"/>
             <EditText
                 android:id="@+id/txtDescripcion"
-                android:layout_width="301dp"
+                android:layout_width="match_parent"
                 android:layout_height="153dp"
                 android:layout_marginStart="41dp"
                 android:layout_marginTop="7dp"
@@ -116,7 +97,7 @@
 
                 <AutoCompleteTextView
                     android:id="@+id/SpinCategories"
-                    android:layout_width="300dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:entries="@array/categories"
                     android:minHeight="48dp"
@@ -130,7 +111,7 @@
             <TextView
                 android:id="@+id/etEditarFechaInicio"
                 style="@style/Widget.AppCompat.PopupMenu"
-                android:layout_width="300dp"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="#2303FF0E"
                 android:clickable="true"
@@ -148,7 +129,7 @@
             <TextView
                 android:id="@+id/etEditarFechaFinal"
                 style="@style/Widget.AppCompat.PopupMenu"
-                android:layout_width="300dp"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="#2303FF0E"
                 android:clickable="true"
@@ -164,21 +145,41 @@
                 app:drawableTint="@color/verde_lima"
                 tools:ignore="TextViewEdits,TextContrastCheck" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"
+                android:gravity="center">
 
-            <Button
-                android:id="@+id/button6"
-                android:layout_width="239dp"
-                android:layout_height="61dp"
-                android:layout_margin="10dp"
-                android:backgroundTint="@color/azul_brillante"
-                android:onClick="Actualizar"
-                android:text="@string/save"
-                android:textColor="@color/white"
-                android:textSize="20dp"
-                tools:ignore="TextContrastCheck,TextSizeCheck" />
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:text="Update"
+                    android:onClick="Actualizar"
+                    app:icon="@drawable/ic_confirm"
+                    app:iconSize="22dp"
+                    app:iconTint="#FFFFFF"
+                    android:backgroundTint="#59AE5C"
+                    android:textColor="#FFFFFF"/>
+                <Button
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="Cancelar"
+                    android:text="Cancel"
+                    app:icon="@drawable/ic_cancel"
+                    app:iconSize = "22dp"
+                    app:iconTint="#FFFFFF"
+                    android:backgroundTint="#F45C51"
+                    android:layout_marginStart="5dp"
+                    android:textColor="#FFFFFF"/>
+            </LinearLayout>
 
         </LinearLayout>
 
     </ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

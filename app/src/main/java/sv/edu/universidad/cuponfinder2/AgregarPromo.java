@@ -111,7 +111,7 @@ public class AgregarPromo extends AppCompatActivity {
         String titulo = Objects.requireNonNull(txtTitulo.getText()).toString();
         String descripcion = Objects.requireNonNull(txtDescripcion.getText()).toString();
         String fechaInicio = txtInicio.getText().toString();
-        String fechaFinal = txtInicio.getText().toString();
+        String fechaFinal = txtFinal.getText().toString();
 
         if (titulo.isEmpty() && descripcion.isEmpty() && categoria.isEmpty() &&
                 fechaInicio.isEmpty() && fechaFinal.isEmpty()) {

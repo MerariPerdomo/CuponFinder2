@@ -156,8 +156,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         /*-------------Seccion de Categorias -------------*/
         recyclerViewCategorias();
-
-
     }
 
 
@@ -198,8 +196,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawerLayout.closeDrawers();
             return true;
         } else if (item.getItemId() == R.id.nav_profile) {
-            Intent intent = new Intent(getApplicationContext(), vistaUsurio.class);
-            startActivity(intent);
+            if (mAuth.getCurrentUser() != null){
+                Intent intent = new Intent(getApplicationContext(), vistaUsurio.class);
+                startActivity(intent);
+            }else {
+                Intent intent = new Intent(getApplicationContext(), login.class);
+                startActivity(intent);
+            }
             drawerLayout.closeDrawers();
             return true;
         }else if (item.getItemId() == R.id.nav_acerca) {

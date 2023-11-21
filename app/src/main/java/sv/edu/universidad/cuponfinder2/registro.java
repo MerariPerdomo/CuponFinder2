@@ -1,27 +1,21 @@
 package sv.edu.universidad.cuponfinder2;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import com.google.firebase.firestore.DocumentSnapshot;
-
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.view.Gravity;
+import android.util.Base64;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.signin.internal.Storage;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -29,10 +23,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -44,25 +36,20 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import android.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class registro extends AppCompatActivity {
 
     private TextInputEditText txtEmail, txtNombre, txtNegocio, txtContra, txtContra2;
     private ImageView perfil;
-    private Button agregar;
+
     FirebaseAuth mAuth;
     DatabaseReference mDatabase;
     StorageReference storageReference;
-    private FirebaseFirestore mfirestore;
     String storage_path = "perfil/*";
-    private static final int COD_SEL_STORAGE =200;
     private static final int COD_SEL_IMAGE =300;
     private Uri image_url;
-    String photo = "photo";
     ProgressDialog progressDialog;
     //Valores a registrar
     private String nombre ="";
@@ -83,9 +70,7 @@ public class registro extends AppCompatActivity {
         txtContra = findViewById(R.id.txtPs);
         txtContra2 = findViewById(R.id.txtPs2);
         storageReference= FirebaseStorage.getInstance().getReference();
-        mfirestore = FirebaseFirestore.getInstance();
         progressDialog = new ProgressDialog(this);
-        agregar = findViewById(R.id.agregarFoto);
         perfil=findViewById(R.id.imgUsuario);
 
     }
@@ -124,7 +109,6 @@ public class registro extends AppCompatActivity {
                             @Override
                             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                                Toast.makeText(registro.this, "Bienvenido", Toast.LENGTH_SHORT).show();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -182,7 +166,7 @@ public class registro extends AppCompatActivity {
             if(requestCode == COD_SEL_IMAGE){
                 image_url = data.getData();
                 subirFoto(image_url);
-                Uri selectedImage = data.getData();
+                data.getData();
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -196,8 +180,7 @@ public class registro extends AppCompatActivity {
     public Bitmap stringToBitmap(String encodedString) {
         try {
             byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
-            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
-            return bitmap;
+            return BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
         } catch (Exception e) {
             e.getMessage();
             return null;
@@ -236,7 +219,7 @@ public class registro extends AppCompatActivity {
     }
 
     public File createTempFile(Bitmap bitmap) {
-        File tempFile = null;
+        File tempFile;
         try {
             tempFile = File.createTempFile("tempImage", ".png", getCacheDir());
             tempFile.deleteOnExit();

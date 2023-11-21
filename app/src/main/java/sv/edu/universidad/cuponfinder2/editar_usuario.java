@@ -40,7 +40,6 @@ public class editar_usuario extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
     private FirebaseUser user;
-    private static final int COD_SEL_STORAGE = 200;
     private static final int COD_SEL_IMAGE = 300;
     private Uri image_url;
     private FirebaseFirestore mfirestore;

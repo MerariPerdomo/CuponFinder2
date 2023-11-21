@@ -87,6 +87,7 @@ public class MypromoAdaptor extends RecyclerView.Adapter<MypromoAdaptor.MypromoH
         holder.btnEditar.setOnClickListener(v -> {
             Intent i = new Intent(v.getContext(), Editar_promocion.class);
             i.putExtra("idPromo", idPromo);
+            i.putExtra("idUser", idUser);
             v.getContext().startActivity(i);
         });
         holder.btnBorrar.setOnClickListener(new View.OnClickListener() {
