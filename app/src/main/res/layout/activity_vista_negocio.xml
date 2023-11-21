@@ -93,10 +93,17 @@
                     android:text="@string/Theirpromotions"
                     android:textSize="22sp" />
 
+                <FrameLayout
+                    android:id="@+id/noConnectionContainer3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvPromo"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="wrap_content" />
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

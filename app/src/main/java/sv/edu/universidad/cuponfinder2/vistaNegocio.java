@@ -1,5 +1,8 @@
 package sv.edu.universidad.cuponfinder2;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
@@ -31,6 +34,7 @@ import sv.edu.universidad.cuponfinder2.Model.Promocion;
 
 public class vistaNegocio extends AppCompatActivity {
     private TextView negocio;
+    private noConexion noConnectionFragment;
     private ImageView portada, perfil;
     private StorageReference storageReference;
     private Button regresar;
@@ -52,11 +56,18 @@ public class vistaNegocio extends AppCompatActivity {
         recyclerView = findViewById(R.id.rvPromo);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         mDatabase = FirebaseDatabase.getInstance().getReference("Promociones");
+        noConnectionFragment = new noConexion();
 
 
-        String id = getIntent().getStringExtra("id");
-        MostrarPromos(id);
-        ObtenerUsuario(id);
+        if(!isConnectedToInternet()){
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.noConnectionContainer3, noConnectionFragment)// Oculta el fragmento al inicio
+                    .commit();
+        }else{
+            String id = getIntent().getStringExtra("id");
+            MostrarPromos(id);
+            ObtenerUsuario(id);
+        }
 
     }
     public void MostrarPromos(String id){
@@ -119,5 +130,10 @@ public class vistaNegocio extends AppCompatActivity {
                 Picasso.get().load(imageUrl).into(portada);
             }
         });
+    }
+    public boolean isConnectedToInternet(){
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }

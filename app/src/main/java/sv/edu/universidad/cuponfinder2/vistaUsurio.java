@@ -1,5 +1,8 @@
 package sv.edu.universidad.cuponfinder2;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -36,6 +39,7 @@ public class vistaUsurio extends AppCompatActivity {
     private FirebaseAuth mAuth;
     StorageReference storageReference;
     private DatabaseReference mDatabase;
+    private noConexion noConnectionFragment;
     private RecyclerView.Adapter adapter;
     private RecyclerView recyclerViewListCategorias, recyclerViewListPromo;
     private List<Promocion> promocions = new ArrayList<>();
@@ -57,14 +61,22 @@ public class vistaUsurio extends AppCompatActivity {
         recyclerViewListPromo=findViewById(R.id.rvPromosUser);
         recyclerViewListPromo.setLayoutManager(new LinearLayoutManager(this));
         mDatabase = FirebaseDatabase.getInstance().getReference("Promociones");
+        noConnectionFragment = new noConexion();
 
-        if (mAuth.getCurrentUser() != null) {
-            String id = mAuth.getCurrentUser().getUid();
-            ObtenerUsuario(id);
-            MostrarPromos(id);
-        } else {
-            nombreUsuario.setText("");
-            email.setText("");
+
+        if(!isConnectedToInternet()){
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.noConnectionContainer5, noConnectionFragment)// Oculta el fragmento al inicio
+                    .commit();
+        }else{
+            if (mAuth.getCurrentUser() != null) {
+                String id = mAuth.getCurrentUser().getUid();
+                ObtenerUsuario(id);
+                MostrarPromos(id);
+            } else {
+                nombreUsuario.setText("");
+                email.setText("");
+            }
         }
 
     }
@@ -139,5 +151,10 @@ public class vistaUsurio extends AppCompatActivity {
                 Picasso.get().load(imageUrl).into(portadaFoto);
             }
         });
+    }
+    public boolean isConnectedToInternet(){
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }
