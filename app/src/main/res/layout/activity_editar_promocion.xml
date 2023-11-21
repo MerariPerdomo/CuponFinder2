@@ -31,51 +31,46 @@
             <ImageView
                 android:id="@+id/imageView6"
                 android:layout_width="wrap_content"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:contentDescription="@string/publicidad_ex"
+                android:contentDescription="@string/publicidad_ex" />
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="wrap_content"
+                android:layout_height="53dp"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/amarilloClaro"
+                android:onClick="AgregarFoto"
+                android:text="@string/edit_image"
+                android:textColor="@color/black"
+                app:icon="@drawable/ic_edit"
+                app:iconTint="@color/rojo"
                 tools:ignore="MissingConstraints" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_margin="10dp">
-
-                <Button
-                    android:id="@+id/button4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="53dp"
-                    android:backgroundTint="@color/amarilloClaro"
-                    android:text="@string/edit_image"
-                    android:textColor="@color/black"
-                    app:icon="@drawable/ic_edit"
-                    app:iconTint = "@color/rojo"
-                    android:onClick="AgregarFoto"
-                    tools:ignore="MissingConstraints" />
-    </LinearLayout>
 
             <EditText
                 android:id="@+id/txtTitulo"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_margin="10dp"
                 android:drawableStart="@drawable/ic_canasta"
                 android:drawableTint="@color/verde_lima"
                 android:ems="10"
                 android:hint="@string/promotion_name"
                 android:importantForAutofill="no"
                 android:inputType="text"
-                tools:ignore="TextContrastCheck"
-                android:layout_margin="10dp"/>
+                tools:ignore="TextContrastCheck" />
+
             <EditText
                 android:id="@+id/txtDescripcion"
                 android:layout_width="match_parent"
                 android:layout_height="153dp"
+                android:layout_margin="10dp"
                 android:layout_marginStart="41dp"
                 android:layout_marginTop="7dp"
                 android:layout_marginEnd="40dp"
                 android:layout_marginBottom="19dp"
-                android:padding="10dp"
                 android:autofillHints=""
                 android:background="#FFFCE4"
                 android:ems="10"
@@ -83,11 +78,12 @@
                 android:gravity="start|top"
                 android:hint="@string/description_promotion"
                 android:inputType="textMultiLine"
+                android:padding="10dp"
                 android:scrollbarAlwaysDrawVerticalTrack="true"
                 android:scrollbarSize="10dp"
                 android:scrollbarStyle="insideInset"
-                android:layout_margin="10dp"
                 tools:ignore="TextContrastCheck" />
+
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
@@ -99,83 +95,102 @@
                     android:id="@+id/SpinCategories"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
                     android:entries="@array/categories"
+                    android:inputType="none"
                     android:minHeight="48dp"
-                  android:layout_margin="10dp"
                     android:textSize="18sp"
-                    tools:ignore="LabelFor"
-                    android:inputType="none"/>
+                    tools:ignore="LabelFor" />
 
             </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center_horizontal"
+                app:boxStrokeColor="#39A4C6"
+                app:boxStrokeErrorColor="@color/design_default_color_error">
 
-            <TextView
-                android:id="@+id/etEditarFechaInicio"
-                style="@style/Widget.AppCompat.PopupMenu"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etEditarFechaInicio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:hint="@string/start_date_addPromo"
+                    android:inputType="date"
+                    android:maxLines="1"
+                    android:onClick="llamarFecha"
+                    android:textColorHint="#8D6E63"
+                    android:layout_margin="10dp"
+                    android:textSize="20sp"
+                    app:drawableStartCompat="@drawable/ic_calendar"
+                    app:drawableTint="@color/verde_lima"
+                    android:background="#2303FF0E"
+                    tools:ignore="KeyboardInaccessibleWidget,TextContrastCheck,VisualLintTextFieldSize" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="#2303FF0E"
-                android:clickable="true"
-                android:ems="10"
-                android:focusable="true"
-                android:hint="@string/start_date"
-                android:importantForAutofill="no"
-                android:inputType="date"
-                android:padding="10dp"
-                android:textSize="20sp"
-                android:layout_margin="10dp"
-                app:drawableStartCompat="@drawable/ic_calendar"
-                app:drawableTint="@color/verde_lima"
-                tools:ignore="TextViewEdits,TextContrastCheck" />
-            <TextView
-                android:id="@+id/etEditarFechaFinal"
-                style="@style/Widget.AppCompat.PopupMenu"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="#2303FF0E"
-                android:clickable="true"
-                android:ems="10"
-                android:focusable="true"
-                android:hint="@string/end_date"
-                android:importantForAutofill="no"
-                android:inputType="date"
-                android:padding="10dp"
-                android:textSize="20sp"
-                android:layout_margin="10dp"
-                app:drawableStartCompat="@drawable/ic_calendar"
-                app:drawableTint="@color/verde_lima"
-                tools:ignore="TextViewEdits,TextContrastCheck" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center_horizontal"
+                app:boxStrokeColor="#39A4C6"
+                app:boxStrokeErrorColor="@color/design_default_color_error">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etEditarFechaFinal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:hint="@string/end_date"
+                    android:inputType="date"
+                    android:maxLines="1"
+                    android:onClick="llamarFecha"
+                    android:textColorHint="#8D6E63"
+                    android:layout_margin="10dp"
+                    android:textSize="20sp"
+                    app:drawableStartCompat="@drawable/ic_calendar"
+                    app:drawableTint="@color/verde_lima"
+                    android:background="#2303FF0E"
+                    tools:ignore="KeyboardInaccessibleWidget,TextContrastCheck,VisualLintTextFieldSize" />
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:orientation="horizontal"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/button"
                     android:layout_width="160dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="5dp"
-                    android:text="Update"
+                    android:backgroundTint="#59AE5C"
                     android:onClick="Actualizar"
+                    android:text="Update"
+                    android:textColor="#FFFFFF"
                     app:icon="@drawable/ic_confirm"
                     app:iconSize="22dp"
-                    app:iconTint="#FFFFFF"
-                    android:backgroundTint="#59AE5C"
-                    android:textColor="#FFFFFF"/>
+                    app:iconTint="#FFFFFF" />
+
                 <Button
                     style="?attr/materialButtonOutlinedStyle"
                     android:layout_width="160dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:backgroundTint="#F45C51"
                     android:onClick="Cancelar"
                     android:text="Cancel"
+                    android:textColor="#FFFFFF"
                     app:icon="@drawable/ic_cancel"
-                    app:iconSize = "22dp"
-                    app:iconTint="#FFFFFF"
-                    android:backgroundTint="#F45C51"
-                    android:layout_marginStart="5dp"
-                    android:textColor="#FFFFFF"/>
+                    app:iconSize="22dp"
+                    app:iconTint="#FFFFFF" />
             </LinearLayout>
 
         </LinearLayout>

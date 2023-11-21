@@ -1,5 +1,7 @@
 package sv.edu.universidad.cuponfinder2;
 
+import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +25,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -43,10 +46,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
+
 
 public class Editar_promocion extends AppCompatActivity {
-    private TextView etEditarFechaFinal, etEditaFechaInicio, etTitulo, etDescripcion;
+    private TextView  etTitulo, etDescripcion;
+    private TextInputEditText etEditarFechaFinal, etEditaFechaInicio;
     private DatabaseReference mDatabase;
     private AutoCompleteTextView txtSpinner;
     private FirebaseAuth mAuth;
@@ -62,6 +66,7 @@ public class Editar_promocion extends AppCompatActivity {
     Button btnActualizar;
 
 
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,27 +88,7 @@ public class Editar_promocion extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         txtSpinner.setAdapter(adapter);
 
-        /*DATE PICKER*/
-        etEditarFechaFinal= findViewById(R.id.etEditarFechaFinal);
-        etEditaFechaInicio= findViewById(R.id.etEditarFechaInicio);
 
-       etEditaFechaInicio.setOnClickListener(v -> {
-            MaterialDatePicker.Builder<Long> builder = MaterialDatePicker.Builder.datePicker();
-            builder.setTitleText("Seleccione la fecha de inicio de su promocion");
-            final MaterialDatePicker<Long> materialDatePicker = builder.build();
-
-            materialDatePicker.show(getSupportFragmentManager(), "DATE_PICKER");
-            materialDatePicker.addOnPositiveButtonClickListener(selection -> etEditaFechaInicio.setText(materialDatePicker.getHeaderText()));
-
-        });
-        etEditarFechaFinal.setOnClickListener(v -> {
-            MaterialDatePicker.Builder<Long> builder = MaterialDatePicker.Builder.datePicker();
-            builder.setTitleText("Seleccione la fecha de finalizacion de su promocion");
-            final MaterialDatePicker<Long> materialDatePicker = builder.build();
-
-            materialDatePicker.show(getSupportFragmentManager(), "DATE_PICKER");
-            materialDatePicker.addOnPositiveButtonClickListener(selection -> etEditarFechaFinal.setText(materialDatePicker.getHeaderText()));
-        });
         idPromo = getIntent().getStringExtra("idPromo");
         idUser = getIntent().getStringExtra("idUser");
         MostrarPromo(idPromo);
@@ -175,6 +160,8 @@ public class Editar_promocion extends AppCompatActivity {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             Toast.makeText(Editar_promocion.this, R.string.successful_update, Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(getApplicationContext(), vistaUsurio.class);
+                            startActivity(i);
                         }
                     });
                 }
@@ -182,11 +169,32 @@ public class Editar_promocion extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(Editar_promocion.this, "Algo salio mal", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Editar_promocion.this, "Error", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(getApplicationContext(), vistaUsurio.class);
+                startActivity(i);
             }
         });
-           Intent i = new Intent(getApplicationContext(), vistaUsurio.class);
-            startActivity(i);
+    }
+    public void llamarFecha(View view) {
+        if (view.getId()==R.id.etEditarFechaInicio){
+            showDatePickerDialog(etEditaFechaInicio);
+        }else{
+            showDatePickerDialog(etEditarFechaFinal);
+        }
+    }
+
+    private void showDatePickerDialog(final TextInputEditText editText) {
+        DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int day) {
+                final String selectedDate = day + " / " + (month+1) + " / " + year;
+                editText.setText(selectedDate);
+            }
+        });
+        newFragment.show(this.getSupportFragmentManager(), "datePicker");
+    }
+    private String twoDigits(int n) {
+        return (n<=9) ? ("0"+n) : String.valueOf(n);
     }
 
     public void Regresar(View view) {
