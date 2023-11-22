@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="20dp"
+    android:layout_marginTop="0dp"
+    android:background="#00C1FE"
+    android:backgroundTint="#00C1FE"
     tools:context=".login">
 
 
@@ -12,18 +14,18 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="670dp"
+        android:layout_margin="40dp"
         android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:padding="50dp">
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/imageView3"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
+            android:layout_width="321dp"
+            android:layout_height="280dp"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="70dp"
+            android:layout_margin="10dp"
             android:contentDescription="@string/txtContentDescriptionLogo"
-            app:srcCompat="@drawable/logoapp"
+            app:srcCompat="@drawable/logo_nombre"
             tools:ignore="ImageContrastCheck" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -40,6 +42,8 @@
                 android:id="@+id/txtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#FFFFFF"
+                android:backgroundTint="#FFFFFF"
                 android:hint="@string/txtInputLabelMail"
                 android:inputType="textEmailAddress"
                 android:textColorHint="#8D6E63"
@@ -60,6 +64,8 @@
                 android:id="@+id/txtPssw"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:backgroundTint="#FFFFFF"
                 android:hint="@string/txtPasswordInput"
                 android:inputType="textPassword"
                 android:textColorHint="#8D6E63"
@@ -72,25 +78,25 @@
             android:layout_width="232dp"
             android:layout_height="70dp"
             android:layout_marginTop="15dp"
-            android:backgroundTint="#3EB4DA"
+            android:backgroundTint="@color/amarillo"
             android:text="@string/txtButtonlogin"
-            android:textColor="@color/white"
+            android:textColor="@color/verdeOscuro"
             android:textSize="20sp"
             tools:ignore="TextContrastCheck" />
 
 
         <Button
             style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="match_parent"
-            android:layout_height="41dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:onClick="OlvidoContra"
             android:text="@string/textContraseña"
             android:textAlignment="center"
+            android:textColor="@color/verdeOscuro"
             android:textStyle="bold"
-            tools:ignore="VisualLintButtonSize"
-            android:onClick="OlvidoContra"/>
-<!--            android:textColor="@color/black"-->
-
+            tools:ignore="VisualLintButtonSize" />
+        <!--            android:textColor="@color/black"-->
 
 
     </LinearLayout>
@@ -104,11 +110,12 @@
         android:onClick="ViewSignUp"
         android:text="@string/Crearcuentatxt"
         android:textAlignment="center"
+        android:textColor="@color/light_blue_900"
         android:textStyle="bold"
         app:layout_anchor="@+id/linearLayout"
         app:layout_anchorGravity="bottom|center"
         tools:ignore="VisualLintButtonSize" />
-<!--        android:textColor="@color/black"-->
+    <!--        android:textColor="@color/black"-->
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
