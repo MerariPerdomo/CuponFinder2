@@ -185,29 +185,6 @@ public class editar_usuario extends AppCompatActivity {
 //    }
 
     private void subirFoto(Uri image_url, String url) {
-//        String rute_storage_photo = url + mAuth.getUid();
-//        StorageReference reference = storageReference.child(rute_storage_photo);
-//        reference.putFile(image_url).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//            @Override
-//            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-//                while (!uriTask.isSuccessful());
-//                if (uriTask.isSuccessful()){
-//                    uriTask.addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                        @Override
-//                        public void onSuccess(Uri uri) {
-//
-//                        }
-//                    });
-//                }
-//            }
-//        }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//                progressDialog.dismiss();
-//                Toast.makeText(getApplicationContext(), "Error al cargar foto", Toast.LENGTH_SHORT).show();
-//            }
-//        });
         String id = mAuth.getCurrentUser().getUid();
         StorageReference reference = storageReference.child(url + id);
         UploadTask uploadTask = reference.putFile(image_url);

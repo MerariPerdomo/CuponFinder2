@@ -57,6 +57,7 @@
         android:text="@string/about_us"
         android:textColor="@color/verdeOscuro"
         android:textSize="20sp"
+        android:onClick="AboutUs"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

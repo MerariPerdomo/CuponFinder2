@@ -28,7 +28,8 @@ public class Configuracion extends AppCompatActivity {
         btnAcercaDe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(getApplicationContext(), AcercaDe.class);
+                Intent i =new Intent(getApplicationContext(), AcercaDe.class);
+                startActivity(i);
             }
         });
         btnRegresarConfig.setOnClickListener(new View.OnClickListener() {
