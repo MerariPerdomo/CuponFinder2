@@ -13,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.view.menu.MenuView;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -32,10 +34,12 @@ import sv.edu.universidad.cuponfinder2.Editar_promocion;
 import sv.edu.universidad.cuponfinder2.Model.Negocio;
 import sv.edu.universidad.cuponfinder2.Model.Promocion;
 import sv.edu.universidad.cuponfinder2.R;
+import sv.edu.universidad.cuponfinder2.detalle_promo;
 import sv.edu.universidad.cuponfinder2.vistaUsurio;
 
 public class MypromoAdaptor extends RecyclerView.Adapter<MypromoAdaptor.MypromoHolder> {
     public List<Promocion> promocions;
+    CardView layoutPromo2;
     public MypromoAdaptor(List<Promocion> promocions) {
         this.promocions = promocions;
     }
@@ -53,6 +57,15 @@ public class MypromoAdaptor extends RecyclerView.Adapter<MypromoAdaptor.MypromoH
         holder.txtTituloPromo.setText(promocion.getTitulo());
         holder.txtInicio.setText(promocion.getFechaInicio());
         holder.txtFin.setText(promocion.getFechaFinal());
+        holder.layoutPromo2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String idPromo = promocion.getIdPromo();
+                Intent i = new Intent(v.getContext(), detalle_promo.class);
+                i.putExtra("id", idPromo);
+                v.getContext().startActivity(i);
+            }
+        });
         String idPromo = promocion.getIdPromo();
         String idUser = promocion.getIdUser();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
@@ -143,6 +156,7 @@ public class MypromoAdaptor extends RecyclerView.Adapter<MypromoAdaptor.MypromoH
         Button btnEditar, btnBorrar;
         TextView txtTituloPromo, txtTitleLocalName, txtInicio, txtFin;
         ImageView img_fotopromo;
+        CardView layoutPromo2;
 
         public MypromoHolder(@NonNull View itemView) {
             super(itemView);
@@ -153,6 +167,7 @@ public class MypromoAdaptor extends RecyclerView.Adapter<MypromoAdaptor.MypromoH
             img_fotopromo = itemView.findViewById(R.id.img_fotopromo);
             btnEditar = itemView.findViewById(R.id.btnEditarPromo);
             btnBorrar = itemView.findViewById(R.id.btnEliminarPromo);
+            layoutPromo2= itemView.findViewById(R.id.layoutPromo2);
         }
     }
 }
