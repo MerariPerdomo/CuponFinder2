@@ -34,18 +34,6 @@ public class login extends AppCompatActivity {
         btnRegister=findViewById(R.id.btnNoCount);
         mAuth = FirebaseAuth.getInstance();
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                email = txtEmail.getText().toString();
-                password = txtPassword.getText().toString();
-                if(email.isEmpty() && !password.isEmpty()){
-                    Toast.makeText(login.this, "Complete todos los campos", Toast.LENGTH_SHORT).show();
-                }else{
-                    loginUser();
-                }
-            }
-        });
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,5 +64,15 @@ public class login extends AppCompatActivity {
     public void OlvidoContra(View view) {
         Intent intent = new Intent(getApplicationContext(), CambiarContra.class);
         startActivity(intent);
+    }
+
+    public void Login(View view) {
+        email = txtEmail.getText().toString();
+        password = txtPassword.getText().toString();
+        if(email.isEmpty() || password.isEmpty()){
+            Toast.makeText(getApplicationContext(), "Complete todos los campos", Toast.LENGTH_SHORT).show();
+        }else{
+            loginUser();
+        }
     }
 }
