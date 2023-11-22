@@ -1,7 +1,6 @@
 package sv.edu.universidad.cuponfinder2;
 
 import android.annotation.SuppressLint;
-import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,8 +12,6 @@ import android.util.Base64;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,19 +20,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
@@ -53,10 +45,8 @@ public class Editar_promocion extends AppCompatActivity {
     private TextInputEditText etEditarFechaFinal, etEditaFechaInicio;
     private DatabaseReference mDatabase;
     private AutoCompleteTextView txtSpinner;
-    private FirebaseAuth mAuth;
     private static final int COD_SEL_IMAGE = 300;
     private Uri image_url;
-    private FirebaseFirestore mfirestore;
 
     private StorageReference storageReference;
     String idPromo, idUser;
@@ -106,7 +96,6 @@ public class Editar_promocion extends AppCompatActivity {
                 String descripcion = snapshot.child("descripcion").getValue(String.class);
                 String Inicio = snapshot.child("fechaInicio").getValue(String.class);
                 String Final = snapshot.child("fechaFinal").getValue(String.class);
-                String categoria = snapshot.child("categoria").getValue(String.class);
                 String idUser = snapshot.child("idUser").getValue(String.class);
                 etTitulo.setText(titulo);
                 etDescripcion.setText(descripcion);
@@ -116,12 +105,9 @@ public class Editar_promocion extends AppCompatActivity {
                 StorageReference promoRef = FirebaseStorage.getInstance().getReference("promocion/*"+ idUser + "" + idPromo);
 
                 try{
-                    promoRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            String imageUrl2 = uri.toString();
-                            Picasso.get().load(imageUrl2).error(R.drawable.fondo_pordefecto).into(imgPromo);
-                        }
+                    promoRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                        String imageUrl2 = uri.toString();
+                        Picasso.get().load(imageUrl2).error(R.drawable.fondo_pordefecto).into(imgPromo);
                     });
 
                 }catch (Exception e){
@@ -149,28 +135,22 @@ public class Editar_promocion extends AppCompatActivity {
         map.put("titulo", titulo);
         if(!categoria.equals("")){map.put("categoria", categoria);}
 
-        mDatabase.child("Promociones").child(idPromo).updateChildren(map).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                    SharedPreferences sharedPreferences = getSharedPreferences("CuponFinder2", MODE_PRIVATE);
-                    String imageBitmapString = sharedPreferences.getString("tempImageBitmap", null);
-                    if (imageBitmapString != null) {
-                        Bitmap imageBitmap = stringToBitmap(imageBitmapString);
-                        byte[] data = bitmapToByte(imageBitmap);
-                        StorageReference reference = storageReference.child("promocion/*" + idUser + "" + idPromo);
-                        reference.putBytes(data);
-                    }
-                Toast.makeText(Editar_promocion.this, R.string.successful_update, Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(getApplicationContext(), vistaUsurio.class);
-                startActivity(i);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(Editar_promocion.this, "Error", Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(getApplicationContext(), vistaUsurio.class);
-                startActivity(i);
-            }
+        mDatabase.child("Promociones").child(idPromo).updateChildren(map).addOnSuccessListener(unused -> {
+                SharedPreferences sharedPreferences = getSharedPreferences("CuponFinder2", MODE_PRIVATE);
+                String imageBitmapString = sharedPreferences.getString("tempImageBitmap", null);
+                if (imageBitmapString != null) {
+                    Bitmap imageBitmap = stringToBitmap(imageBitmapString);
+                    byte[] data = bitmapToByte(imageBitmap);
+                    StorageReference reference = storageReference.child("promocion/*" + idUser + "" + idPromo);
+                    reference.putBytes(data);
+                }
+            Toast.makeText(Editar_promocion.this, R.string.successful_update, Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(getApplicationContext(), vistaUsurio.class);
+            startActivity(i);
+        }).addOnFailureListener(e -> {
+            Toast.makeText(Editar_promocion.this, "Error", Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(getApplicationContext(), vistaUsurio.class);
+            startActivity(i);
         });
     }
     public void llamarFecha(View view) {
@@ -182,17 +162,11 @@ public class Editar_promocion extends AppCompatActivity {
     }
 
     private void showDatePickerDialog(final TextInputEditText editText) {
-        DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int day) {
-                final String selectedDate = day + " / " + (month+1) + " / " + year;
-                editText.setText(selectedDate);
-            }
+        DatePickerFragment newFragment = DatePickerFragment.newInstance((view, year, month, day) -> {
+            final String selectedDate = day + " / " + (month+1) + " / " + year;
+            editText.setText(selectedDate);
         });
         newFragment.show(this.getSupportFragmentManager(), "datePicker");
-    }
-    private String twoDigits(int n) {
-        return (n<=9) ? ("0"+n) : String.valueOf(n);
     }
 
     public void Regresar(View view) {

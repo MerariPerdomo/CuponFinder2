@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -82,13 +80,13 @@ public class vistaNegocio extends AppCompatActivity {
                     Promocion promotion = dataSnapshot1.getValue(Promocion.class);
                     assert promotion != null;
                     @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd / MM / yyyy");
-                    Date fechaInicio = null;
+                    Date fechaInicio;
                     try {
                         fechaInicio = sdf.parse(promotion.getFechaInicio());
                     } catch (ParseException e) {
                         throw new RuntimeException(e);
                     }
-                    Date fechaFinal = null;
+                    Date fechaFinal;
                     try {
                         fechaFinal = sdf.parse(promotion.getFechaFinal());
                     } catch (ParseException e) {
@@ -127,22 +125,16 @@ public class vistaNegocio extends AppCompatActivity {
             }
         });
         StorageReference reference = storageReference.child("perfil/*" + id);
-        reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                //Foto de perfil
-                String imageUrl = uri.toString();
-                Picasso.get().load(imageUrl).into(perfil);
-            }
+        reference.getDownloadUrl().addOnSuccessListener(uri -> {
+            //Foto de perfil
+            String imageUrl = uri.toString();
+            Picasso.get().load(imageUrl).into(perfil);
         });
         StorageReference reference2 = storageReference.child("fondo/*" + id);
-        reference2.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                //Foto de portada
-                String imageUrl = uri.toString();
-                Picasso.get().load(imageUrl).into(portada);
-            }
+        reference2.getDownloadUrl().addOnSuccessListener(uri -> {
+            //Foto de portada
+            String imageUrl = uri.toString();
+            Picasso.get().load(imageUrl).into(portada);
         });
     }
     public boolean isConnectedToInternet(){

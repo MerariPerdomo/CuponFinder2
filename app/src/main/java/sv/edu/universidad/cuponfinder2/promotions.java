@@ -3,7 +3,6 @@ package sv.edu.universidad.cuponfinder2;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -31,7 +30,6 @@ public class promotions extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private PromocionesAdapter adapter;
-    private List<Promocion> promocions = new ArrayList<>();
     private TextView txtCategoria;
 
     @Override
@@ -59,13 +57,13 @@ public class promotions extends AppCompatActivity {
                     Promocion promotion = dataSnapshot1.getValue(Promocion.class);
                     assert promotion != null;
                     @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd / MM / yyyy");
-                    Date fechaInicio = null;
+                    Date fechaInicio;
                     try {
                         fechaInicio = sdf.parse(promotion.getFechaInicio());
                     } catch (ParseException e) {
                         throw new RuntimeException(e);
                     }
-                    Date fechaFinal = null;
+                    Date fechaFinal;
                     try {
                         fechaFinal = sdf.parse(promotion.getFechaFinal());
                     } catch (ParseException e) {

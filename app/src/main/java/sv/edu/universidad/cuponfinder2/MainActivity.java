@@ -1,5 +1,17 @@
 package sv.edu.universidad.cuponfinder2;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,20 +23,6 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.net.Uri;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -44,9 +42,8 @@ import java.util.Date;
 import java.util.List;
 
 import sv.edu.universidad.cuponfinder2.Adaptor.CategoryAdaptor;
-import sv.edu.universidad.cuponfinder2.Adaptor.PromosAdaptor;
-import sv.edu.universidad.cuponfinder2.Model.Promocion;
 import sv.edu.universidad.cuponfinder2.Model.Negocio;
+import sv.edu.universidad.cuponfinder2.Model.Promocion;
 import sv.edu.universidad.cuponfinder2.domain.CategoryDomain;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, CategoryAdaptor.OnItemClickListener, SearchView.OnQueryTextListener {
@@ -101,13 +98,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         Promocion promotion = dataSnapshot1.getValue(Promocion.class);
                         assert promotion != null;
                         @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd / MM / yyyy");
-                        Date fechaInicio = null;
+                        Date fechaInicio;
                         try {
                             fechaInicio = sdf.parse(promotion.getFechaInicio());
                         } catch (ParseException e) {
                             throw new RuntimeException(e);
                         }
-                        Date fechaFinal = null;
+                        Date fechaFinal;
                         try {
                             fechaFinal = sdf.parse(promotion.getFechaFinal());
                         } catch (ParseException e) {

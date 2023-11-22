@@ -12,22 +12,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
@@ -75,50 +68,35 @@ public class registro extends AppCompatActivity {
     }
 
     private void registerUser() {
-        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    String id =mAuth.getCurrentUser().getUid();
-                    Map<String, Object> map = new HashMap<>();
-                    map.put("idUser", id);
-                    map.put("email",email);
-                    map.put("nombre", nombre);
-                    map.put("negocio", negocio);
-                    mDatabase.child("Usuarios").child(id).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task2) {
-                            if (task2.isSuccessful()){
-                                startActivity(new Intent(registro.this, vistaUsurio.class));
-                                finish();
-                            }else{
-                                Toast.makeText(registro.this, "Algo salio mal", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                    SharedPreferences sharedPreferences = getSharedPreferences("CuponFinder2", MODE_PRIVATE);
-                    String imageBitmapString = sharedPreferences.getString("tempImageBitmap", null);
-                    if (imageBitmapString != null) {
-                        Bitmap imageBitmap = stringToBitmap(imageBitmapString);
-                        byte[] data = bitmapToByte(imageBitmap);
-                        StorageReference reference = storageReference.child("perfil/*" + id);
-                        reference.putBytes(data).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(registro.this, "Error al subir la imagen", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                String id =mAuth.getCurrentUser().getUid();
+                Map<String, Object> map = new HashMap<>();
+                map.put("idUser", id);
+                map.put("email",email);
+                map.put("nombre", nombre);
+                map.put("negocio", negocio);
+                mDatabase.child("Usuarios").child(id).setValue(map).addOnCompleteListener(task2 -> {
+                    if (task2.isSuccessful()){
+                        startActivity(new Intent(registro.this, vistaUsurio.class));
+                        finish();
+                    }else{
+                        Toast.makeText(registro.this, "Algo salio mal", Toast.LENGTH_SHORT).show();
                     }
+                });
+                SharedPreferences sharedPreferences = getSharedPreferences("CuponFinder2", MODE_PRIVATE);
+                String imageBitmapString = sharedPreferences.getString("tempImageBitmap", null);
+                if (imageBitmapString != null) {
+                    Bitmap imageBitmap = stringToBitmap(imageBitmapString);
+                    byte[] data = bitmapToByte(imageBitmap);
+                    StorageReference reference = storageReference.child("perfil/*" + id);
+                    reference.putBytes(data).addOnSuccessListener(taskSnapshot -> {
 
-                } else {
-                    Toast.makeText(registro.this, "Authentication failed", Toast.LENGTH_SHORT).show();
+                    }).addOnFailureListener(e -> Toast.makeText(registro.this, "Error al subir la imagen", Toast.LENGTH_SHORT).show());
                 }
+
+            } else {
+                Toast.makeText(registro.this, "Authentication failed", Toast.LENGTH_SHORT).show();
             }
         });
     }

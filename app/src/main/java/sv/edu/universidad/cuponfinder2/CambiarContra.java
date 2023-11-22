@@ -52,14 +52,11 @@ public class CambiarContra extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(snapshot.exists()){
                         mAuth.setLanguageCode("en");
-                        mAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isSuccessful()){
-                                    Toast.makeText(getApplicationContext(), R.string.check_your_email, Toast.LENGTH_SHORT).show();
-                                }else{
-                                    Toast.makeText(getApplicationContext(), R.string.could_not_send_password_reset_email, Toast.LENGTH_SHORT).show();
-                                }
+                        mAuth.sendPasswordResetEmail(email).addOnCompleteListener(task -> {
+                            if(task.isSuccessful()){
+                                Toast.makeText(getApplicationContext(), R.string.check_your_email, Toast.LENGTH_SHORT).show();
+                            }else{
+                                Toast.makeText(getApplicationContext(), R.string.could_not_send_password_reset_email, Toast.LENGTH_SHORT).show();
                             }
                         });
                     }else{

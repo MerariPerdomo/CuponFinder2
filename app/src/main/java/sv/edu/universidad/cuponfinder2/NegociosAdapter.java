@@ -1,7 +1,6 @@
 package sv.edu.universidad.cuponfinder2;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +8,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
@@ -43,12 +41,9 @@ public class NegociosAdapter extends RecyclerView.Adapter<NegociosViewHolder> {
         StorageReference perfilRef = FirebaseStorage.getInstance().getReference("perfil/*" + negocio.getIdUser());
 
         try{
-            perfilRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                @Override
-                public void onSuccess(Uri uri) {
-                    String imageUrl = uri.toString();
-                    Picasso.get().load(imageUrl).error(R.drawable.perfil_estatico).into(holder.perfil_negocio);
-                }
+            perfilRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                String imageUrl = uri.toString();
+                Picasso.get().load(imageUrl).error(R.drawable.perfil_estatico).into(holder.perfil_negocio);
             });
 
         }catch (Exception e){
@@ -57,24 +52,18 @@ public class NegociosAdapter extends RecyclerView.Adapter<NegociosViewHolder> {
         StorageReference fondoRef = FirebaseStorage.getInstance().getReference("fondo/*"+negocio.getIdUser());
 
         try{
-            fondoRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                @Override
-                public void onSuccess(Uri uri) {
-                    String imageUrl = uri.toString();
-                    Picasso.get().load(imageUrl).error(R.drawable.fondo_pordefecto).into(holder.fondo_negocio);
-                }
+            fondoRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                String imageUrl = uri.toString();
+                Picasso.get().load(imageUrl).error(R.drawable.fondo_pordefecto).into(holder.fondo_negocio);
             });
 
         }catch (Exception e){
             Picasso.get().load(R.drawable.perfil_estatico).into(holder.perfil_negocio);
         }
-        holder.verNegocio.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(v.getContext(), vistaNegocio.class);
-                i.putExtra("id", id);
-                v.getContext().startActivity(i);
-            }
+        holder.verNegocio.setOnClickListener(v -> {
+            Intent i = new Intent(v.getContext(), vistaNegocio.class);
+            i.putExtra("id", id);
+            v.getContext().startActivity(i);
         });
 
 

@@ -2,7 +2,6 @@ package sv.edu.universidad.cuponfinder2;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -13,18 +12,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -39,7 +33,6 @@ public class editar_usuario extends AppCompatActivity {
     private ImageView fotoPerfil, fotoFondo;
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
-    private FirebaseUser user;
     private static final int COD_SEL_IMAGE = 300;
     private Uri image_url;
 
@@ -58,7 +51,6 @@ public class editar_usuario extends AppCompatActivity {
         negocio = findViewById(R.id.txtLocal);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
-        user = FirebaseAuth.getInstance().getCurrentUser();
         progressDialog = new ProgressDialog(this);
         storageReference= FirebaseStorage.getInstance().getReference();
         String id = mAuth.getCurrentUser().getUid();
@@ -80,12 +72,9 @@ public class editar_usuario extends AppCompatActivity {
                 StorageReference perfil = FirebaseStorage.getInstance().getReference("perfil/*"+ id);
 
                 try{
-                    perfil.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            String imageUrl2 = uri.toString();
-                            Picasso.get().load(imageUrl2).error(R.drawable.perfil_estatico).into(fotoPerfil);
-                        }
+                    perfil.getDownloadUrl().addOnSuccessListener(uri -> {
+                        String imageUrl2 = uri.toString();
+                        Picasso.get().load(imageUrl2).error(R.drawable.perfil_estatico).into(fotoPerfil);
                     });
 
                 }catch (Exception e){
@@ -93,12 +82,9 @@ public class editar_usuario extends AppCompatActivity {
                 }
                 StorageReference fondo = FirebaseStorage.getInstance().getReference("fondo/*"+ id);
                 try{
-                    fondo.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            String imageUrl2 = uri.toString();
-                            Picasso.get().load(imageUrl2).error(R.drawable.fondo_pordefecto).into(fotoFondo);
-                        }
+                    fondo.getDownloadUrl().addOnSuccessListener(uri -> {
+                        String imageUrl2 = uri.toString();
+                        Picasso.get().load(imageUrl2).error(R.drawable.fondo_pordefecto).into(fotoFondo);
                     });
 
                 }catch (Exception e){
@@ -122,17 +108,7 @@ public class editar_usuario extends AppCompatActivity {
         Map<String, Object> map = new HashMap<>();
         map.put("nombre", name);
         map.put("negocio", local);
-        mDatabase.child("Usuarios").child(id).updateChildren(map).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(editar_usuario.this, "No se pueden actualizar", Toast.LENGTH_SHORT).show();
-            }
-        }).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                Toast.makeText(editar_usuario.this, "Successful update", Toast.LENGTH_SHORT).show();
-            }
-        });
+        mDatabase.child("Usuarios").child(id).updateChildren(map).addOnFailureListener(e -> Toast.makeText(editar_usuario.this, "No se pueden actualizar", Toast.LENGTH_SHORT).show()).addOnSuccessListener(unused -> Toast.makeText(editar_usuario.this, "Successful update", Toast.LENGTH_SHORT).show());
         Intent i = new Intent(getApplicationContext(),vistaUsurio.class);
         startActivity(i);
     }
@@ -174,15 +150,6 @@ public class editar_usuario extends AppCompatActivity {
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
-
-//    private void guardarImagenEnSharedPreferences(Uri image_url, String url) {
-//        String imageUriString = image_url.toString();
-//        SharedPreferences sharedPreferences = getSharedPreferences("CuponFinder2", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sharedPreferences.edit();
-//        editor.putString(url, imageUriString);
-//        editor.apply();
-//        cargarImagen(image_url);
-//    }
 
     private void subirFoto(Uri image_url, String url) {
         String id = mAuth.getCurrentUser().getUid();

@@ -1,17 +1,15 @@
 package sv.edu.universidad.cuponfinder2;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnSuccessListener;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,7 +26,6 @@ public class detalle_promo extends AppCompatActivity {
     TextView nombrePromo, nombreLocal, categoria, descripcion, fechaInicio, fechaFin;
     ImageView imgDetallePromo;
     Button btnRHome;
-    Promocion promo2=new Promocion();
 
 
     @Override
@@ -36,21 +33,18 @@ public class detalle_promo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_promo);
 
-        imgDetallePromo = (ImageView) findViewById(R.id.imgDetallePromo);
-        nombrePromo = (TextView) findViewById(R.id.title_promotxt);
-        nombreLocal = (TextView) findViewById(R.id.txtLocalNameDet);
-        categoria = (TextView) findViewById(R.id.txtCatDetallePromo);
-        descripcion = (TextView) findViewById(R.id.txtDescripDetalle);
-        fechaInicio = (TextView) findViewById(R.id.txtStarPromoDe);
-        fechaFin = (TextView) findViewById(R.id.txtEndPromoDe);
-        btnRHome=(Button)findViewById(R.id.btnRHome);
+        imgDetallePromo = findViewById(R.id.imgDetallePromo);
+        nombrePromo =  findViewById(R.id.title_promotxt);
+        nombreLocal = findViewById(R.id.txtLocalNameDet);
+        categoria = findViewById(R.id.txtCatDetallePromo);
+        descripcion =  findViewById(R.id.txtDescripDetalle);
+        fechaInicio = findViewById(R.id.txtStarPromoDe);
+        fechaFin = findViewById(R.id.txtEndPromoDe);
+        btnRHome= findViewById(R.id.btnRHome);
 
-        btnRHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-            }
+        btnRHome.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
         });
 
         String id = getIntent().getStringExtra("id");
@@ -95,12 +89,9 @@ public class detalle_promo extends AppCompatActivity {
                     }
                 });
                 try{
-                    promoRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            String imageUrl2 = uri.toString();
-                            Picasso.get().load(imageUrl2).error(R.drawable.fondo_pordefecto).into(imgDetallePromo);
-                        }
+                    promoRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                        String imageUrl2 = uri.toString();
+                        Picasso.get().load(imageUrl2).error(R.drawable.fondo_pordefecto).into(imgDetallePromo);
                     });
 
                 }catch (Exception e){
