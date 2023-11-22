@@ -150,10 +150,6 @@ public class AgregarPromo extends AppCompatActivity {
                                             uriTask.addOnSuccessListener(new OnSuccessListener<Uri>() {
                                                 @Override
                                                 public void onSuccess(Uri uri) {
-                                                    String download_uri = uri.toString();
-                                                    HashMap<String, Object> map = new HashMap<>();
-                                                    map.put("foto", download_uri);
-                                                    mfirestore.collection("promocion").document(idPromo).update(map);
                                                 }
                                             });
                                         }

@@ -204,15 +204,12 @@ public class registro extends AppCompatActivity {
         }
     }
     public void cargarImagen() {
-        progressDialog.setMessage("Actualizando foto");
-        progressDialog.show();
         SharedPreferences sharedPreferences = getSharedPreferences("CuponFinder2", MODE_PRIVATE);
         String imageBitmapString = sharedPreferences.getString("tempImageBitmap", null);
         if (imageBitmapString != null) {
             Bitmap imageBitmap = stringToBitmap(imageBitmapString);
             File tempFile = createTempFile(imageBitmap);
             Picasso.get().load(tempFile).into(perfil);
-            progressDialog.dismiss();
         }
     }
 

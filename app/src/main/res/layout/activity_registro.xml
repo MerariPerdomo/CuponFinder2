@@ -26,12 +26,19 @@
 
         <Button
             android:id="@+id/agregarFoto"
+            style="?attr/materialButtonOutlinedStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:backgroundTint="#3EB4DA"
             android:onClick="AgregarFoto"
             android:text="@string/add_photo"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            app:icon="@drawable/ic_add"
+            app:iconSize="20dp"
+            app:iconTint="#00BCD4"
+            app:strokeColor="#03A9F4"
+            android:backgroundTint="#FFFFFF"
             tools:ignore="TextContrastCheck" />
 
         <com.google.android.material.textfield.TextInputLayout

@@ -2,6 +2,7 @@ package sv.edu.universidad.cuponfinder2;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -77,10 +78,34 @@ public class editar_usuario extends AppCompatActivity {
 
                 nombre.setText(name);
                 negocio.setText(local);
-                Picasso.get().load("perfil/*"+id).into(fotoPerfil);
-                Picasso.get().load("fondo/*"+id).into(fotoFondo);
-            }
+                StorageReference perfil = FirebaseStorage.getInstance().getReference("perfil/*"+ id);
 
+                try{
+                    perfil.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            String imageUrl2 = uri.toString();
+                            Picasso.get().load(imageUrl2).error(R.drawable.perfil_estatico).into(fotoPerfil);
+                        }
+                    });
+
+                }catch (Exception e){
+                    Picasso.get().load(R.drawable.perfil_estatico).into(fotoPerfil);
+                }
+                StorageReference fondo = FirebaseStorage.getInstance().getReference("fondo/*"+ id);
+                try{
+                    fondo.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            String imageUrl2 = uri.toString();
+                            Picasso.get().load(imageUrl2).error(R.drawable.fondo_pordefecto).into(fotoFondo);
+                        }
+                    });
+
+                }catch (Exception e){
+                    Picasso.get().load(R.drawable.fondo_pordefecto).into(fotoFondo);
+                }
+            }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -109,6 +134,15 @@ public class editar_usuario extends AppCompatActivity {
                 Toast.makeText(editar_usuario.this, "Successful update", Toast.LENGTH_SHORT).show();
             }
         });
+            SharedPreferences sharedPreferences = getSharedPreferences("CuponFinder2", MODE_PRIVATE);
+            String perfilImageUriString = sharedPreferences.getString("perfil/*", null);
+            String fondoImageUriString = sharedPreferences.getString("fondo/*", null);
+            if (perfilImageUriString != null) {
+                subirFoto(Uri.parse(perfilImageUriString), "perfil/*");
+            }
+            if (fondoImageUriString != null) {
+                subirFoto(Uri.parse(fondoImageUriString), "fondo/*");
+            }
         Intent i = new Intent(getApplicationContext(),vistaUsurio.class);
         startActivity(i);
     }
@@ -122,12 +156,14 @@ public class editar_usuario extends AppCompatActivity {
         url = "fondo/*";
         cargarFoto();
     }
+
     private void cargarFoto() {
         Intent i = new Intent(Intent.ACTION_PICK);
         i.setType("image/*");
 
         startActivityForResult(i, COD_SEL_IMAGE);
     }
+
     public void cargarImagen(Uri imageUrl) {
         if(url.equals("perfil/*")){
             Picasso.get().load(imageUrl).into(fotoPerfil);
@@ -141,15 +177,22 @@ public class editar_usuario extends AppCompatActivity {
         if(resultCode == RESULT_OK){
             if (requestCode == COD_SEL_IMAGE){
                 image_url = data.getData();
-                subirFoto(image_url, url);
+                guardarImagenEnSharedPreferences(image_url, url);
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    private void guardarImagenEnSharedPreferences(Uri image_url, String url) {
+        String imageUriString = image_url.toString();
+        SharedPreferences sharedPreferences = getSharedPreferences("CuponFinder2", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(url, imageUriString);
+        editor.apply();
+        cargarImagen(image_url);
+    }
+
     private void subirFoto(Uri image_url, String url) {
-        progressDialog.setMessage("Actualizando foto");
-        progressDialog.show();
         String rute_storage_photo = url + mAuth.getUid();
         StorageReference reference = storageReference.child(rute_storage_photo);
         reference.putFile(image_url).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -161,8 +204,7 @@ public class editar_usuario extends AppCompatActivity {
                     uriTask.addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-                            cargarImagen(image_url);
-                            progressDialog.dismiss();
+
                         }
                     });
                 }
@@ -174,8 +216,8 @@ public class editar_usuario extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Error al cargar foto", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
+
 
     public void Cancelar(View view) {
         Intent intent = new Intent(getApplicationContext(), vistaUsurio.class);
