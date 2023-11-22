@@ -42,7 +42,6 @@ public class editar_usuario extends AppCompatActivity {
     private FirebaseUser user;
     private static final int COD_SEL_IMAGE = 300;
     private Uri image_url;
-    private FirebaseFirestore mfirestore;
 
     ProgressDialog progressDialog;
     StorageReference storageReference;
@@ -134,15 +133,6 @@ public class editar_usuario extends AppCompatActivity {
                 Toast.makeText(editar_usuario.this, "Successful update", Toast.LENGTH_SHORT).show();
             }
         });
-            SharedPreferences sharedPreferences = getSharedPreferences("CuponFinder2", MODE_PRIVATE);
-            String perfilImageUriString = sharedPreferences.getString("perfil/*", null);
-            String fondoImageUriString = sharedPreferences.getString("fondo/*", null);
-            if (perfilImageUriString != null) {
-                subirFoto(Uri.parse(perfilImageUriString), "perfil/*");
-            }
-            if (fondoImageUriString != null) {
-                subirFoto(Uri.parse(fondoImageUriString), "fondo/*");
-            }
         Intent i = new Intent(getApplicationContext(),vistaUsurio.class);
         startActivity(i);
     }
@@ -167,8 +157,10 @@ public class editar_usuario extends AppCompatActivity {
     public void cargarImagen(Uri imageUrl) {
         if(url.equals("perfil/*")){
             Picasso.get().load(imageUrl).into(fotoPerfil);
+            subirFoto(image_url, url);
         } else if (url.equals("fondo/*")) {
             Picasso.get().load(imageUrl).into(fotoFondo);
+            subirFoto(image_url, url);
         }
     }
 
@@ -177,45 +169,48 @@ public class editar_usuario extends AppCompatActivity {
         if(resultCode == RESULT_OK){
             if (requestCode == COD_SEL_IMAGE){
                 image_url = data.getData();
-                guardarImagenEnSharedPreferences(image_url, url);
+                cargarImagen(image_url);
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void guardarImagenEnSharedPreferences(Uri image_url, String url) {
-        String imageUriString = image_url.toString();
-        SharedPreferences sharedPreferences = getSharedPreferences("CuponFinder2", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(url, imageUriString);
-        editor.apply();
-        cargarImagen(image_url);
-    }
+//    private void guardarImagenEnSharedPreferences(Uri image_url, String url) {
+//        String imageUriString = image_url.toString();
+//        SharedPreferences sharedPreferences = getSharedPreferences("CuponFinder2", MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        editor.putString(url, imageUriString);
+//        editor.apply();
+//        cargarImagen(image_url);
+//    }
 
     private void subirFoto(Uri image_url, String url) {
-        String rute_storage_photo = url + mAuth.getUid();
-        StorageReference reference = storageReference.child(rute_storage_photo);
-        reference.putFile(image_url).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                while (!uriTask.isSuccessful());
-                if (uriTask.isSuccessful()){
-                    uriTask.addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-
-                        }
-                    });
-                }
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                progressDialog.dismiss();
-                Toast.makeText(getApplicationContext(), "Error al cargar foto", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        String rute_storage_photo = url + mAuth.getUid();
+//        StorageReference reference = storageReference.child(rute_storage_photo);
+//        reference.putFile(image_url).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//            @Override
+//            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+//                while (!uriTask.isSuccessful());
+//                if (uriTask.isSuccessful()){
+//                    uriTask.addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                        @Override
+//                        public void onSuccess(Uri uri) {
+//
+//                        }
+//                    });
+//                }
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//                progressDialog.dismiss();
+//                Toast.makeText(getApplicationContext(), "Error al cargar foto", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+        String id = mAuth.getCurrentUser().getUid();
+        StorageReference reference = storageReference.child(url + id);
+        UploadTask uploadTask = reference.putFile(image_url);
     }
 
 

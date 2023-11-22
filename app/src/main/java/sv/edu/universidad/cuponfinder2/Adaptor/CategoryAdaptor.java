@@ -28,6 +28,10 @@ public class CategoryAdaptor extends RecyclerView.Adapter<CategoryAdaptor.ViewHo
     }
     public interface OnItemClickListener {
         void onItemClick(String title);
+
+        boolean onQueryTextSubmit(String query);
+
+        boolean onQueryTextChange(String newText);
     }
     @NonNull
     @Override
