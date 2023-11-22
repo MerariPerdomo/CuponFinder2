@@ -140,8 +140,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             databaseReference.child("Usuarios").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    Negocio usuarios = dataSnapshot.getValue(Negocio.class);
-                    nombreUsuario.setText(usuarios.getNombre());
+                    if(dataSnapshot.exists()){
+                        Negocio usuarios = dataSnapshot.getValue(Negocio.class);
+                        nombreUsuario.setText(usuarios.getNombre());
+                    }else{
+                        nombreUsuario.setText("No hay usuarios en la base");
+                    }
+
                 }
 
                 @Override
@@ -268,7 +273,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     public void search(String s) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Promociones");
-        Query query = ref.orderByChild("titulo").startAt(s).endAt(s+"\uf8ff");
+        Query query = ref.orderByChild("titulo").startAt(s.toLowerCase()).endAt(s.toLowerCase()+"\uf8ff");
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -278,7 +283,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 String dateToday = sdf.format(currentDate);
                 for (DataSnapshot dataSnapshot1 : snapshot.getChildren()) {
                     Promocion promotion = dataSnapshot1.getValue(Promocion.class);
-                    if (promotion.getFechaInicio().compareTo(dateToday) <= 0 && promotion.getFechaFinal().compareTo(dateToday) >= 0) {
+                    if (promotion.getTitulo().toLowerCase().contains(s.toLowerCase()) && promotion.getFechaInicio().compareTo(dateToday) <= 0 && promotion.getFechaFinal().compareTo(dateToday) >= 0) {
                         promocions.add(promotion);
                     }
                 }
@@ -297,5 +302,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
-
 }
+
+
