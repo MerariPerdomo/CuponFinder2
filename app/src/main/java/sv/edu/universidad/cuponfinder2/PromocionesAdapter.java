@@ -90,22 +90,6 @@ public class PromocionesAdapter extends RecyclerView.Adapter<PromocionesHolder> 
         }catch (Exception e){
             Picasso.get().load(R.drawable.fondo_pordefecto).into(holder.img_fotopromo);
         }
-        /*Foto del negocio*/
-//        StorageReference tiendaRef = FirebaseStorage.getInstance().getReference("perfil/*"+idUser);
-//
-//        try{
-//            tiendaRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                @Override
-//                public void onSuccess(Uri uri) {
-//                    String imageUrl = uri.toString();
-//                    Picasso.get().load(imageUrl).error(R.drawable.perfil_estatico).into(holder.img_perfilnegocio);
-//                }
-//            });
-//
-//        }catch (Exception e){
-//            Picasso.get().load(R.drawable.perfil_estatico).into(holder.img_perfilnegocio);
-//        }
-
     }
     public void setPromocions(List<Promocion> nuevasPromociones) {
         this.promocions = nuevasPromociones;

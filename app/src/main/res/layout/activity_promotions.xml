@@ -4,80 +4,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="30dp"
+    android:layout_margin="20dp"
     tools:context=".promotions">
+    <Button
+        android:id="@+id/btnRHome"
+        style="@style/Widget.Material3.Button.TextButton.Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="150dp"
+        android:gravity="start"
+        android:onClick="Regresar"
+        android:text="@string/txtPromotions"
+        android:textColor="@color/light_blue_900"
+        android:textSize="20sp"
+        app:icon="@drawable/ic_regresar"
+        app:iconSize="30dp"
+        app:iconTint="@color/light_blue_900"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="VisualLintBounds" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:foregroundGravity="center_horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:orientation="vertical"
+        android:layout_marginTop="40dp">
 
-        <Button
-            android:id="@+id/btnRHome"
-            style="@style/Widget.Material3.Button.TextButton.Icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="150dp"
-            android:layout_marginBottom="15dp"
-            android:gravity="start"
-            android:text="@string/txtPromotions"
-            android:textColor="@color/light_blue_900"
-            android:textSize="20sp"
-            app:icon="@drawable/ic_regresar"
-            app:iconSize="30dp"
-            app:iconTint="@color/light_blue_900"
-            android:onClick="Regresar"
-            app:layout_constraintBottom_toTopOf="@id/guideline13"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="VisualLintBounds" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.08" />
 
         <TextView
             android:id="@+id/categoria"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_marginTop="12dp"
-            android:text="Categoria"
-            android:textSize="24dp"
-            android:textColor="@color/light_blue_900"
             android:gravity="center"
-            app:layout_constraintBottom_toTopOf="@+id/guideline23"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.073"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline13"
-            app:layout_constraintVertical_bias="0.0" />
+            android:text="Categoria"
+            android:textColor="@color/light_blue_900"
+            android:textSize="24dp" />
 
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline23"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.1795735" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="165dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/constraintLayout">
+        android:layout_marginTop="100dp">
 
         <LinearLayout
             android:layout_width="match_parent"

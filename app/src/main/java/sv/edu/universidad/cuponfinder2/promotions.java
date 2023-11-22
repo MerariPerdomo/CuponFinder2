@@ -1,5 +1,6 @@
 package sv.edu.universidad.cuponfinder2;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -53,19 +55,31 @@ public class promotions extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 List<Promocion> promocions = new ArrayList<>();
                 Date currentDate = new Date();
-                SimpleDateFormat sdf = new SimpleDateFormat("dd / MM / yyyy");
-                String dateToday = sdf.format(currentDate);
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     Promocion promotion = dataSnapshot1.getValue(Promocion.class);
-                    if (promotion.getFechaInicio().compareTo(dateToday) <= 0 && promotion.getFechaFinal().compareTo(dateToday) >= 0) {
+                    assert promotion != null;
+                    @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd / MM / yyyy");
+                    Date fechaInicio = null;
+                    try {
+                        fechaInicio = sdf.parse(promotion.getFechaInicio());
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e);
+                    }
+                    Date fechaFinal = null;
+                    try {
+                        fechaFinal = sdf.parse(promotion.getFechaFinal());
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e);
+                    }
+                    if (fechaInicio.compareTo(currentDate) <= 0 && fechaFinal.compareTo(currentDate) >= 0) {
                         promocions.add(promotion);
                     }
-                    if (adapter == null) {
-                        adapter = new PromocionesAdapter(promocions);
-                        recyclerView.setAdapter(adapter);
-                    } else {
-                        adapter.notifyDataSetChanged();
-                    }
+                }
+                if (adapter == null) {
+                    adapter = new PromocionesAdapter(promocions);
+                    recyclerView.setAdapter(adapter);
+                } else {
+                    adapter.notifyDataSetChanged();
                 }
             }
 
