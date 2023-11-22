@@ -131,10 +131,10 @@
     <string name="could_not_send_password_reset_email">Could not send password reset email</string>
     <string name="check_your_email">Check your email</string>
     <string name="please_wait_a_moment">Please wait a moment</string>
-    <string name="restaurant_cat">Restaurant</string>
-    <string name="market_cat">Market</string>
-    <string name="pets_cat">Pets</string>
-    <string name="tech_cat">Tech</string>
-    <string name="clothes_cat">Clothes</string>
-    <string name="health_cat">Health</string>
+    <string name="restaurant_cat" translatable="false">Restaurant</string>
+    <string name="market_cat" translatable="false">Market</string>
+    <string name="pets_cat" translatable="false">Pets</string>
+    <string name="tech_cat" translatable="false">Tech</string>
+    <string name="clothes_cat" translatable="false">Clothes</string>
+    <string name="health_cat" translatable="false">Health</string>
 </resources>
