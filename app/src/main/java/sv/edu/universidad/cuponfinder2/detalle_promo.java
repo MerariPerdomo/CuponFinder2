@@ -45,10 +45,18 @@ public class detalle_promo extends AppCompatActivity {
         fechaFin = (TextView) findViewById(R.id.txtEndPromoDe);
         btnRHome=(Button)findViewById(R.id.btnRHome);
 
+        btnRHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         String id = getIntent().getStringExtra("id");
 
         Obtenerpromo(id);
+
     }
     public void Regresar(View view) {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
