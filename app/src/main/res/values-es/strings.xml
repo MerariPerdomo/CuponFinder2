@@ -108,4 +108,10 @@
     <string name="could_not_send_password_reset_email">No se pudo enviar el correo electrónico para restablecer la contraseña, revisa tu correo electrónico</string>
     <string name="check_your_email">Abre tu correo electrónico</string>
     <string name="please_wait_a_moment">Por favor espere un momento</string>
+    <string name="restaurant_cat">Restaurante</string>
+    <string name="market_cat">Mercado</string>
+    <string name="pets_cat">Mascotas</string>
+    <string name="tech_cat">Tecnología</string>
+    <string name="clothes_cat">Ropa</string>
+    <string name="health_cat">Salud</string>
 </resources>

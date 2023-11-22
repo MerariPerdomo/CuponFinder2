@@ -108,5 +108,11 @@
     <string name="could_not_send_password_reset_email">Não foi possível enviar o e-mail de redefinição de senha, verifique seu e-mail</string>
     <string name="check_your_email">abra seu e-mail</string>
     <string name="please_wait_a_moment">Por favor espere um momento</string>
+    <string name="restaurant_cat">Restaurante</string>
+    <string name="market_cat">Mercado</string>
+    <string name="pets_cat">Animais</string>
+    <string name="tech_cat">Tecnologia</string>
+    <string name="clothes_cat">Roupas</string>
+    <string name="health_cat">Saúde</string>
 </resources>
 

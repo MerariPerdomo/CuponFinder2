@@ -41,12 +41,12 @@ public class CategoryAdaptor extends RecyclerView.Adapter<CategoryAdaptor.ViewHo
 
 
         int[] drawables = new int[]{
-                R.drawable.restauran_c1,
+                R.drawable.coffe_c6,
                 R.drawable.marketplace_c2,
                 R.drawable.healt_c3,
                 R.drawable.pets_c4,
-                R.drawable.drinks_c5,
-                R.drawable.coffe_c6
+                R.drawable.tech_c,
+                R.drawable.ropa_c6
         };
 
 

@@ -71,12 +71,12 @@
     <string name="img_splashscreen">SplashScreen</string>
     <string name="imagen_portada" translatable="false">imagen portada</string>
     <string-array name="categories">
-        <item>Restaurant</item>
-        <item>Market</item>
-        <item>Health</item>
-        <item>Pets</item>
-        <item>Drinks</item>
-        <item>Coffee Shops</item>
+        <item>@string/restaurant_cat</item>
+        <item>@string/market_cat</item>
+        <item>@string/health_cat</item>
+        <item>@string/pets_cat</item>
+        <item>@string/tech_cat</item>
+        <item>@string/clothes_cat</item>
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
@@ -131,4 +131,10 @@
     <string name="could_not_send_password_reset_email">Could not send password reset email</string>
     <string name="check_your_email">Check your email</string>
     <string name="please_wait_a_moment">Please wait a moment</string>
+    <string name="restaurant_cat">Restaurant</string>
+    <string name="market_cat">Market</string>
+    <string name="pets_cat">Pets</string>
+    <string name="tech_cat">Tech</string>
+    <string name="clothes_cat">Clothes</string>
+    <string name="health_cat">Health</string>
 </resources>
