@@ -101,11 +101,11 @@
     <string name="successful_update">Cambios actualizados</string>
     <string name="to">a</string>
     <string name="edit_user">Edit user</string>
-    <string name="do_you_want_to_change_your_password">do you want to change your password?</string>
+    <string name="do_you_want_to_change_your_password">¿Quieres cambiar tu contraseña?</string>
     <string name="restore_password">Restore password</string>
-    <string name="email_reset">Enter your email, you will receive a message where you can reset your password</string>
-    <string name="enter_your_email">Enter your email</string>
-    <string name="could_not_send_password_reset_email">Could not send password reset email</string>
-    <string name="check_your_email">Check your email</string>
-    <string name="please_wait_a_moment">Please wait a moment</string>
+    <string name="email_reset">Ingresa tu correo electrónico, recibirás un mensaje donde podrás restablecer tu contraseña</string>
+    <string name="enter_your_email">Ingrese su correo electrónico</string>
+    <string name="could_not_send_password_reset_email">No se pudo enviar el correo electrónico para restablecer la contraseña, revisa tu correo electrónico</string>
+    <string name="check_your_email">Abre tu correo electrónico</string>
+    <string name="please_wait_a_moment">Por favor espere un momento</string>
 </resources>

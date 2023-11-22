@@ -47,7 +47,6 @@ public class registro extends AppCompatActivity {
     FirebaseAuth mAuth;
     DatabaseReference mDatabase;
     StorageReference storageReference;
-    String storage_path = "perfil/*";
     private static final int COD_SEL_IMAGE =300;
     private Uri image_url;
     ProgressDialog progressDialog;
