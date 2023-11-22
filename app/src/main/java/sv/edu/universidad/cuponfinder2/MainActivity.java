@@ -7,9 +7,11 @@ import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -56,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private RecyclerView.Adapter adapter;
     private RecyclerView recyclerViewListCategorias, recyclerViewListPromo;
     private PromocionesAdapter adapterPromocion;
-    private List<Promocion> promocions = new ArrayList<>();
+    private final List<Promocion> promocions = new ArrayList<>();
     private SearchView searchView;
 
 
@@ -75,6 +77,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         searchView = findViewById(R.id.scvPromotion);
         noConnectionFragment = new noConexion();
+        recyclerViewListPromo=findViewById(R.id.rvPromotiones);
+        recyclerViewListPromo.setLayoutManager(new LinearLayoutManager(this));
+
 
 
         /*--------------Para las cards de promocion ---------------*/
@@ -83,19 +88,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .add(R.id.noConnectionContainer, noConnectionFragment)// Oculta el fragmento al inicio
                     .commit();
         }else{
-            recyclerViewListPromo=findViewById(R.id.rvPromotiones);
-            recyclerViewListPromo.setLayoutManager(new LinearLayoutManager(this));
             DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("Promociones");
-
-            mDatabase.addValueEventListener(new ValueEventListener() {
+            mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    List<Promocion> oldPromociones = new ArrayList<>(promocions);
                     promocions.clear();
                     Date currentDate = new Date();
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd / MM / yyyy");
+                    @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd / MM / yyyy");
                     String dateToday = sdf.format(currentDate);
                     for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                         Promocion promotion = dataSnapshot1.getValue(Promocion.class);
+                        assert promotion != null;
                         if (promotion.getFechaInicio().compareTo(dateToday) <= 0 && promotion.getFechaFinal().compareTo(dateToday) >= 0) {
                             promocions.add(promotion);
                         }
@@ -104,12 +108,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         adapterPromocion = new PromocionesAdapter(promocions);
                         recyclerViewListPromo.setAdapter(adapterPromocion);
                     } else {
-                        adapterPromocion.setPromocions(promocions);
+                        DiffUtil.DiffResult result = DiffUtil.calculateDiff(new MyCallback(oldPromociones, promocions));
+                        result.dispatchUpdatesTo(adapterPromocion);
                     }
                 }
 
                 @Override
-                public void onCancelled(DatabaseError databaseError) {
+                public void onCancelled(@NonNull DatabaseError databaseError) {
                     Log.e("ERROR", databaseError.getMessage());
                 }
             });
@@ -139,9 +144,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
             databaseReference.child("Usuarios").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if(dataSnapshot.exists()){
                         Negocio usuarios = dataSnapshot.getValue(Negocio.class);
+                        assert usuarios != null;
                         nombreUsuario.setText(usuarios.getNombre());
                     }else{
                         nombreUsuario.setText("No hay usuarios en la base");
@@ -150,21 +156,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
 
                 @Override
-                public void onCancelled(DatabaseError databaseError) {
+                public void onCancelled(@NonNull DatabaseError databaseError) {
                     // Manejar error
                 }
             });
             StorageReference reference = storageReference.child("perfil/*" + id);
-            reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                @Override
-                public void onSuccess(Uri uri) {
-                    //Foto de perfil
-                    String imageUrl = uri.toString();
-                    Picasso.get().load(imageUrl).into(perfil_foto);
-                }
+            reference.getDownloadUrl().addOnSuccessListener(uri -> {
+                //Foto de perfil
+                String imageUrl = uri.toString();
+                Picasso.get().load(imageUrl).into(perfil_foto);
             });
         }else{
-            nombreUsuario.setText("Sin registrar");
+            nombreUsuario.setText("No Register");
         }
         /*-----------------fin----------------*/
 
@@ -279,10 +282,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 promocions.clear();
                 Date currentDate = new Date();
-                SimpleDateFormat sdf = new SimpleDateFormat("dd / MM / yyyy");
+                @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd / MM / yyyy");
                 String dateToday = sdf.format(currentDate);
                 for (DataSnapshot dataSnapshot1 : snapshot.getChildren()) {
                     Promocion promotion = dataSnapshot1.getValue(Promocion.class);
+                    assert promotion != null;
                     if (promotion.getTitulo().toLowerCase().contains(s.toLowerCase()) && promotion.getFechaInicio().compareTo(dateToday) <= 0 && promotion.getFechaFinal().compareTo(dateToday) >= 0) {
                         promocions.add(promotion);
                     }

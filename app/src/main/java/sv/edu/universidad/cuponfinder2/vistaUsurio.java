@@ -6,6 +6,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -48,6 +49,7 @@ public class vistaUsurio extends AppCompatActivity {
 
     /*Cards*/
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,17 +84,17 @@ public class vistaUsurio extends AppCompatActivity {
     }
 
     public void Editar(View view) {
-        Intent i = new Intent(getApplicationContext(), editar_usuario.class);
+        Intent i = new Intent(vistaUsurio.this, editar_usuario.class);
         startActivity(i);
     }
 
     public void AgregarProm(View view) {
-        Intent intent = new Intent(getApplicationContext(), AgregarPromo.class);
+        Intent intent = new Intent(vistaUsurio.this, AgregarPromo.class);
         startActivity(intent);
     }
 
     public void Regresar(View view) {
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        Intent intent = new Intent(vistaUsurio.this, MainActivity.class);
         startActivity(intent);
     }
     public void MostrarPromos(String id){
@@ -115,6 +117,7 @@ public class vistaUsurio extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+                Log.e("DatabaseError", "onCancelled", error.toException());
             }
         });
     }
@@ -131,6 +134,7 @@ public class vistaUsurio extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 // Manejar error
+                Log.e("DatabaseError", "onCancelled", databaseError.toException());
             }
         });
         StorageReference reference = storageReference.child("perfil/*" + id);

@@ -72,10 +72,7 @@ public class AgregarPromo extends AppCompatActivity {
         txtInicio = findViewById(R.id.inicioF);
         txtFinal=findViewById(R.id.finalF);
         imgPromo=findViewById(R.id.imgPromo);
-        mAuth = FirebaseAuth.getInstance();
-        mfirestore = FirebaseFirestore.getInstance();
-        mDatabase= FirebaseDatabase.getInstance().getReference();
-        storageReference= FirebaseStorage.getInstance().getReference();
+        initializeFirebase();
         progressDialog = new ProgressDialog(this);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -163,7 +160,7 @@ public class AgregarPromo extends AppCompatActivity {
 
                             }
                             Toast.makeText(AgregarPromo.this, "Se creo correctamente", Toast.LENGTH_SHORT).show();
-                            Intent i = new Intent(getApplicationContext(), vistaUsurio.class);
+                            Intent i = new Intent(AgregarPromo.this, vistaUsurio.class);
                             startActivity(i);
                         }
                     }).addOnFailureListener(new OnFailureListener() {
@@ -267,7 +264,13 @@ public class AgregarPromo extends AppCompatActivity {
         }
 
     public void Cancelar(View view) {
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        Intent intent = new Intent(AgregarPromo.this, MainActivity.class);
         startActivity(intent);
+    }
+    private void initializeFirebase() {
+        mAuth = FirebaseAuth.getInstance();
+        mfirestore = FirebaseFirestore.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        storageReference = FirebaseStorage.getInstance().getReference();
     }
 }
