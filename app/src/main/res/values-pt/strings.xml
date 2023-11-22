@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">CuponFinder2</string>
+    <string name="app_name">Cupon Finder</string>
     <string name="nav_drawer_open">Abrir barra de navegação</string>
     <string name="nav_drawer_close">Fechar barra de navegação</string>
     <string name="home">Início</string>
