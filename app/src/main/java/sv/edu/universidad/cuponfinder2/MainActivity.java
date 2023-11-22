@@ -290,32 +290,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     public void search(String s) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Promociones");
-        Query query = ref.orderByChild("titulo").startAt(s.toLowerCase()).endAt(s.toLowerCase()+"\uf8ff");
+        Query query = ref.orderByChild("titulo").startAt(s).endAt(s+"\uf8ff");
+
         query.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                promocions.clear();
-                Date currentDate = new Date();
-                @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd / MM / yyyy");
-                String dateToday = sdf.format(currentDate);
-                for (DataSnapshot dataSnapshot1 : snapshot.getChildren()) {
-                    Promocion promotion = dataSnapshot1.getValue(Promocion.class);
-                    assert promotion != null;
-                    if (promotion.getTitulo().toLowerCase().contains(s.toLowerCase()) && promotion.getFechaInicio().compareTo(dateToday) <= 0 && promotion.getFechaFinal().compareTo(dateToday) >= 0) {
-                        promocions.add(promotion);
-                    }
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<Promocion> list = new ArrayList<>();
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    Promocion promocion = ds.getValue(Promocion.class);
+                    list.add(promocion);
                 }
-                if (adapterPromocion == null) {
-                    adapterPromocion = new PromocionesAdapter(promocions);
-                    recyclerViewListPromo.setAdapter(adapterPromocion);
-                } else {
-                    adapterPromocion.setPromocions(promocions);
-                }
+                PromocionesAdapter adapter = new PromocionesAdapter(list);
+                recyclerViewListPromo.setAdapter(adapter);
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
+            public void onCancelled(DatabaseError databaseError) {
+                // manejar error
             }
         });
     }
