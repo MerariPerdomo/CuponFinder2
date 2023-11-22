@@ -187,8 +187,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         categoria.add(new CategoryDomain("Market","C2"));
         categoria.add(new CategoryDomain("Health","C3"));
         categoria.add(new CategoryDomain("Pets","C4"));
-        categoria.add(new CategoryDomain("Drinks","C5"));
-        categoria.add(new CategoryDomain("Coffee Shops","C6"));
+        categoria.add(new CategoryDomain("Tech","C5"));
+        categoria.add(new CategoryDomain("Clothes","C6"));
 
         adapter=new CategoryAdaptor(categoria, this);
         recyclerViewListCategorias.setAdapter(adapter);

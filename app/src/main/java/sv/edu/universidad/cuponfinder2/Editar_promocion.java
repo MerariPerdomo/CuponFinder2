@@ -63,7 +63,7 @@ public class Editar_promocion extends AppCompatActivity {
     ImageView imgPromo;
     ProgressDialog progressDialog;
     SharedPreferences sharedPreferences;
-    Button btnActualizar;
+
 
 
     @SuppressLint("WrongViewCast")
@@ -88,6 +88,9 @@ public class Editar_promocion extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         txtSpinner.setAdapter(adapter);
 
+        SharedPreferences preferences = getSharedPreferences("CuponFinder2", MODE_PRIVATE);
+        preferences.edit().clear().commit();
+
 
         idPromo = getIntent().getStringExtra("idPromo");
         idUser = getIntent().getStringExtra("idUser");
@@ -109,7 +112,6 @@ public class Editar_promocion extends AppCompatActivity {
                 etDescripcion.setText(descripcion);
                 etEditaFechaInicio.setText(Inicio);
                 etEditarFechaFinal.setText(Final);
-                txtSpinner.setText(categoria);
 
                 StorageReference promoRef = FirebaseStorage.getInstance().getReference("promocion/*"+ idUser + "" + idPromo);
 
@@ -141,30 +143,26 @@ public class Editar_promocion extends AppCompatActivity {
         String end = etEditarFechaFinal.getText().toString();
 
         Map<String, Object> map = new HashMap<>();
-        map.put("categoria", categoria);
         map.put("descripcion", descripcion);
         map.put("fechaInicio", start);
         map.put("fechaFinal", end);
         map.put("titulo", titulo);
+        if(!categoria.equals("")){map.put("categoria", categoria);}
 
         mDatabase.child("Promociones").child(idPromo).updateChildren(map).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
-                SharedPreferences sharedPreferences = getSharedPreferences("CuponFinder2", MODE_PRIVATE);
-                String imageBitmapString = sharedPreferences.getString("tempImageBitmap", null);
-                if (imageBitmapString != null) {
-                    Bitmap imageBitmap = stringToBitmap(imageBitmapString);
-                    byte[] data = bitmapToByte(imageBitmap);
-                    StorageReference reference = storageReference.child("promocion/*" + idUser + "" + idPromo);
-                    reference.putBytes(data).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Toast.makeText(Editar_promocion.this, R.string.successful_update, Toast.LENGTH_SHORT).show();
-                            Intent i = new Intent(getApplicationContext(), vistaUsurio.class);
-                            startActivity(i);
-                        }
-                    });
-                }
+                    SharedPreferences sharedPreferences = getSharedPreferences("CuponFinder2", MODE_PRIVATE);
+                    String imageBitmapString = sharedPreferences.getString("tempImageBitmap", null);
+                    if (imageBitmapString != null) {
+                        Bitmap imageBitmap = stringToBitmap(imageBitmapString);
+                        byte[] data = bitmapToByte(imageBitmap);
+                        StorageReference reference = storageReference.child("promocion/*" + idUser + "" + idPromo);
+                        reference.putBytes(data);
+                    }
+                Toast.makeText(Editar_promocion.this, R.string.successful_update, Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(getApplicationContext(), vistaUsurio.class);
+                startActivity(i);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -261,15 +259,12 @@ public class Editar_promocion extends AppCompatActivity {
         }
     }
     public void cargarImagen() {
-        progressDialog.setMessage("Actualizando foto");
-        progressDialog.show();
         SharedPreferences sharedPreferences = getSharedPreferences("CuponFinder2", MODE_PRIVATE);
         String imageBitmapString = sharedPreferences.getString("tempImageBitmap", null);
         if (imageBitmapString != null) {
             Bitmap imageBitmap = stringToBitmap(imageBitmapString);
             File tempFile = createTempFile(imageBitmap);
             Picasso.get().load(tempFile).into(imgPromo);
-            progressDialog.dismiss();
         }
     }
 
