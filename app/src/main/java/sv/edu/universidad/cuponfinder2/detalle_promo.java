@@ -3,8 +3,11 @@ package sv.edu.universidad.cuponfinder2;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,6 +27,7 @@ import sv.edu.universidad.cuponfinder2.Model.Promocion;
 public class detalle_promo extends AppCompatActivity {
     TextView nombrePromo, nombreLocal, categoria, descripcion, fechaInicio, fechaFin;
     ImageView imgDetallePromo;
+    Button btnRHome;
     Promocion promo2=new Promocion();
 
 
@@ -39,10 +43,16 @@ public class detalle_promo extends AppCompatActivity {
         descripcion = (TextView) findViewById(R.id.txtDescripDetalle);
         fechaInicio = (TextView) findViewById(R.id.txtStarPromoDe);
         fechaFin = (TextView) findViewById(R.id.txtEndPromoDe);
+        btnRHome=(Button)findViewById(R.id.btnRHome);
+
 
         String id = getIntent().getStringExtra("id");
 
         Obtenerpromo(id);
+    }
+    public void Regresar(View view) {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
     }
 
     public void Obtenerpromo(String id){

@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:gravity="start"
+        android:onClick="Regresar"
         android:text="@string/txtPromotions"
         android:textColor="@color/light_blue_900"
         android:textSize="20sp"

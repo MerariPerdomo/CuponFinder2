@@ -13,7 +13,7 @@
             android:title="@string/stores" />
         <item android:id="@+id/nav_acerca"
             android:title="@string/about_it"
-            android:icon="@drawable/ic_home"/>
+            android:icon="@drawable/ic_us"/>
         <item android:id="@+id/nav_setting"
             android:title="@string/setting"
             android:icon="@drawable/ic_settings"/>
