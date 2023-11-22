@@ -1,7 +1,5 @@
 package sv.edu.universidad.cuponfinder2;
 
-import android.app.DatePickerDialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -12,7 +10,6 @@ import android.util.Base64;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -20,8 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,7 +28,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
@@ -46,8 +40,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import sv.edu.universidad.cuponfinder2.Model.Negocio;
-
 public class AgregarPromo extends AppCompatActivity {
     private TextInputEditText txtTitulo, txtDescripcion, txtInicio, txtFinal;
     private AutoCompleteTextView txtSpinner;
@@ -57,7 +49,7 @@ public class AgregarPromo extends AppCompatActivity {
     private DatabaseReference mDatabase;
     Uri image_url;
     private static final int COD_SEL_IMAGE =300;
-    ProgressDialog progressDialog;
+
     StorageReference storageReference;
 
 
@@ -73,7 +65,6 @@ public class AgregarPromo extends AppCompatActivity {
         txtFinal=findViewById(R.id.finalF);
         imgPromo=findViewById(R.id.imgPromo);
         initializeFirebase();
-        progressDialog = new ProgressDialog(this);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.categories, R.layout.spinner_items);
@@ -90,17 +81,11 @@ public class AgregarPromo extends AppCompatActivity {
     }
 
     private void showDatePickerDialog(final TextInputEditText editText) {
-        DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int day) {
-                final String selectedDate = day + " / " + (month+1) + " / " + year;
-                editText.setText(selectedDate);
-            }
+        DatePickerFragment newFragment = DatePickerFragment.newInstance((view, year, month, day) -> {
+            final String selectedDate = day + " / " + (month+1) + " / " + year;
+            editText.setText(selectedDate);
         });
         newFragment.show(this.getSupportFragmentManager(), "datePicker");
-    }
-    private String twoDigits(int n) {
-        return (n<=9) ? ("0"+n) : String.valueOf(n);
     }
 
     public void GuardarPromo(View view) {
@@ -119,7 +104,6 @@ public class AgregarPromo extends AppCompatActivity {
             databaseReference.child("Usuarios").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    Negocio usuarios = dataSnapshot.getValue(Negocio.class);
                     String idPromo = mDatabase.child("Promociones").push().getKey();
                     Map<String, Object> map = new HashMap<>();
                     map.put("idUser", id);
@@ -129,47 +113,27 @@ public class AgregarPromo extends AppCompatActivity {
                     map.put("fechaInicio", fechaInicio);
                     map.put("fechaFinal", fechaFinal);
                     map.put("idPromo", idPromo);
-                    mDatabase.child("Promociones").child(idPromo).setValue(map).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            SharedPreferences sharedPreferences = getSharedPreferences("CuponFinder2", MODE_PRIVATE);
-                            String imageBitmapString = sharedPreferences.getString("tempImageBitmap", null);
-                            if (imageBitmapString != null) {
-                                Bitmap imageBitmap = stringToBitmap(imageBitmapString);
-                                byte[] data = bitmapToByte(imageBitmap);
-                                StorageReference reference = storageReference.child("promocion/*" + id + "" + idPromo);
-                                reference.putBytes(data).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                    @Override
-                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                        Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                                        while (!uriTask.isSuccessful());
-                                        if (uriTask.isSuccessful()){
-                                            uriTask.addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                                @Override
-                                                public void onSuccess(Uri uri) {
-                                                }
-                                            });
-                                        }
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(getApplicationContext(), "Error al subir la imagen", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
+                    mDatabase.child("Promociones").child(idPromo).setValue(map).addOnSuccessListener(unused -> {
+                        SharedPreferences sharedPreferences = getSharedPreferences("CuponFinder2", MODE_PRIVATE);
+                        String imageBitmapString = sharedPreferences.getString("tempImageBitmap", null);
+                        if (imageBitmapString != null) {
+                            Bitmap imageBitmap = stringToBitmap(imageBitmapString);
+                            byte[] data = bitmapToByte(imageBitmap);
+                            StorageReference reference = storageReference.child("promocion/*" + id + "" + idPromo);
+                            reference.putBytes(data).addOnSuccessListener(taskSnapshot -> {
+                                Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                                while (!uriTask.isSuccessful());
+                                if (uriTask.isSuccessful()){
+                                    uriTask.addOnSuccessListener(uri -> {
+                                    });
+                                }
+                            }).addOnFailureListener(e -> Toast.makeText(getApplicationContext(), "Error al subir la imagen", Toast.LENGTH_SHORT).show());
 
-                            }
-                            Toast.makeText(AgregarPromo.this, "Se creo correctamente", Toast.LENGTH_SHORT).show();
-                            Intent i = new Intent(AgregarPromo.this, vistaUsurio.class);
-                            startActivity(i);
                         }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-
-                            Toast.makeText(AgregarPromo.this, "Algo salio mal", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                        Toast.makeText(AgregarPromo.this, "Se creo correctamente", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(AgregarPromo.this, vistaUsurio.class);
+                        startActivity(i);
+                    }).addOnFailureListener(e -> Toast.makeText(AgregarPromo.this, "Algo salio mal", Toast.LENGTH_SHORT).show());
                 }
 
                 @Override
@@ -237,20 +201,17 @@ public class AgregarPromo extends AppCompatActivity {
         }
 
         public void cargarImagen() {
-            progressDialog.setMessage("Actualizando foto");
-            progressDialog.show();
             SharedPreferences sharedPreferences = getSharedPreferences("CuponFinder2", MODE_PRIVATE);
             String imageBitmapString = sharedPreferences.getString("tempImageBitmap", null);
             if (imageBitmapString != null) {
                 Bitmap imageBitmap = stringToBitmap(imageBitmapString);
                 File tempFile = createTempFile(imageBitmap);
                 Picasso.get().load(tempFile).into(imgPromo);
-                progressDialog.dismiss();
             }
         }
 
         public File createTempFile(Bitmap bitmap) {
-            File tempFile = null;
+            File tempFile;
             try {
                 tempFile = File.createTempFile("tempImage", ".png", getCacheDir());
                 tempFile.deleteOnExit();

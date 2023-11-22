@@ -23,21 +23,15 @@ public class Configuracion extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuracion);
 
-        btnRegresarConfig=(Button) findViewById(R.id.btnRegresarConfig);
-        btnAcercaDe=(Button) findViewById(R.id.btnAcercadeConfig);
-        btnAcercaDe.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i =new Intent(getApplicationContext(), AcercaDe.class);
-                startActivity(i);
-            }
+        btnRegresarConfig= findViewById(R.id.btnRegresarConfig);
+        btnAcercaDe= findViewById(R.id.btnAcercadeConfig);
+        btnAcercaDe.setOnClickListener(v -> {
+            Intent i =new Intent(getApplicationContext(), AcercaDe.class);
+            startActivity(i);
         });
-        btnRegresarConfig.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent =new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-            }
+        btnRegresarConfig.setOnClickListener(v -> {
+            Intent intent =new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
         });
 
         btnCambiarLenguaje = findViewById(R.id.btnCambiarLenguaje);
